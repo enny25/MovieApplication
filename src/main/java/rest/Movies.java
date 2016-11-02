@@ -8,6 +8,8 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Movie;
+import facades.MovieFacade;
+import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,6 +25,7 @@ public class Movies {
     
     
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    MovieFacade facade = new MovieFacade(Persistence.createEntityManagerFactory("pu_development"));
     
     public Movies(){
         
@@ -33,23 +36,36 @@ public class Movies {
     @GET
     @Path("movie")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMovieName() throws Exception{
-        return null;
+    public String getMovieName(String title) throws Exception{
+        Movie p = facade.getMoviebyTitle(title);
+        return gson.toJson(p);
     }
     
     @GET
     @Path("movie/{imdbid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMovieId(@PathParam("imdbid") int imdbid) throws Exception{
-        return null;
+    public String getMovieId(@PathParam("imdbid") String imdbid) throws Exception{
+        Movie p = facade.getMoviebyID(imdbid);
+        return gson.toJson(p);
     }
     
     @POST
-    @Path("create")
+    @Path("createById")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String addMovie(String movieJsonStr) throws Exception{
-        Movie m = gson.fromJson(movieJsonStr, Movie.class);
-        return null;
+    public void addMovieById(String movieJsonStr) throws Exception{
+        String imdbID  = gson.fromJson(movieJsonStr, String.class);
+        facade.createMoviebyID(imdbID);
+        
+    }
+    
+    @POST
+    @Path("createByName")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addMoviebyName(String movieJsonStr) throws Exception{
+        String title  = gson.fromJson(movieJsonStr, String.class);
+        facade.createMoviebyTitle(title);
+        
     }
 }
