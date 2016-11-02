@@ -13,7 +13,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author Lenovo
+ * @author Lenovow
  */
 public class tester {
     public static void main(String[] args) {
