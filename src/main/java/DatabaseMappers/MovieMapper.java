@@ -40,16 +40,9 @@ public class MovieMapper {
         String imdbRating = map.get("imdbRating");
         String directors = map.get("Director");
         String language = map.get("Language");
-            System.out.println(title);
-            System.out.println(year);
-//            System.out.println(released);
-            System.out.println(runtime);
-            System.out.println(genre);
-            System.out.println(actors);
-            System.out.println(plot);
-            System.out.println(imdbRating);
-            System.out.println(directors);
-            System.out.println(language);
+           if(title == null){
+            return null;
+        }
         Movie movie = new Movie(imdbId,title, year, runtime, genre,directors, actors, plot,language,imdbRating);
         
         return movie;
@@ -72,7 +65,6 @@ public class MovieMapper {
 
         String imdbID = map.get("imdbID");
         String year = map.get("Year");
-//        String released = map.get("Released");
         String runtime = map.get("Runtime");
         String genre = map.get("Genre");
         String actors = map.get("Actors");
@@ -80,15 +72,11 @@ public class MovieMapper {
         String imdbRating = map.get("imdbRating");
         String directors = map.get("Director");
         String language = map.get("Language");
-            System.out.println(year);
-//            System.out.println(released);
-            System.out.println(runtime);
-            System.out.println(genre);
-            System.out.println(actors);
-            System.out.println(plot);
-            System.out.println(imdbRating);
-            System.out.println(directors);
-            System.out.println(language);
+        
+        if(imdbID ==null){
+            return null;
+        }
+            
         Movie movie = new Movie(imdbID,MovieTitle, year, runtime, genre,directors, actors, plot,language,imdbRating);
         
         return movie;
