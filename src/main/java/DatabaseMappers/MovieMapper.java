@@ -22,7 +22,7 @@ import java.util.Map;
  * @author Lenovo
  */
 public class MovieMapper {
-    public static Movie movieGetter (String imdbId){
+    public static Movie movieGetterById (String imdbId){
         try {
 
         String selectedItem = imdbId ;
@@ -62,5 +62,45 @@ public class MovieMapper {
     }
         
     }
+        public static Movie movieGetterByTitle (String MovieTitle){
+        try {
+
+        String selectedItem = MovieTitle ;
+
+        InputStream input = new URL("http://www.omdbapi.com/?t=" + URLEncoder.encode(selectedItem, "UTF-8")).openStream();
+        Map<String, String> map = new Gson().fromJson(new InputStreamReader(input, "UTF-8"), new TypeToken<Map<String, String>>(){}.getType());
+
+        String imdbID = map.get("imdbID");
+        String year = map.get("Year");
+//        String released = map.get("Released");
+        String runtime = map.get("Runtime");
+        String genre = map.get("Genre");
+        String actors = map.get("Actors");
+        String plot = map.get("Plot");
+        String imdbRating = map.get("imdbRating");
+        String directors = map.get("Director");
+        String language = map.get("Language");
+            System.out.println(year);
+//            System.out.println(released);
+            System.out.println(runtime);
+            System.out.println(genre);
+            System.out.println(actors);
+            System.out.println(plot);
+            System.out.println(imdbRating);
+            System.out.println(directors);
+            System.out.println(language);
+        Movie movie = new Movie(imdbID,MovieTitle, year, runtime, genre,directors, actors, plot,language,imdbRating);
+        
+        return movie;
+
+        
+
+    } catch (JsonIOException | JsonSyntaxException | IOException e){
+        System.out.println(e);
+        return null;
+    }
+        
+    }
+    
     
 }
