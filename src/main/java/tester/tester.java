@@ -19,7 +19,7 @@ public class tester {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         EntityManager em = emf.createEntityManager();
-        Movie movie= MovieMapper.movieGetter("tt0265086");
+        Movie movie= MovieMapper.movieGetterById("tt0265086");
         
         try {
         em.getTransaction().begin();

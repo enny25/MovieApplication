@@ -60,6 +60,102 @@ public class Movie implements Serializable {
 
     public Movie() {
     }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String Title) {
+        this.Title = Title;
+    }
+
+    public String getYear() {
+        return Year;
+    }
+
+    public void setYear(String Year) {
+        this.Year = Year;
+    }
+
+    public String getRuntime() {
+        return Runtime;
+    }
+
+    public void setRuntime(String Runtime) {
+        this.Runtime = Runtime;
+    }
+
+    public String getGenre() {
+        return Genre;
+    }
+
+    public void setGenre(String Genre) {
+        this.Genre = Genre;
+    }
+
+    public String getDirectors() {
+        return Directors;
+    }
+
+    public void setDirectors(String Directors) {
+        this.Directors = Directors;
+    }
+
+    public String getActors() {
+        return Actors;
+    }
+
+    public void setActors(String Actors) {
+        this.Actors = Actors;
+    }
+
+    public String getPlot() {
+        return plot;
+    }
+
+    public void setPlot(String plot) {
+        this.plot = plot;
+    }
+
+    public String getLanguage() {
+        return Language;
+    }
+
+    public void setLanguage(String Language) {
+        this.Language = Language;
+    }
+
+    public String getImdbRating() {
+        return ImdbRating;
+    }
+
+    public void setImdbRating(String ImdbRating) {
+        this.ImdbRating = ImdbRating;
+    }
+
+    public List getReviews() {
+        return Reviews;
+    }
+
+    public void setReviews(List Reviews) {
+        this.Reviews = Reviews;
+    }
+
+    public List getReccommendations() {
+        return Reccommendations;
+    }
+
+    public void setReccommendations(List Reccommendations) {
+        this.Reccommendations = Reccommendations;
+    }
     
     
     
