@@ -9,6 +9,7 @@ import DatabaseMappers.MovieMapper;
 import entity.Movie;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 /**
  *
@@ -42,8 +43,11 @@ public class MovieFacade {
     // return a movie by a title
     public Movie getMoviebyTitle(String title){
         EntityManager em = getEntityManager();
+        Query query = em.createQuery("SELECT m FROM Movie m where m.Title = :title");
+        query.setParameter("title", title);
+        Movie result = (Movie)query.getSingleResult();
         try{
-            return em.find(Movie.class, title);
+             return result;
         }finally{
                 em.close();
                 }
@@ -52,7 +56,7 @@ public class MovieFacade {
     // create a new movie entry in the database by ID
     public void createMoviebyID(String imdbid){
         EntityManager em = getEntityManager();
-        Movie newmovie = new Movie(imdbid);
+        Movie newmovie = moviemapper.movieGetterById(imdbid);
         try{
             em.getTransaction().begin();
             em.persist(newmovie);
@@ -66,7 +70,7 @@ public class MovieFacade {
     // create a new movie entry in the database by title
     public void createMoviebyTitle(String title){
         EntityManager em = getEntityManager();
-        Movie newmovie = new Movie(title);
+        Movie newmovie = moviemapper.movieGetterByTitle(title);
         try{
             em.getTransaction().begin();
             em.persist(newmovie);

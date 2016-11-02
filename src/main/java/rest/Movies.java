@@ -7,6 +7,8 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import entity.Movie;
 import facades.MovieFacade;
 import javax.persistence.Persistence;
@@ -33,12 +35,17 @@ public class Movies {
     
     
     
-    @GET
+    @POST
     @Path("movie")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMovieName(String title) throws Exception{
-        Movie p = facade.getMoviebyTitle(title);
-        return gson.toJson(p);
+    public String getMovieName(String jsonString) throws Exception{
+       
+      JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+      String movieTitle = json.get("title").getAsString();
+       Movie movie = facade.getMoviebyTitle(movieTitle);
+       
+        return gson.toJson(movie);
     }
     
     @GET
@@ -50,9 +57,8 @@ public class Movies {
     }
     
     @POST
-    @Path("createById")
+    @Path("createById/{imdbid}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public void addMovieById(String movieJsonStr) throws Exception{
         String imdbID  = gson.fromJson(movieJsonStr, String.class);
         facade.createMoviebyID(imdbID);
@@ -62,7 +68,6 @@ public class Movies {
     @POST
     @Path("createByName")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public void addMoviebyName(String movieJsonStr) throws Exception{
         String title  = gson.fromJson(movieJsonStr, String.class);
         facade.createMoviebyTitle(title);
