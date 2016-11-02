@@ -21,6 +21,7 @@ public class tester {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
        MovieFacade mf = new MovieFacade(emf);
        mf.createMoviebyTitle("Frozen");
+       mf.createMoviebyTitle("Warcraft");
         }
         
         

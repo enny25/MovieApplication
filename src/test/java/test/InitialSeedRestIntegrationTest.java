@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import org.apache.catalina.LifecycleException;
 import static org.hamcrest.Matchers.*;
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import test.utils.EmbeddedTomcat;
 
@@ -64,7 +65,7 @@ public class InitialSeedRestIntegrationTest {
             .statusCode(200)
             .body("message", equalTo("result for all"));
   }
-
+@Ignore
   @Test
   public void tesRestForAdmin() {
     login("admin","test");
@@ -77,7 +78,7 @@ public class InitialSeedRestIntegrationTest {
             .body("message", equalTo("REST call accesible by only authenticated ADMINS"))
             .body("serverTime",notNullValue());
   }
-
+@Ignore
   @Test
   public void testRestForUser() {
     login("user","test");
