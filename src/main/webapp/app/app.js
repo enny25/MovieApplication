@@ -9,8 +9,6 @@ angular.module('myApp', [
     'myApp.security',
     'myApp.MovieJS',
     'myApp.view1',
-    'myApp.view3',
-    'myApp.view4',
     'myApp.filters',
     'myApp.directives',
     'myApp.factories',
