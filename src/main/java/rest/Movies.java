@@ -30,7 +30,6 @@ public class Movies {
     MovieFacade facade = new MovieFacade(Persistence.createEntityManagerFactory("pu_development"));
     
     public Movies(){
-        
     }
     
     
@@ -57,7 +56,7 @@ public class Movies {
     }
     
     @POST
-    @Path("createById/{imdbid}")
+    @Path("createById")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addMovieById(String movieJsonStr) throws Exception{
         String imdbID  = gson.fromJson(movieJsonStr, String.class);
