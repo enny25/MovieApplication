@@ -20,56 +20,58 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
-
 @Path("movies")
 public class Movies {
-    
-    
+
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     MovieFacade facade = new MovieFacade(Persistence.createEntityManagerFactory("pu_development"));
-    
-    public Movies(){
+
+    public Movies() {
     }
-    
-    
-    
+
     @POST
     @Path("movie")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMovieName(String jsonString) throws Exception{
-       
-      JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-      String movieTitle = json.get("title").getAsString();
-       Movie movie = facade.getMoviebyTitle(movieTitle);
-       
+    public String getMovieName(String jsonString) throws Exception {
+
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        String movieTitle = json.get("title").getAsString();
+        Movie movie = facade.getMoviebyTitle(movieTitle);
+
         return gson.toJson(movie);
     }
-    
+
     @GET
-    @Path("movie/{imdbid}")
+    @Path("movieById")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMovieId(@PathParam("imdbid") String imdbid) throws Exception{
-        Movie p = facade.getMoviebyID(imdbid);
-        return gson.toJson(p);
+    public String getMovieId(String jsongString) throws Exception {
+        JsonObject json = new JsonParser().parse(jsongString).getAsJsonObject();
+        String imdbid = json.get("imdbid").getAsString();
+        Movie movie = facade.getMoviebyID(imdbid);
+
+        return gson.toJson(movie);
     }
-    
+
     @POST
     @Path("createById")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addMovieById(String movieJsonStr) throws Exception{
-        String imdbID  = gson.fromJson(movieJsonStr, String.class);
+    public void addMovieById(String jsonString) throws Exception {
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        String imdbID = json.get("imdbid").getAsString();
         facade.createMoviebyID(imdbID);
-        
+
     }
-    
+
     @POST
     @Path("createByName")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addMoviebyName(String movieJsonStr) throws Exception{
-        String title  = gson.fromJson(movieJsonStr, String.class);
+    public void addMoviebyName(String jsonString) throws Exception {
+         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        String title = json.get("title").getAsString();
+        System.out.println(title);
         facade.createMoviebyTitle(title);
-        
+
     }
 }

@@ -7,12 +7,13 @@ angular.module('myApp.view2', ['ngRoute'])
             $scope.addMovie = function () {
                 
                 var postObject = $scope.titleid;
+                var title = {title:postObject}; 
                 console.log("Adding movie: "+postObject);
                 $http({
                     url: 'api/movies/createByName',
                     dataType: 'json',
                     method: 'POST',
-                    data: postObject,
+                    data: title,
                     headers: {
                         "Content-Type": "application/json"
                     }
