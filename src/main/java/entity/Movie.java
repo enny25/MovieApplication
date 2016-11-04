@@ -44,6 +44,10 @@ public class Movie implements Serializable {
     public Movie(String imdbId) {
         this.imdbId = imdbId;
     }
+    public Movie(String imdbId, String Title) {
+        this.imdbId = imdbId;
+        this.Title = Title;
+    }
 
     public Movie(String imdbId, String Title, String Year, String Runtime, String Genre, String Directors, String Actors, String plot, String Language, String ImdbRating) {
         this.imdbId = imdbId;
