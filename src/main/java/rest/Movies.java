@@ -12,10 +12,12 @@ import com.google.gson.JsonParser;
 import entity.Movie;
 import facades.MovieFacade;
 import javax.annotation.security.RolesAllowed;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -73,8 +75,24 @@ public class Movies {
         String title = json.get("title").getAsString();
         
         facade.createMoviebyTitle(title);
-
-        
-        
     }
+        
+    @PUT
+    @RolesAllowed("Admin")
+    @Path("updateMovie")
+    @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)    
+    public String updateMovie(String updateMovie, String imdbid, String title, String year, String runtime, String genre, String directors, String actors, String plot, String language, String imdbrating){   
+      if(facade.updateMovie(imdbid, title, year, runtime, genre, directors, actors, plot, language, imdbrating)){
+          String jsonResult = gson.toJson("update succesfull");
+          return jsonResult;
+      }else{
+          String jsonResult = gson.toJson("update unsucesfull");
+          return jsonResult;
+      }
+      
+    }
+    
+    
+    
 }
