@@ -46,8 +46,8 @@ public class Movies {
     @Path("movieById")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String getMovieId(String jsongString) throws Exception {
-        JsonObject json = new JsonParser().parse(jsongString).getAsJsonObject();
+    public String getMovieId(String jsonString) throws Exception {
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
         String imdbid = json.get("imdbid").getAsString();
         Movie movie = facade.getMoviebyID(imdbid);
 
@@ -68,9 +68,12 @@ public class Movies {
     @Path("createByName")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addMoviebyName(String jsonString) throws Exception {
-         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        System.out.println(json);
+        System.out.println(jsonString);
         String title = json.get("title").getAsString();
-        System.out.println(title);
+        
         facade.createMoviebyTitle(title);
 
     }
