@@ -48,54 +48,27 @@ public class MoviesTest {
     @Test
     public void testGetMovieName() throws Exception {
         // To make this work then change title in getMovieName in Movies.java to Title, with a capital T.
-        Movie movie = new Movie("tt0096895", "batman");
+        Movie movie = new Movie("tt0077631", "Grease");
         Movies instance = new Movies();
-        String expResult = "batman";
+        String expResult = "Grease";
         String result = instance.getMovieName(gson.toJson(movie));
         JsonObject json = new JsonParser().parse(result).getAsJsonObject();
-        String movieTitle = json.get("Title").getAsString();
+        String movieTitle = json.get("title").getAsString();
         assertEquals(expResult, movieTitle);
 
     }
 //    @Ignore
     @Test
     public void testGetMovieId() throws Exception {
-        Movie movie = new Movie("tt0096895", "batman");        
+        Movie movie = new Movie("tt0077631", "Grease");        
         Movies instance = new Movies();
-        String expResult = "tt0096895";        
+        String expResult = "tt0077631";        
         String result = instance.getMovieId(gson.toJson(movie));
         // fails here
         JsonObject json = new JsonParser().parse(result).getAsJsonObject();
+        System.out.println("Json: " + json);
         String movieId = json.get("imdbid").getAsString();        
         assertEquals(expResult, movieId);
-    }
-
-    /**
-     * Test of addMovieById method, of class Movies.
-     */
-    @Ignore
-    @Test
-    public void testAddMovieById() throws Exception {
-        System.out.println("addMovieById");
-        String jsonString = "";
-        Movies instance = new Movies();
-        instance.addMovieById(jsonString);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of addMoviebyName method, of class Movies.
-     */
-    @Ignore
-    @Test
-    public void testAddMoviebyName() throws Exception {
-        System.out.println("addMoviebyName");
-        String jsonString = "";
-        Movies instance = new Movies();
-        instance.addMoviebyName(jsonString);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

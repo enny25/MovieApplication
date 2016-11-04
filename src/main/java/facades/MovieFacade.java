@@ -33,7 +33,7 @@ public class MovieFacade {
     // return a movie by an ID
     public Movie getMoviebyID(String imdbid){
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT m FROM Movie m WHERE m.imdbId = :imdbid");
+        Query query = em.createQuery("SELECT m FROM Movie m WHERE m.imdbid = :imdbid");
         query.setParameter("imdbid", imdbid);
         Movie result = (Movie)query.getSingleResult();
         try{

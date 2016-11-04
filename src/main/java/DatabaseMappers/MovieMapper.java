@@ -72,12 +72,12 @@ public class MovieMapper {
         String imdbRating = map.get("imdbRating");
         String directors = map.get("Director");
         String language = map.get("Language");
-        
+        String title = map.get("Title");
         if(imdbID ==null){
             return null;
         }
             
-        Movie movie = new Movie(imdbID,MovieTitle, year, runtime, genre,directors, actors, plot,language,imdbRating);
+        Movie movie = new Movie(imdbID,title, year, runtime, genre,directors, actors, plot,language,imdbRating);
         
         return movie;
 

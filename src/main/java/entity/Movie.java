@@ -20,9 +20,9 @@ public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    private String imdbId;
+    private String imdbid;
     
-    private String Title;
+    private String title;
     @Column(name="MovieYear")
     private String Year;
     
@@ -42,16 +42,16 @@ public class Movie implements Serializable {
     private List Reccommendations;
 
     public Movie(String imdbId) {
-        this.imdbId = imdbId;
+        this.imdbid = imdbId;
     }
     public Movie(String imdbId, String Title) {
-        this.imdbId = imdbId;
-        this.Title = Title;
+        this.imdbid = imdbId;
+        this.title = Title;
     }
 
     public Movie(String imdbId, String Title, String Year, String Runtime, String Genre, String Directors, String Actors, String plot, String Language, String ImdbRating) {
-        this.imdbId = imdbId;
-        this.Title = Title;
+        this.imdbid = imdbId;
+        this.title = Title;
         this.Year = Year;
         this.Runtime = Runtime;
         this.Genre = Genre;
@@ -66,19 +66,19 @@ public class Movie implements Serializable {
     }
 
     public String getImdbId() {
-        return imdbId;
+        return imdbid;
     }
 
     public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
+        this.imdbid = imdbId;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String Title) {
-        this.Title = Title;
+        this.title = Title;
     }
 
     public String getYear() {
