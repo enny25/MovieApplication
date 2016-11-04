@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import rest.Movies;
 
 /**
@@ -24,30 +23,11 @@ public class MoviesTest {
 
     public MoviesTest() {
     }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of getMovieName method, of class Movies.
-     */
-    @Ignore
+  
+//    @Ignore
     @Test
     public void testGetMovieName() throws Exception {
-        // To make this work then change title in getMovieName in Movies.java to Title, with a capital T.
+        System.out.println("testGetMovieName");
         Movie movie = new Movie("tt0077631", "Grease");
         Movies instance = new Movies();
         String expResult = "Grease";
@@ -55,20 +35,26 @@ public class MoviesTest {
         JsonObject json = new JsonParser().parse(result).getAsJsonObject();
         String movieTitle = json.get("title").getAsString();
         assertEquals(expResult, movieTitle);
+        System.out.println("MovieId: " + movieTitle);
+        System.out.println("MovieInfo: " + json);
 
     }
+    
 //    @Ignore
     @Test
     public void testGetMovieId() throws Exception {
+        System.out.println("///////////");
+        System.out.println("testGetMovieId");
         Movie movie = new Movie("tt0077631", "Grease");        
         Movies instance = new Movies();
         String expResult = "tt0077631";        
         String result = instance.getMovieId(gson.toJson(movie));
         // fails here
         JsonObject json = new JsonParser().parse(result).getAsJsonObject();
-        System.out.println("Json: " + json);
-        String movieId = json.get("imdbid").getAsString();        
+        String movieId = json.get("imdbid").getAsString(); 
         assertEquals(expResult, movieId);
+        System.out.println("MovieId: " + movieId);
+        System.out.println("MovieInfo: " + json);
     }
 
 }

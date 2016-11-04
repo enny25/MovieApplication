@@ -46,7 +46,7 @@ public class MovieFacade {
     // return a movie by a title
     public Movie getMoviebyTitle(String title){
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT m FROM Movie m where m.Title = :title");
+        Query query = em.createQuery("SELECT m FROM Movie m where m.title = :title");
         query.setParameter("title", title);
         Movie result = (Movie)query.getSingleResult();
         try{
