@@ -8,6 +8,7 @@ angular.module('myApp', [
     'ui.bootstrap',
     'myApp.security',
     'myApp.MovieJS',
+    'myApp.adminAdd',
     'myApp.view1',
     'myApp.filters',
     'myApp.directives',

@@ -4,40 +4,19 @@ angular.module('myApp.MovieJS', ['ngRoute'])
 
 
         .controller('movieController', function ($http, $window, $scope) {
-            $scope.movieInfo = {Name: "ASDF"};
-            $scope.addMovie = function () {
-
-                var postObject = $scope.titleid;
-
-                console.log("Adding movie: " + postObject);
-                $http({
-                    url: 'api/movies/createByName',
-                    dataType: 'json',
-                    method: 'POST',
-                    data: {title: postObject},
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-
-
-
-                }).then(function successCallback(res) {
-                    console.log("Works");
-                }, function errorCallback(res) {
-                    console.log("Does not work");
-                });
-
-            };
+            
+            
             $scope.searchMovie = function () {
 
-                var postObject = $scope.movie;
+                var movieGet = $scope.movie;
+                var postObject = {};
                 $scope.movie = {};
-                if (postObject.type == 1) {
-                    postObject.imdbid = postObject.info;
+                if (movieGet.type == 1) {
+                    postObject.imdbid = movieGet.info;
                     var url = 'api/movies/movieById';
                     console.log(postObject);
                 } else {
-                    postObject.title = postObject.info;
+                    postObject.title = movieGet.info;
                     var url = 'api/movies/movie';
                     console.log(postObject);
                 }

@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Movie;
 import facades.MovieFacade;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -56,6 +57,7 @@ public class Movies {
     }
 
     @POST
+    @RolesAllowed("Admin")
     @Path("createById")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addMovieById(String jsonString) throws Exception {
@@ -66,6 +68,7 @@ public class Movies {
     }
 
     @POST
+    @RolesAllowed("Admin")
     @Path("createByName")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addMoviebyName(String jsonString) throws Exception {

@@ -1,0 +1,13 @@
+<h1>Add IMDB Movie</h1>
+<form name="movieSearch" ng-submit="addMovie()">
+    <div class="form-group" style="float: left; width: 15em">
+        <select class="form-control" id="sel1" ng-model="movie.type">
+            <option value="1">Add By ID</option>
+            <option value="2">Add By Title</option>
+
+        </select>
+    </div>
+
+    <input ng-model="movie.info" style="float:left; clear: left; width: 25em; margin-right: 0.5em; " class="form-control" type="text" placeholder="Title or ID" name="titlesearch"/>
+    <button style="float:left;  margin-right: 0em" class="btn btn-info" type="submit">Add</button>
+</form>
