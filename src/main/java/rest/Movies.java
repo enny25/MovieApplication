@@ -35,10 +35,8 @@ public class Movies {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String getMovieName(String jsonString) throws Exception {
-
-
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        String movieTitle = json.get("title").getAsString();
+        String movieTitle = json.get("Title").getAsString();
         Movie movie = facade.getMoviebyTitle(movieTitle);
 
         return gson.toJson(movie);
@@ -72,7 +70,7 @@ public class Movies {
     @Path("createByName")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addMoviebyName(String jsonString) throws Exception {
-         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
         String title = json.get("title").getAsString();
         System.out.println(title);
         facade.createMoviebyTitle(title);

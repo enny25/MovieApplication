@@ -48,32 +48,26 @@ public class MoviesTest {
     @Test
     public void testGetMovieName() throws Exception {
         // To make this work then change title in getMovieName in Movies.java to Title, with a capital T.
-        Movie asd = new Movie("tt0096895", "batman");
+        Movie movie = new Movie("tt0096895", "batman");
         Movies instance = new Movies();
         String expResult = "batman";
-        String result = instance.getMovieName(gson.toJson(asd));
-
+        String result = instance.getMovieName(gson.toJson(movie));
         JsonObject json = new JsonParser().parse(result).getAsJsonObject();
         String movieTitle = json.get("Title").getAsString();
-
         assertEquals(expResult, movieTitle);
 
     }
-
-    /**
-     * Test of getMovieId method, of class Movies.
-     */
-    @Ignore
+//    @Ignore
     @Test
     public void testGetMovieId() throws Exception {
-        System.out.println("getMovieId");
-        String jsongString = "";
+        Movie movie = new Movie("tt0096895", "batman");        
         Movies instance = new Movies();
-        String expResult = "";
-        String result = instance.getMovieId(jsongString);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String expResult = "tt0096895";        
+        String result = instance.getMovieId(gson.toJson(movie));
+        // fails here
+        JsonObject json = new JsonParser().parse(result).getAsJsonObject();
+        String movieId = json.get("imdbid").getAsString();        
+        assertEquals(expResult, movieId);
     }
 
     /**
