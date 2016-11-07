@@ -63,7 +63,6 @@ public class MovieFacade {
     public void createMoviebyID(String imdbid) {
         EntityManager em = getEntityManager();
         Movie newmovie = moviemapper.movieGetterById(imdbid);
-        addedMovies.add(newmovie);
         try {
             em.getTransaction().begin();
             em.persist(newmovie);
@@ -78,7 +77,6 @@ public class MovieFacade {
     public void createMoviebyTitle(String title) {
         EntityManager em = getEntityManager();
         Movie newmovie = moviemapper.movieGetterByTitle(title);
-        addedMovies.add(newmovie);
         try {
             em.getTransaction().begin();
             em.persist(newmovie);
