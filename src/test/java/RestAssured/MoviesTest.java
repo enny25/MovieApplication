@@ -5,12 +5,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Movie;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import facades.MovieFacade;
+import javax.persistence.EntityManagerFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import rest.Movies;
 
 /**
@@ -18,7 +17,8 @@ import rest.Movies;
  * @author Emil
  */
 public class MoviesTest {
-
+    EntityManagerFactory emf;
+    MovieFacade facade = new MovieFacade(emf);
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public MoviesTest() {
@@ -49,7 +49,6 @@ public class MoviesTest {
         Movies instance = new Movies();
         String expResult = "tt0077631";        
         String result = instance.getMovieId(gson.toJson(movie));
-        // fails here
         JsonObject json = new JsonParser().parse(result).getAsJsonObject();
         String movieId = json.get("imdbid").getAsString(); 
         assertEquals(expResult, movieId);
@@ -57,4 +56,16 @@ public class MoviesTest {
         System.out.println("MovieInfo: " + json);
     }
 
+    
+    // Does not work yet.
+    @Ignore
+    @Test
+    public void testUpdateMovie(){        
+        Movies instance = new Movies();
+        Movie movies = facade.getMoviebyTitle("Grease");
+        movies.setTitle("Travolta");
+        String result = instance.updateMovie(gson.toJson(movies));
+        String jsonResult = gson.toJson("update succesfull");
+        assertEquals(result, jsonResult);
+    }   
 }
