@@ -33,6 +33,7 @@ public class Movie implements Serializable {
     private String Directors;
     
     private String Actors;
+    private String Poster;
     
     private String plot;
     @Column(name="MovieLanguage")
@@ -60,7 +61,23 @@ public class Movie implements Serializable {
         this.plot = plot;
         this.Language = Language;
         this.ImdbRating = ImdbRating;
+
     }
+    
+    public Movie(String imdbId, String Title, String Year, String Runtime, String Genre, String Directors, String Actors, String plot, String Language, String ImdbRating, String Poster) {
+        this.imdbid = imdbId;
+        this.title = Title;
+        this.Year = Year;
+        this.Runtime = Runtime;
+        this.Genre = Genre;
+        this.Directors = Directors;
+        this.Actors = Actors;
+        this.plot = plot;
+        this.Language = Language;
+        this.ImdbRating = ImdbRating;
+        this.Poster = Poster;
+    }
+    
 
     public Movie() {
     }
@@ -159,6 +176,14 @@ public class Movie implements Serializable {
 
     public void setReccommendations(List Reccommendations) {
         this.Reccommendations = Reccommendations;
+    }
+
+    public String getPoster() {
+        return Poster;
+    }
+
+    public void setPoster(String Poster) {
+        this.Poster = Poster;
     }
     
     

@@ -40,10 +40,11 @@ public class MovieMapper {
         String imdbRating = map.get("imdbRating");
         String directors = map.get("Director");
         String language = map.get("Language");
+        String poster = map.get("Poster");
            if(title == null){
             return null;
         }
-        Movie movie = new Movie(imdbId,title, year, runtime, genre,directors, actors, plot,language,imdbRating);
+        Movie movie = new Movie(imdbId,title, year, runtime, genre,directors, actors, plot,language,imdbRating, poster);
         
         return movie;
 
@@ -73,11 +74,12 @@ public class MovieMapper {
         String directors = map.get("Director");
         String language = map.get("Language");
         String title = map.get("Title");
+        String poster = map.get("Poster");
         if(imdbID ==null){
             return null;
         }
             
-        Movie movie = new Movie(imdbID,title, year, runtime, genre,directors, actors, plot,language,imdbRating);
+        Movie movie = new Movie(imdbID,title, year, runtime, genre,directors, actors, plot,language,imdbRating, poster);
         
         return movie;
 

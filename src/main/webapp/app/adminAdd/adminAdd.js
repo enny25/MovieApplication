@@ -10,10 +10,13 @@ angular.module('myApp.adminAdd', ['ngRoute'])
                 });
             }])
 
-        .controller('adminAddController', function ($scope, $http) {
+        .controller('adminAddController', function ($scope, $http, $uibModal) {
             $scope.addMovie = function () {
 
-                var movieGet = $scope.movie;
+                
+                var movieGet = $scope.movieSearch;
+                console.log(movieGet);
+                console.log(movieGet[0]);
                 var postObject = {};
                 if (movieGet.type == 1) {
                     postObject.imdbid = movieGet.info;
@@ -37,9 +40,11 @@ angular.module('myApp.adminAdd', ['ngRoute'])
 
 
                 }).then(function successCallback(res) {
-                    console.log("Works");
+                    $scope.openSuccessModal("Movie has been added to the list!");
+                    $scope.isVisible = false;
                 }, function errorCallback(res) {
-                    console.log("Does not work");
+                    $scope.openErrorModal("Movie does not exist or is already Added!");
+                    $scope.isVisible = false;
                 });
 
             };

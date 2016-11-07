@@ -33,14 +33,14 @@ angular.module('myApp.security', [])
             }
           });
 
-          $scope.$on("HttpErrorEvent", function (event, res) {
-            if (typeof res.data.error !== "undefined" && res.data.error.message) {
-              $scope.openErrorModal(res.data.error.message);
-            }
-            else {
-              $scope.openErrorModal("Unknown error during http request");
-            }
-          });
+//          $scope.$on("HttpErrorEvent", function (event, res) {
+//            if (typeof res.data.error !== "undefined" && res.data.error.message) {
+//              $scope.openErrorModal(res.data.error.message);
+//            }
+//            else {
+//              $scope.openErrorModal("Unknown error during http request");
+//            }
+//          }); Use only for debugging 
 
           clearUserDetails($scope);
 
@@ -69,6 +69,19 @@ angular.module('myApp.security', [])
             var modalInstance = $uibModal.open({
               animation: true,
               templateUrl: 'errorModal.html',
+              controller: function ($scope, $uibModalInstance) {
+                $scope.error = text;
+                $scope.ok = function () {
+                  $uibModalInstance.close();
+                };
+              },
+              size: 'sm'
+            });
+          };
+          $rootScope.openSuccessModal = function (text) {
+            var modalInstance = $uibModal.open({
+              animation: true,
+              templateUrl: 'successModal.html',
               controller: function ($scope, $uibModalInstance) {
                 $scope.error = text;
                 $scope.ok = function () {

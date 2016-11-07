@@ -9,6 +9,7 @@ angular.module('myApp.MovieJS', ['ngRoute'])
             $scope.searchMovie = function () {
 
                 var movieGet = $scope.movie;
+
                 var postObject = {};
                 $scope.movie = {};
                 if (movieGet.type == 1) {
@@ -34,11 +35,12 @@ angular.module('myApp.MovieJS', ['ngRoute'])
 
 
                 }).then(function successCallback(res) { 
-                    $scope.movieInfo = res.data;
+                    console.log(res.data)
+                    $scope.movieDetails = res.data;
                     $window.location.href = '#/movie';
                     
                 }, function errorCallback(res) {
-                    console.log("Does not work");
+                     $scope.openErrorModal("This movie does not exist in our List!");
                     
                 });
 

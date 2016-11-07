@@ -9,6 +9,8 @@ angular.module('myApp', [
     'myApp.security',
     'myApp.MovieJS',
     'myApp.adminAdd',
+    'myApp.ViewList',
+    'myApp.DocumentationView',
     'myApp.view1',
     'myApp.filters',
     'myApp.directives',
