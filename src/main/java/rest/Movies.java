@@ -90,13 +90,22 @@ public class Movies {
     @PUT
     @Path("updateMovie")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-/*
-    we have to move the json handling away from moviefacade and into the rest api
-    */    
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON) 
     public Movie updateMovie(String jsonString){   
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        return facade.updateMovie(json);
+         String imdbid = json.get("imdbid").getAsString();
+        String title = json.get("title").getAsString();
+        String year = json.get("Year").getAsString();
+        String runtime = json.get("Runtime").getAsString();
+        String genre = json.get("Genre").getAsString();
+        String directors = json.get("Directors").getAsString();
+        String actors = json.get("Actors").getAsString();
+        String plot = json.get("plot").getAsString();
+        String language = json.get("Language").getAsString();
+        String imdbrating = json.get("ImdbRating").getAsString();
+        String poster = json.get("Poster").getAsString();
+        Movie movie = new Movie(imdbid,title,year,runtime,genre,directors,actors,plot,language,imdbrating,poster);
+        return facade.updateMovie(movie);
       
     }
     
