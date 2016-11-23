@@ -11,9 +11,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Movie;
 import facades.MovieFacade;
+import facades.UserFacade;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
-import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -28,6 +28,7 @@ public class Movies {
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     MovieFacade facade = new MovieFacade(Persistence.createEntityManagerFactory("pu_development"));
+    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
 
     public Movies() {
     }
@@ -97,5 +98,9 @@ public class Movies {
     
     @GET
     @Path("userpage")
-    @Produces()
+    @Produces(MediaType.APPLICATION_JSON)
+    public String userPage(){
+        List movies = uFacade.
+        List buddies = 
+    }
 }
