@@ -1,6 +1,7 @@
 package facades;
 
 import entity.Movie;
+import entity.PersonalMovie;
 import security.IUserFacade;
 import entity.User;
 import java.util.ArrayList;
@@ -41,10 +42,30 @@ public class UserFacade implements IUserFacade {
       
   }
   
-  public ArrayList<Movie> getPersonalMovieListById (String id){
+  public ArrayList<PersonalMovie> getPersonalMovieListById (String id){
       User user = getUserByUserId(id);
-      ArrayList<Movie> movieList =(ArrayList) user.getMovieList();
+      ArrayList<PersonalMovie> movieList =(ArrayList) user.getMovieList();
       return movieList;
+  }
+  
+  public User updateUser (User user){
+      
+      User updatedUser = getUserByUserId(user.getUserName());
+      EntityManager em = getEntityManager();
+      updatedUser.setBirthday(user.getBirthday());
+      updatedUser.setCountry(user.getCountry());
+      updatedUser.setGender(user.getGender());
+      updatedUser.setFriendList(user.getFriendList());
+      updatedUser.setMovieList(user.getMovieList());
+       try {
+            em.getTransaction().begin();
+            em.merge(updatedUser);
+            em.getTransaction().commit();
+            
+        } finally {
+            em.close();
+        }
+        return updatedUser;
   }
 
   /*

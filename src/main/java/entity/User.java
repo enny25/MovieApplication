@@ -18,6 +18,12 @@ public class User implements IUser, Serializable{
   @Id
   private String userName;
   
+  private String gender;
+  
+  private String birthday;
+  
+  private String country;
+  
   @ManyToMany
   List<Role> roles;
   
@@ -25,7 +31,7 @@ public class User implements IUser, Serializable{
   List<User> friendList;
   
   @ManyToMany
-  List<Movie> movieList;
+  List<PersonalMovie> movieList;
   
   
   
@@ -38,6 +44,14 @@ public class User implements IUser, Serializable{
     this.userName = userName;
     this.passwordHash = PasswordStorage.createHash(password);
   }
+
+    public User(String userName, String gender, String birthday, String country) {
+        this.userName = userName;
+        this.gender = gender;
+        this.birthday = birthday;
+        this.country = country;
+    }
+  
   
 //  public User(String userName, String passwordHash,List<String> roles) {
 //    this.userName = userName;
@@ -92,12 +106,37 @@ public class User implements IUser, Serializable{
         this.friendList = friendList;
     }
 
-    public List<Movie> getMovieList() {
+    public List<PersonalMovie> getMovieList() {
         return movieList;
     }
 
-    public void setMovieList(List<Movie> movieList) {
+    public void setMovieList(List<PersonalMovie> movieList) {
         this.movieList = movieList;
     }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
      
 }
