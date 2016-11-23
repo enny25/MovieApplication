@@ -31,7 +31,7 @@ public class UserPage {
     @Path("userMovies/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String userMovie(@PathParam("id")String id) {
-
+        
         List personalMovies = uFacade.getPersonalMovieListById(id);
         return gson.toJson(personalMovies);
     }

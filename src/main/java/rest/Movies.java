@@ -97,12 +97,5 @@ public class Movies {
       
     }
     
-    @GET
-    @Path("userpage/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String userPage(@PathParam("id")String id){
-       
-        List buddies = uFacade.getFriendListById(id);
-        return gson.toJson(buddies);
-    }
+   
 }
