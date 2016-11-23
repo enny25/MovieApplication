@@ -7,14 +7,16 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import facades.MovieFacade;
+import entity.Movie;
 import facades.UserFacade;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -30,8 +32,7 @@ public class UserPage {
     @GET
     @Path("userMovies/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String userMovie(@PathParam("id")String id) {
-        
+    public String userMovie(@PathParam("id")String id) {        
         List personalMovies = uFacade.getPersonalMovieListById(id);
         return gson.toJson(personalMovies);
     }
@@ -45,4 +46,13 @@ public class UserPage {
         return gson.toJson(buddies);
     }
     
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addMovie(String movieJsonStr){
+        Movie movie = gson.fromJson(movieJsonStr, Movie.class);
+        Movie newMovie = uFacade.AddToPersonalMovieList(username, movie);
+        String jsonResult = gson.toJson(newMovie);
+        return jsonResult;
+    }
 }
