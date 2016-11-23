@@ -95,7 +95,5 @@ public class Movies {
       
     }
     
-    @GET
-    @Path("userpage")
-    @Produces()
+   
 }
