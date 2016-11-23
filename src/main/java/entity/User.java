@@ -27,10 +27,10 @@ public class User implements IUser, Serializable{
   @ManyToMany
   List<Role> roles;
   
-  @ManyToMany
+  @OneToMany
   List<User> friendList;
   
-  @ManyToMany
+  @OneToMany
   List<PersonalMovie> movieList;
   
   

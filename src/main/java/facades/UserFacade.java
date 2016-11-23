@@ -67,6 +67,23 @@ public class UserFacade implements IUserFacade {
         }
         return updatedUser;
   }
+  
+  public boolean addToPersonalMovieList (String username,PersonalMovie pm){
+      ArrayList<PersonalMovie> pmList = getPersonalMovieListById(username);
+      pmList.add(pm);
+       EntityManager em = getEntityManager();
+      
+         try {
+            em.getTransaction().begin();
+            em.merge(pmList);
+            em.getTransaction().commit();
+            
+        } finally {
+            em.close();
+        }
+      
+      return pmList.contains(pm);
+  }
 
   /*
   Return the Roles if users could be authenticated, otherwise null
