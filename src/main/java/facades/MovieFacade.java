@@ -100,35 +100,22 @@ public class MovieFacade {
         
     }
     
-    public Movie updateMovie(JsonObject json) {
-
-        System.out.println(json);        
-        String imdbid = json.get("imdbid").getAsString();
-        String title = json.get("title").getAsString();
-        String year = json.get("Year").getAsString();
-        String runtime = json.get("Runtime").getAsString();
-        String genre = json.get("Genre").getAsString();
-        String directors = json.get("Directors").getAsString();
-        String actors = json.get("Actors").getAsString();
-        String plot = json.get("plot").getAsString();
-        String language = json.get("Language").getAsString();
-        String imdbrating = json.get("ImdbRating").getAsString();
-        String poster = json.get("Poster").getAsString();
+    public Movie updateMovie(Movie movie) {
         
         EntityManager em = getEntityManager();
         
-        Movie updatedMovie = (Movie) em.find(Movie.class, imdbid);
-        updatedMovie.setImdbId(imdbid);
-        updatedMovie.setTitle(title);
-        updatedMovie.setYear(year);
-        updatedMovie.setRuntime(runtime);
-        updatedMovie.setGenre(genre);
-        updatedMovie.setDirectors(directors);
-        updatedMovie.setActors(actors);
-        updatedMovie.setPlot(plot);
-        updatedMovie.setLanguage(language);
-        updatedMovie.setImdbRating(imdbrating);
-        updatedMovie.setPoster(poster);
+        Movie updatedMovie = (Movie) em.find(Movie.class, movie.getImdbId());
+        updatedMovie.setImdbId(movie.getImdbId());
+        updatedMovie.setTitle(movie.getTitle());
+        updatedMovie.setYear(movie.getYear());
+        updatedMovie.setRuntime(movie.getRuntime());
+        updatedMovie.setGenre(movie.getGenre());
+        updatedMovie.setDirectors(movie.getDirectors());
+        updatedMovie.setActors(movie.getActors());
+        updatedMovie.setPlot(movie.getPlot());
+        updatedMovie.setLanguage(movie.getPlot());
+        updatedMovie.setImdbRating(movie.getImdbRating());
+        updatedMovie.setPoster(movie.getPoster());
         
         try {
             em.getTransaction().begin();
