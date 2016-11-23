@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import security.IUser;
 import security.PasswordStorage;
 
@@ -19,6 +20,16 @@ public class User implements IUser, Serializable{
   
   @ManyToMany
   List<Role> roles;
+  
+  @ManyToMany
+  List<User> friendList;
+  
+  @ManyToMany
+  List<Movie> movieList;
+  
+  
+  
+  
  
   public User() {
   }
@@ -72,5 +83,21 @@ public class User implements IUser, Serializable{
   public String getUserName() {
     return userName;
   }
+
+    public List<User> getFriendList() {
+        return friendList;
+    }
+
+    public void setFriendList(List<User> friendList) {
+        this.friendList = friendList;
+    }
+
+    public List<Movie> getMovieList() {
+        return movieList;
+    }
+
+    public void setMovieList(List<Movie> movieList) {
+        this.movieList = movieList;
+    }
      
 }

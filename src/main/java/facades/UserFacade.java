@@ -1,7 +1,9 @@
 package facades;
 
+import entity.Movie;
 import security.IUserFacade;
 import entity.User;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,13 +25,26 @@ public class UserFacade implements IUserFacade {
   }
 
   @Override
-  public IUser getUserByUserId(String id) {
+  public User getUserByUserId(String id) {
     EntityManager em = getEntityManager();
     try {
       return em.find(User.class, id);
     } finally {
       em.close();
     }
+  }
+  
+  public ArrayList<User> getFriendListById(String id){
+      User user = getUserByUserId(id);
+      ArrayList<User> friendList =(ArrayList) user.getFriendList();
+      return friendList;
+      
+  }
+  
+  public ArrayList<Movie> getPersonalMovieListById (String id){
+      User user = getUserByUserId(id);
+      ArrayList<Movie> movieList =(ArrayList) user.getMovieList();
+      return movieList;
   }
 
   /*
