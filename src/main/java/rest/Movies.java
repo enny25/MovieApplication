@@ -11,15 +11,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Movie;
 import facades.MovieFacade;
+import facades.UserFacade;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
-import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -28,6 +29,7 @@ public class Movies {
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     MovieFacade facade = new MovieFacade(Persistence.createEntityManagerFactory("pu_development"));
+    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
 
     public Movies() {
     }
@@ -88,13 +90,24 @@ public class Movies {
     @PUT
     @Path("updateMovie")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
-    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)    
-    public void updateMovie(String jsonString){   
+    @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON) 
+    public Movie updateMovie(String jsonString){   
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        facade.updateMovie(json);
+         String imdbid = json.get("imdbid").getAsString();
+        String title = json.get("title").getAsString();
+        String year = json.get("Year").getAsString();
+        String runtime = json.get("Runtime").getAsString();
+        String genre = json.get("Genre").getAsString();
+        String directors = json.get("Directors").getAsString();
+        String actors = json.get("Actors").getAsString();
+        String plot = json.get("plot").getAsString();
+        String language = json.get("Language").getAsString();
+        String imdbrating = json.get("ImdbRating").getAsString();
+        String poster = json.get("Poster").getAsString();
+        Movie movie = new Movie(imdbid,title,year,runtime,genre,directors,actors,plot,language,imdbrating,poster);
+        return facade.updateMovie(movie);
       
     }
     
-    
-    
+   
 }
