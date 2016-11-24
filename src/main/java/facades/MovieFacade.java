@@ -19,16 +19,16 @@ import javax.persistence.Query;
  * @author Plamen
  */
 public class MovieFacade {
-    
+
     EntityManagerFactory emf;
     MovieMapper moviemapper = new MovieMapper();
     Movie mov1 = new Movie();
     List<Movie> addedMovies = new ArrayList();
-    
+
     public MovieFacade(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
+
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
@@ -67,7 +67,7 @@ public class MovieFacade {
             em.getTransaction().begin();
             em.persist(newmovie);
             em.getTransaction().commit();
-            
+
         } finally {
             em.close();
         }
@@ -81,28 +81,28 @@ public class MovieFacade {
             em.getTransaction().begin();
             em.persist(newmovie);
             em.getTransaction().commit();
-            
+
         } finally {
             em.close();
         }
     }
-    
+
     public List<Movie> getAllMovies() {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT m FROM Movie m");
-        
+
         List<Movie> addressList = query.getResultList();
         try {
             return addressList;
         } finally {
             em.close();
         }
-        
-    }
-    
-    public Movie updateMovie(JsonObject json) {
 
-        System.out.println(json);        
+    }
+
+    public void updateMovie(JsonObject json) {
+
+        System.out.println(json);
         String imdbid = json.get("imdbid").getAsString();
         String title = json.get("title").getAsString();
         String year = json.get("Year").getAsString();
@@ -114,31 +114,29 @@ public class MovieFacade {
         String language = json.get("Language").getAsString();
         String imdbrating = json.get("ImdbRating").getAsString();
         String poster = json.get("Poster").getAsString();
-        
+
         EntityManager em = getEntityManager();
-        
         Movie updatedMovie = (Movie) em.find(Movie.class, imdbid);
-        updatedMovie.setImdbId(imdbid);
-        updatedMovie.setTitle(title);
-        updatedMovie.setYear(year);
-        updatedMovie.setRuntime(runtime);
-        updatedMovie.setGenre(genre);
-        updatedMovie.setDirectors(directors);
-        updatedMovie.setActors(actors);
-        updatedMovie.setPlot(plot);
-        updatedMovie.setLanguage(language);
-        updatedMovie.setImdbRating(imdbrating);
-        updatedMovie.setPoster(poster);
-        
         try {
             em.getTransaction().begin();
-            em.merge(updatedMovie);
+
+            updatedMovie.setImdbId(imdbid);
+            updatedMovie.setTitle(title);
+            updatedMovie.setYear(year);
+            updatedMovie.setRuntime(runtime);
+            updatedMovie.setGenre(genre);
+            updatedMovie.setDirectors(directors);
+            updatedMovie.setActors(actors);
+            updatedMovie.setPlot(plot);
+            updatedMovie.setLanguage(language);
+            updatedMovie.setImdbRating(imdbrating);
+            updatedMovie.setPoster(poster);
             em.getTransaction().commit();
-            
+
         } finally {
             em.close();
         }
-        return updatedMovie;
+        
     }
-    
+
 }

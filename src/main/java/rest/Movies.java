@@ -89,9 +89,9 @@ public class Movies {
     @Path("updateMovie")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)    
-    public Movie updateMovie(String jsonString){   
+    public void updateMovie(String jsonString){   
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        return facade.updateMovie(json);
+        facade.updateMovie(json);
       
     }
     

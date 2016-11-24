@@ -44,6 +44,9 @@ angular.module('myApp.ViewList', ['ngRoute'])
 {
 
     $scope.movie = items;
+    $scope.close = function() {
+        $uibModalInstance.close();
+    };
     $scope.ok = function () {
         var updates = $scope.movie;
         console.log(updates);
@@ -56,7 +59,7 @@ angular.module('myApp.ViewList', ['ngRoute'])
                 "Content-Type": "application/json"
             }
         }).then(function successCallback(res) {
-            $scope.openSuccessModal("Movie has been updated to the list!");
+            $scope.openSuccessModal("Movie has been updated!");
             $scope.isVisible = false;
         }, function errorCallback(res) {
             $scope.openErrorModal("Uknown error appeared!");
