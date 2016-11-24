@@ -5,10 +5,7 @@
  */
 package tester;
 
-import DatabaseMappers.MovieMapper;
-import entity.Movie;
 import facades.MovieFacade;
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -18,7 +15,8 @@ import javax.persistence.Persistence;
  */
 public class tester {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_local");
+        Persistence.generateSchema("pu_local", null);
        MovieFacade mf = new MovieFacade(emf);
        mf.createMoviebyTitle("Grease");
 
