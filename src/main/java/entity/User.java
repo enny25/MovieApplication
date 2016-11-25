@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -24,13 +25,13 @@ public class User implements IUser, Serializable{
   
   private String country;
   
-  @ManyToMany
+  @ManyToMany(cascade = CascadeType.ALL)
   List<Role> roles;
   
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   List<User> friendList;
   
-  @OneToMany
+  @OneToMany(cascade = CascadeType.ALL)
   List<PersonalMovie> movieList;
   
   

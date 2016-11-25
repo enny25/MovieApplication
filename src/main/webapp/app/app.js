@@ -7,6 +7,7 @@ angular.module('myApp', [
     'angular-jwt',
     'ui.bootstrap',
     'myApp.security',
+    'myApp.PersonalProfile',
     'myApp.MovieJS',
     'myApp.adminAdd',
     'myApp.ViewList',

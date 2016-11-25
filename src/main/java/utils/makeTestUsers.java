@@ -17,7 +17,7 @@ public class makeTestUsers {
         try {
             System.out.println("Creating TEST Users");
             if (em.find(User.class, "user") == null) {
-                em.getTransaction().begin();
+                
                 Role userRole = new Role("User");
                 Role adminRole = new Role("Admin");
                 User user = new User("user", "test");
@@ -30,6 +30,7 @@ public class makeTestUsers {
                 User both = new User("user_admin", "test");
                 both.addRole(userRole);
                 both.addRole(adminRole);
+                em.getTransaction().begin();
                 em.persist(userRole);
                 em.persist(adminRole);
                 em.persist(docRole);

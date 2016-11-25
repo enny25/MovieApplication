@@ -3,6 +3,7 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToMany;
 @Entity(name = "USER_ROLE")
 public class Role implements Serializable {
 
-  @ManyToMany(mappedBy = "roles")
+  @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
   private List<User> users;
 
   private static final long serialVersionUID = 1L;
