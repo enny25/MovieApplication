@@ -31,7 +31,7 @@ import javax.ws.rs.core.MediaType;
 public class UserPage {
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
+    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_local"));
 
     @GET
     @Path("userMovies/{id}")

@@ -22,10 +22,12 @@ import security.PasswordStorage;
  * @author Lenovow
  */
 public class tester {
+
     public static void main(String[] args) throws PasswordStorage.CannotPerformOperationException {
         Persistence.generateSchema("pu_local", null);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_local");
         
+
        MovieFacade mf = new MovieFacade(emf);
        mf.createMoviebyTitle("Grease");
        UserFacade uf = new UserFacade(emf);

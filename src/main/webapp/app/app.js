@@ -12,6 +12,7 @@ angular.module('myApp', [
     'myApp.userPage',
     'myApp.ViewList',
     'myApp.DocumentationView',
+    'myApp.personalpage',
     'myApp.view1',
     'myApp.filters',
     'myApp.directives',

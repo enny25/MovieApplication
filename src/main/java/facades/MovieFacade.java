@@ -8,6 +8,8 @@ package facades;
 import DatabaseMappers.MovieMapper;
 import com.google.gson.JsonObject;
 import entity.Movie;
+import entity.Review;
+import entity.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -99,6 +101,30 @@ public class MovieFacade {
         }
 
     }
+    
+    public void postReview (Review review){
+        EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(review);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+        
+    }
+    
+    public List<Review> getReviewsByUser (User user){
+        EntityManager em = getEntityManager();
+        
+       ArrayList<Review> reviewlist= new ArrayList<Review>();
+       return reviewlist;
+        
+    }
+    
+    
 
     public Movie updateMovie(Movie movie) {
 

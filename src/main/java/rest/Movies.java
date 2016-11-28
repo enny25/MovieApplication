@@ -28,8 +28,8 @@ import javax.ws.rs.core.MediaType;
 public class Movies {
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    MovieFacade facade = new MovieFacade(Persistence.createEntityManagerFactory("pu_development"));
-    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
+    MovieFacade facade = new MovieFacade(Persistence.createEntityManagerFactory("pu_local"));
+    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_local"));
 
     public Movies() {
     }
