@@ -18,6 +18,7 @@ public class User implements IUser, Serializable{
   @Id
   private String userName;
   
+  
   private String gender;
   
   private String birthday;
@@ -45,8 +46,9 @@ public class User implements IUser, Serializable{
     this.passwordHash = PasswordStorage.createHash(password);
   }
 
-    public User(String userName, String gender, String birthday, String country) {
+    public User(String userName,String password, String gender, String birthday, String country)throws PasswordStorage.CannotPerformOperationException {
         this.userName = userName;
+        this.passwordHash = PasswordStorage.createHash(password);
         this.gender = gender;
         this.birthday = birthday;
         this.country = country;

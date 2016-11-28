@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 import entity.Movie;
 import facades.UserFacade;
 import entity.PersonalMovie;
+import entity.User;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.GET;
@@ -38,6 +39,14 @@ public class UserPage {
     public String userMovie(@PathParam("id")String id) {        
         List personalMovies = uFacade.getPersonalMovieListById(id);
         return gson.toJson(personalMovies);
+    }
+    
+    @GET
+    @Path("userPage/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUser(@PathParam("id")String id) {        
+         User user = uFacade.getUserByUserId(id);
+        return gson.toJson(user);
     }
 
     @GET

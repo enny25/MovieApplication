@@ -84,6 +84,21 @@ public class UserFacade implements IUserFacade {
       
       return pmList.contains(pm);
   }
+  public boolean createUser (User user){
+       EntityManager em = getEntityManager();
+      
+         try {
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+            
+        } finally {
+            em.close();
+            
+        }
+         return (getUserByUserId(user.getUserName())!= null);
+      
+  }
 
   /*
   Return the Roles if users could be authenticated, otherwise null

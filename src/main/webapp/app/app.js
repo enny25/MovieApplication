@@ -9,6 +9,7 @@ angular.module('myApp', [
     'myApp.security',
     'myApp.MovieJS',
     'myApp.adminAdd',
+    'myApp.userPage',
     'myApp.ViewList',
     'myApp.DocumentationView',
     'myApp.view1',
