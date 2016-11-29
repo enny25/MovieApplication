@@ -7,6 +7,7 @@
 //import entity.Movie;
 //import facades.MovieFacade;
 //import javax.persistence.EntityManagerFactory;
+//import javax.persistence.Persistence;
 //import org.junit.Test;
 //import static org.junit.Assert.*;
 //import org.junit.Ignore;
@@ -17,14 +18,19 @@
 // * @author Emil
 // */
 //public class MoviesTest {
-//    EntityManagerFactory emf;
+//    
+//    MovieFacade instance = new MovieFacade(Persistence.createEntityManagerFactory("pu_test"));
+//    
+//    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_test");
+//
 //    MovieFacade facade = new MovieFacade(emf);
 //    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
 //
 //    public MoviesTest() {
+//        instance.createMoviebyTitle("Grease");
 //    }
 //  
-////    @Ignore
+//    @Ignore
 //    @Test
 //    public void testGetMovieName() throws Exception {
 //        System.out.println("testGetMovieName");
@@ -40,7 +46,7 @@
 //
 //    }
 //    
-////    @Ignore
+//    @Ignore
 //    @Test
 //    public void testGetMovieId() throws Exception {
 //        System.out.println("///////////");
@@ -58,14 +64,18 @@
 //
 //    
 //    // Does not work yet.
-//    @Ignore
+////    @Ignore
 //    @Test
 //    public void testUpdateMovie(){        
+//        System.out.println("------- TEST -------");
 //        Movies instance = new Movies();
-//        Movie movies = facade.getMoviebyTitle("Grease");
-//        movies.setTitle("Travolta");
-//        String result = instance.updateMovie(gson.toJson(movies));
-//        String jsonResult = gson.toJson("update succesfull");
-//        assertEquals(result, jsonResult);
+//        Movie movies = facade.getMoviebyTitle("Travolta");
+//        movies.setTitle("Grease");
+//        System.out.println("Movie: " + movies);
+//        Movie result = instance.updateMovie(gson.toJson(movies));
+////        String jsonResult = gson.toJson("Travolta");
+//        assertEquals(facade.getMoviebyTitle("Travolta"), result);
+//        
+//        // It changes the movie title, but the assert Is wrong, so it fails.
 //    }   
 //}
