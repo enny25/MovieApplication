@@ -23,7 +23,7 @@ public class Movie implements Serializable {
     private String imdbid;
     
     private String title;
-    @Column(name="MovieYear")
+//    @Column(name="MovieYear")
     private String Year;
     
     private String Runtime;
@@ -36,7 +36,7 @@ public class Movie implements Serializable {
     private String Poster;
     
     private String plot;
-    @Column(name="MovieLanguage")
+//    @Column(name="MovieLanguage")
     private String Language;
     private String ImdbRating;
     private List Reviews;
