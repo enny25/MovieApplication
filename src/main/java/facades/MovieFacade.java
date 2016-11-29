@@ -118,11 +118,57 @@ public class MovieFacade {
     
     public List<Review> getReviewsByUser (User user){
         EntityManager em = getEntityManager();
-        
-       ArrayList<Review> reviewlist= new ArrayList<Review>();
-       return reviewlist;
+        Query query = em.createQuery("SELECT r FROM Review r WHERE r.user = :user");
+        query.setParameter("user", user);
+        ArrayList<Review> result = (ArrayList<Review>)query.getResultList();
+       return result;
         
     }
+     public List<Review> getReviewsByMovie (Movie movie){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("SELECT r FROM Review r WHERE r.movie = :movie");
+        query.setParameter("movie", movie);
+        ArrayList<Review> result = (ArrayList<Review>)query.getResultList();
+       return result;
+        
+    }
+     public void upvoteReview(Review review){
+          EntityManager em = getEntityManager();
+           Review updatedReview = (Review) em.find(Review.class, review.getId());
+           int updatedScore = updatedReview.getScore()+1;
+           updatedReview.setScore(updatedScore);
+
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(updatedReview);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+         
+         
+     }
+     
+      public void downVoteReview(Review review){
+          EntityManager em = getEntityManager();
+           Review updatedReview = (Review) em.find(Review.class, review.getId());
+           int updatedScore = updatedReview.getScore()-1;
+           updatedReview.setScore(updatedScore);
+
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(updatedReview);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+         
+         
+     }
     
     
 
