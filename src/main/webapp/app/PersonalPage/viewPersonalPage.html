@@ -1,0 +1,50 @@
+
+<div>
+    <table>
+        <thead>
+            <tr>                
+                <th>Username</th>                
+            </tr>
+            <tr>                
+                <th>Birthday</th>                
+            </tr>
+            <tr>                
+                <th>Gender</th>                
+            </tr>
+            <tr>                
+                <th>Country</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in listUsers"></tr>
+        <td>
+
+            <script type="text/ng-template" id="upTemplate.html">
+        <div class="modal-header">
+                        <h3 class="modal-title">Edit User!</h3>
+                        </div>
+                        
+                        <div class="modal-body">
+                        <form  name="userUpdate" ng-submit="ok()">
+                        <input class="form-control" type="text" ng-model="user.username" value="{{user.username}}"/><br>
+                        <input class="form-control" type="text" ng-model="user.birthday" value="{{user.birthday}}"/><br>
+                        <input class="form-control" type="text" ng-model="user.gender" value="{{user.gender}}"/><br>
+                        <input class="form-control" type="text" ng-model="user.country" value="{{user.country}}"/><br>
+                        <button style="width: 100%"  class="btn btn-success" type="submit" autofocus>OK</button>
+                        </form>
+                        </div>
+                        
+                        
+                <div class="modal-footer">
+                <button class="btn btn-primary" style="width: 100%" ng-click="close()" autofocus>Close</button>
+                        </div>
+        
+            </script>  
+        </td>
+         <td>{{user.username}}</td>
+                <td>{{user.birthday}}</td>
+                <td>{{user.gender}}</td>
+                <td>{{user.country}}</td>
+        </tbody>
+    </table>
+</div>

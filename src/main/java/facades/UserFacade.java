@@ -69,11 +69,9 @@ public class UserFacade implements IUserFacade {
         return updatedUser;
     }
 
-    public void addToPersonalMovieList(String username, String imdbId, String status, int rating) {
+    public void addToPersonalMovieList(String username, PersonalMovie pm) {
 
-        EntityManager em = getEntityManager();
-        Movie movie = (Movie) em.find(Movie.class, imdbId);
-        PersonalMovie pm = new PersonalMovie(movie, rating, status);
+        EntityManager em = getEntityManager();        
         ArrayList<PersonalMovie> pmList = getPersonalMovieListById(username);
         pmList.add(pm);
         try {
@@ -84,8 +82,26 @@ public class UserFacade implements IUserFacade {
         } finally {
             em.close();
         }
+      
+      
+  }
+  public boolean createUser (User user){
+       EntityManager em = getEntityManager();
+      
+         try {
+            em.getTransaction().begin();
+            em.merge(user);
+            em.getTransaction().commit();
+            
+        } finally {
+            em.close();
+            
+        }
+         return (getUserByUserId(user.getUserName())!= null);
+      
+  }
 
-    }
+    
 
     /*
   Return the Roles if users could be authenticated, otherwise null

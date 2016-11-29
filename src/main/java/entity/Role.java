@@ -11,7 +11,9 @@ import javax.persistence.ManyToMany;
 @Entity(name = "USER_ROLE")
 public class Role implements Serializable {
 
-  @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+
+  @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "roles")
+
   private List<User> users;
 
   private static final long serialVersionUID = 1L;

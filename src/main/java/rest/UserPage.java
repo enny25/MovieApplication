@@ -12,6 +12,8 @@ import com.google.gson.JsonParser;
 import entity.Movie;
 import entity.PersonalMovie;
 import facades.UserFacade;
+import entity.PersonalMovie;
+import entity.User;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.GET;
@@ -40,6 +42,14 @@ public class UserPage {
         List personalMovies = uFacade.getPersonalMovieListById(username);
         return gson.toJson(personalMovies);
     }
+    
+    @GET
+    @Path("userPage/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUser(@PathParam("id")String id) {        
+         User user = uFacade.getUserByUserId(id);
+        return gson.toJson(user);
+    }
 
     @GET
     @Path("userBuddies/{id}")
@@ -49,21 +59,29 @@ public class UserPage {
         List buddies = uFacade.getFriendListById(id);
         return gson.toJson(buddies);
     }
-
+    
     @POST
-    @Path("personalMovieAdd")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public void addMovie(String movieJsonStr) {
-        JsonObject json = new JsonParser().parse(movieJsonStr).getAsJsonObject();
-        String imdbid = json.get("movie").getAsString();
-        String username = json.get("username").getAsString();
-        String status = json.get("status").getAsString();
-        int rating = json.get("rating").getAsInt();
-        
-        uFacade.addToPersonalMovieList(username, imdbid, status, rating);
-        
+    public void addMovie(String jsonString){
+       JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+         String imdbid = json.get("imdbid").getAsString();
+        String title = json.get("title").getAsString();
+        String year = json.get("Year").getAsString();
+        String runtime = json.get("Runtime").getAsString();
+        String genre = json.get("Genre").getAsString();
+        String directors = json.get("Directors").getAsString();
+        String actors = json.get("Actors").getAsString();
+        String plot = json.get("plot").getAsString();
+        String language = json.get("Language").getAsString();
+        String imdbrating = json.get("ImdbRating").getAsString();
+        String poster = json.get("Poster").getAsString();
+        Movie movie = new Movie(imdbid,title,year,runtime,genre,directors,actors,plot,language,imdbrating,poster);
+        String rating = json.get("Rating").getAsString();
+        String status = json.get("Status").getAsString();
+        String username = json.get("Username").getAsString();
+        PersonalMovie pm = new PersonalMovie(movie,Integer.parseInt(status),rating);
+        uFacade.addToPersonalMovieList(username, pm);
         
     }
-   
 }

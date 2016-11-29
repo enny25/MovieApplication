@@ -7,26 +7,34 @@ package tester;
 
 import DatabaseMappers.MovieMapper;
 import entity.Movie;
+import entity.PersonalMovie;
+import entity.User;
 import facades.MovieFacade;
 import facades.UserFacade;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import security.PasswordStorage;
 
 /**
  *
  * @author Lenovow
  */
 public class tester {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws PasswordStorage.CannotPerformOperationException {
+        Persistence.generateSchema("pu_development", null);
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+        
+
        MovieFacade mf = new MovieFacade(emf);
+       mf.createMoviebyTitle("Frozen");
        UserFacade uf = new UserFacade(emf);
-//       mf.createMoviebyTitle("Grease");
-       uf.addToPersonalMovieList("user", "tt0072505", "Completed", 1);
-       uf.addToPersonalMovieList("user", "tt0076759", "Completed", 2);
-       uf.addToPersonalMovieList("user", "tt0077631", "Completed", 3);
-       uf.addToPersonalMovieList("user", "tt0078346", "Completed", 4);
+       User user = new User("EmilsUser","SuperSecretPassword","male","25-04-1984","Denmark");
+       ArrayList<PersonalMovie> pmList = new ArrayList<PersonalMovie>();
+       user.setMovieList(pmList);
+       uf.createUser(user);
        
 
         }
