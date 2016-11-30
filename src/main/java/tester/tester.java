@@ -24,12 +24,12 @@ import security.PasswordStorage;
 public class tester {
 
     public static void main(String[] args) throws PasswordStorage.CannotPerformOperationException {
-        Persistence.generateSchema("pu_local", null);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_local");
+        Persistence.generateSchema("pu_development", null);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         
 
        MovieFacade mf = new MovieFacade(emf);
-       mf.createMoviebyTitle("Grease");
+       mf.createMoviebyTitle("Frozen");
        UserFacade uf = new UserFacade(emf);
        User user = new User("EmilsUser","SuperSecretPassword","male","25-04-1984","Denmark");
        ArrayList<PersonalMovie> pmList = new ArrayList<PersonalMovie>();

@@ -50,7 +50,7 @@ angular.module("myApp.personalpage", ['ngRoute'])
         var updates = $scope.user;
         console.log(updates);
         $http({
-            url: 'api/profile/updateUser', WE*RE LACKING THE REST FOR UPDATE USER, ZYGI!
+            url: 'api/profile/updateUser', /* WE*RE LACKING THE REST FOR UPDATE USER, ZYGI!*/
             dataType: 'json',
             method: 'PUT',
             data: updates,

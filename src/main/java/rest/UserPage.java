@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Movie;
+import entity.PersonalMovie;
 import facades.UserFacade;
 import entity.PersonalMovie;
 import entity.User;
@@ -22,6 +23,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
+import static rest.Movies.gson;
 
 /**
  *
@@ -31,13 +33,13 @@ import javax.ws.rs.core.MediaType;
 public class UserPage {
 
     static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_local"));
+    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
 
     @GET
-    @Path("userMovies/{id}")
+    @Path("{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String userMovie(@PathParam("id")String id) {        
-        List personalMovies = uFacade.getPersonalMovieListById(id);
+    public String userMovie(@PathParam("username") String username) {
+        List personalMovies = uFacade.getPersonalMovieListById(username);
         return gson.toJson(personalMovies);
     }
     
@@ -52,7 +54,7 @@ public class UserPage {
     @GET
     @Path("userBuddies/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String userBuddy(@PathParam("id")String id) {
+    public String userBuddy(@PathParam("id") String id) {
 
         List buddies = uFacade.getFriendListById(id);
         return gson.toJson(buddies);
@@ -61,7 +63,7 @@ public class UserPage {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String addMovie(String jsonString){
+    public void addMovie(String jsonString){
        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
          String imdbid = json.get("imdbid").getAsString();
         String title = json.get("title").getAsString();
@@ -79,8 +81,7 @@ public class UserPage {
         String status = json.get("Status").getAsString();
         String username = json.get("Username").getAsString();
         PersonalMovie pm = new PersonalMovie(movie,Integer.parseInt(status),rating);
-        boolean result = uFacade.addToPersonalMovieList(username, pm);
-        String jsonResult = gson.toJson(result);
-        return jsonResult;
+        uFacade.addToPersonalMovieList(username, pm);
+        
     }
 }

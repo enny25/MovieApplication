@@ -49,7 +49,7 @@ public class RestMovie {
     
     @Test
     public void testAddMovie(){
-        given().when().get("api/movies/movie/Grease").then().statusCode(200);
+        given().when().get("api/movies/movie/Frozen").then().statusCode(200);
     }
     
     

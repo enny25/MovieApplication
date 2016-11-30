@@ -8,9 +8,9 @@ angular.module('myApp.ViewList', ['ngRoute'])
                 });
             }])
 
-        .controller('listController', function ($http, $window, $scope, $uibModal) {
+        .controller('listController', function ($http, $window, $scope, $uibModal, usernameInfo, isAdmin) {
             $scope.listDetails = {};
-            $scope.admin = $scope.isAdmin;
+            $scope.isAdmin = isAdmin.checkIsAdmin();
             $http({
                 url: 'api/movies/getMovieList',
                 dataType: 'json',
@@ -27,29 +27,45 @@ angular.module('myApp.ViewList', ['ngRoute'])
             }, function errorCallback(res) {
                 console.log("Does not work");
             });
-            $scope.open = function (movie) {
+            $scope.openeditModal = function (movie) {
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'movieTemplate.html',
-                    controller: 'ModalInstanceCtrl',
+                    controller: 'MovieListControler',
                     resolve: {
                         items: function () {
                             return movie;
                         }
                     }
                 });
-            }
-            ;
-        }).controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items, $http)
+            };
+            $scope.openaddModal = function (movie) {
+                if (usernameInfo.getUsername() === undefined) {
+                    $scope.openErrorModal("You Need To Log In If You Want To Add A Movie!");
+                } else {
+                    var modalInstance = $uibModal.open({
+                        animation: true,
+                        templateUrl: 'movielistTemplate.html',
+                        controller: 'PersonalMovieControler',
+                        resolve: {
+                            items: function () {
+                                return movie;
+                            }
+                        }
+                    });
+                }
+                ;
+            };
+        }).controller('MovieListControler', function ($scope, $uibModalInstance, items, $http)
 {
 
     $scope.movie = items;
-    $scope.close = function() {
+    $scope.close = function () {
         $uibModalInstance.close();
     };
     $scope.ok = function () {
         var updates = $scope.movie;
-        console.log(updates);
+//        console.log(updates);
         $http({
             url: 'api/movies/updateMovie',
             dataType: 'json',
@@ -60,10 +76,42 @@ angular.module('myApp.ViewList', ['ngRoute'])
             }
         }).then(function successCallback(res) {
             $scope.openSuccessModal("Movie has been updated!");
+            console.log(res.data);
+            console.log("Works");
             $scope.isVisible = false;
         }, function errorCallback(res) {
             $scope.openErrorModal("Uknown error appeared!");
+            console.log("Does Not Works");
             $scope.isVisible = false;
+        });
+        $uibModalInstance.close();
+    };
+}).controller('PersonalMovieControler', function ($scope, $uibModalInstance, items, $http, usernameInfo)
+{
+
+
+    $scope.close = function () {
+        $uibModalInstance.close();
+    };
+    $scope.ok = function () {
+        $scope.movie = items;
+        var allInfo = {movie: $scope.movie.imdbid, username: usernameInfo.getUsername(), status: $scope.personal.status, rating: $scope.personal.rating};
+        console.log(allInfo);
+
+        $http({
+            url: 'api/profile/personalMovieAdd',
+            dataType: 'json',
+            method: 'POST',
+            data: allInfo,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(function successCallback(res) {
+            $scope.openSuccessModal("Movie has been added to your Movie List!");
+            
+        }, function errorCallback(res) {
+            $scope.openErrorModal("Uknown error appeared!");
+            
         });
         $uibModalInstance.close();
     };
