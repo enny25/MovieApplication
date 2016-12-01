@@ -70,11 +70,22 @@ public class RestMovie {
     // This will test for movies in the movieList on the website, 
     // to check if there's a movie with the existing name.
     @Test
-    public void testGetMovie(){
+    public void testGetMovieName(){
         given().when().get("api/movies/getMovieList").then().body(containsString("Frozen"));
         given().when().get("api/movies/getMovieList").then().body(containsString("The Flash"));
+    }    
+    
+    @Test
+    public void testGetMovieId(){
+        given().when().get("api/movies/getMovieList").then().body(containsString("tt2294629"));
     }
     
+    
+    @Test
+    public void testGetProfile(){
+        given().when().get("api/profile/user").then().statusCode(200);
+    
+    }
     
     
 

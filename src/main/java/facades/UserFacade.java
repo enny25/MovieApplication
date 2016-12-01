@@ -1,16 +1,13 @@
 package facades;
 
-import entity.Movie;
 import entity.PersonalMovie;
 import security.IUserFacade;
 import entity.User;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import security.IUser;
 import security.PasswordStorage;
 
@@ -36,16 +33,16 @@ public class UserFacade implements IUserFacade {
         }
     }
 
-    public ArrayList<User> getFriendListById(String id) {
+    public List<User> getFriendListById(String id) {
         User user = getUserByUserId(id);
-        ArrayList<User> friendList = (ArrayList) user.getFriendList();
+        List<User> friendList =  user.getFriendList();
         return friendList;
 
     }
 
-    public ArrayList<PersonalMovie> getPersonalMovieListById(String id) {
+    public List<PersonalMovie> getPersonalMovieListById(String id) {
         User user = getUserByUserId(id);
-        ArrayList<PersonalMovie> movieList = (ArrayList) user.getMovieList();
+        List<PersonalMovie> movieList =  user.getMovieList();
         return movieList;
     }
 
@@ -72,7 +69,7 @@ public class UserFacade implements IUserFacade {
     public void addToPersonalMovieList(String username, PersonalMovie pm) {
 
         EntityManager em = getEntityManager();        
-        ArrayList<PersonalMovie> pmList = getPersonalMovieListById(username);
+        List<PersonalMovie> pmList = getPersonalMovieListById(username);
         pmList.add(pm);
         try {
             em.getTransaction().begin();
