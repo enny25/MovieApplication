@@ -41,7 +41,7 @@ public class Movie implements Serializable {
     private String Language;
     private String ImdbRating;
     private List Reviews;
-    private List Reccommendations;
+    private List<Recommendation> Recommendations;
 
     public Movie(String imdbId) {
         this.imdbid = imdbId;
@@ -172,11 +172,11 @@ public class Movie implements Serializable {
     }
 
     public List getReccommendations() {
-        return Reccommendations;
+        return Recommendations;
     }
 
     public void setReccommendations(List Reccommendations) {
-        this.Reccommendations = Reccommendations;
+        this.Recommendations = Reccommendations;
     }
 
     public String getPoster() {
