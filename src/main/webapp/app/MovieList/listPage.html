@@ -59,21 +59,16 @@
 
                         <div class="modal-body">
                         <form  name="movieUpdate" ng-submit="ok()">
-                        Rating:
-                        <select class="form-control" ng-model="personal.rating">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
+                    
                         Status:
-                        <select class="form-control" ng-model="personal.status">
-                            <option value="Not Started">Not Started</option>
-                            <option value="Stopped Watching">Stopped Watching</option>
-                            <option value="Watching">Watching</option>
-                            <option value="Completed">Completed</option>
-                        </select>
+                        <select class="form-control" ng-model="selectedStatus" ng-options="st.status for st in statuses" ng-change="setStatus()">
+             
+                           </select>
+                 Rating:
+                        <select ng-disabled="isDisabled" class="form-control" ng-model="selectedRating" ng-options="rt.rate for rt in ratings" ng-change="setRate()">
+             
+                           </select>
+                </fieldset>
                 <br>
                         <button style="width: 100%"  class="btn btn-success" type="submit" autofocus>ADD TO MY LIST</button>
                         </form>

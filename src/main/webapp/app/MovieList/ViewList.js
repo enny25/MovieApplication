@@ -90,13 +90,45 @@ angular.module('myApp.ViewList', ['ngRoute'])
 {
 
 
+    $scope.statuses = [
+        {status: "Planning To Watch", value: "4", rate: "false"},
+        {status: "Stopped Watching", value: "3", rate: "true"},
+        {status: "Watching", value: "2", rate: "true"},
+        {status: "Finished", value: "1", rate: "true"}
+    ];
+    $scope.isDisabled = true;
+    $scope.selectedStatus = $scope.statuses[0];
+
+    $scope.setStatus = function () {
+        if ($scope.selectedStatus.rate == "false")
+        {
+            $scope.isDisabled = true;
+
+        } else {
+            $scope.isDisabled = false;
+        }
+        console.log($scope.selectedStatus.value);
+    };
+    $scope.ratings = [
+        {rate: "5", value: "5"},
+        {rate: "4", value: "4"},
+        {rate: "3", value: "3"},
+        {rate: "2", value: "2"},
+        {rate: "1", value: "1"}
+
+    ];
+    $scope.selectedRating = $scope.ratings[0];
+    $scope.setRate = function () {
+        console.log($scope.selectedRating.value);
+    };
     $scope.close = function () {
         $uibModalInstance.close();
     };
     $scope.ok = function () {
         $scope.movie = items;
-        var allInfo = {movie: $scope.movie.imdbid, username: usernameInfo.getUsername(), status: $scope.personal.status, rating: $scope.personal.rating};
+        var allInfo = {movie: $scope.movie.imdbid, username: usernameInfo.getUsername(), status: $scope.selectedStatus.status, rating: $scope.selectedRating.rate};
         console.log(allInfo);
+
 
         $http({
             url: 'api/profile/personalMovieAdd',
@@ -108,10 +140,10 @@ angular.module('myApp.ViewList', ['ngRoute'])
             }
         }).then(function successCallback(res) {
             $scope.openSuccessModal("Movie has been added to your Movie List!");
-            
+
         }, function errorCallback(res) {
             $scope.openErrorModal("Uknown error appeared!");
-            
+
         });
         $uibModalInstance.close();
     };

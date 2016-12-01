@@ -2,6 +2,7 @@ package facades;
 
 import entity.Movie;
 import entity.PersonalMovie;
+import entity.Review;
 import security.IUserFacade;
 import entity.User;
 import java.util.ArrayList;
@@ -69,11 +70,14 @@ public class UserFacade implements IUserFacade {
         return updatedUser;
     }
 
-    public void addToPersonalMovieList(String username, PersonalMovie pm) {
+    public void addToPersonalMovieList(String username, String status, String imdbid, int rating) {
 
-        EntityManager em = getEntityManager();        
+        EntityManager em = getEntityManager();      
+        Movie foundMovie = em.find(Movie.class, imdbid);
+        PersonalMovie pm = new PersonalMovie(foundMovie, rating, status);
         ArrayList<PersonalMovie> pmList = getPersonalMovieListById(username);
         pmList.add(pm);
+        
         try {
             em.getTransaction().begin();
             em.merge(pmList);
