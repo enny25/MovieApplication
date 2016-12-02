@@ -1,0 +1,32 @@
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Actors</th>
+                <th>Directors</th>
+                <th>Genre</th>
+                <th>IMDB Rating</th>
+                <th>Language</th>
+                <th>Runtime</th>
+                
+                <th>Year</th>
+                
+                <th>Plot</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><img src="{{movieDetails.Poster}}" style="width: 10em; height: auto"/></td>
+                <td style="font-size: 20px;"><b>{{movieDetails.title}}</b><br><div style="font-size: 12px;">{{movieDetails.imdbid}}</div></td>
+                <td>{{movieDetails.Actors}}</td>
+                <td>{{movieDetails.Directors}}</td>
+                <td>{{movieDetails.Genre}}</td>
+                <td>{{movieDetails.ImdbRating}}</td>
+                <td>{{movieDetails.Language}}</td>
+                <td>{{movieDetails.Runtime}}</td>
+                <td>{{movieDetails.Year}}</td>
+                <td>{{movieDetails.plot}}</td></tr>
+        </tbody>
+    </table>
+</div>
