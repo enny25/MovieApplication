@@ -1,11 +1,10 @@
 package facades;
 
-import entity.Movie;
 import entity.PersonalMovie;
 import entity.Review;
+import entity.Movie;
 import security.IUserFacade;
 import entity.User;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

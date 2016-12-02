@@ -81,7 +81,7 @@ angular.module('myApp.ViewList', ['ngRoute'])
             $scope.isVisible = false;
         }, function errorCallback(res) {
             $scope.openErrorModal("Uknown error appeared!");
-            console.log("Does Not Works");
+            console.log("Does Not Work");
             $scope.isVisible = false;
         });
         $uibModalInstance.close();

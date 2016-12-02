@@ -95,6 +95,8 @@ public class MovieFacade {
         Query query = em.createQuery("SELECT m FROM Movie m");
 
         List<Movie> addressList = query.getResultList();
+        System.out.println("This works");
+        System.out.println(addressList);
         try {
             return addressList;
         } finally {

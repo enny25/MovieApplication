@@ -24,20 +24,18 @@
 //public class MovieFacadeTest {
 //    MovieFacade instance = new MovieFacade(Persistence.createEntityManagerFactory("pu_test"));
 //    UserFacade uFacade = new UserFacade(Persistence.createEntityManagerFactory("pu_test"));
+//    User user = new User("Username","Password","Male","25-04-2890","Glorius Nation of Kazakhstan");
 //    
-//    public MovieFacadeTest() {
-//    }
-//    
-//    @Before
-//    public void setUp() throws PasswordStorage.CannotPerformOperationException {
+//    public MovieFacadeTest() throws PasswordStorage.CannotPerformOperationException {
 //         instance.createMoviebyTitle("Grease");
 //        instance.createMoviebyTitle("Black Hawk Down");
-//        instance.getMoviebyTitle("Frozen");
-//        User user = new User("Username","Password","Male","25-04-2890","Glorius Nation of Kazakhstan");
-//        
-//        
-//        
+//        instance.createMoviebyTitle("Frozen");
+//        Movie frozen = instance.getMoviebyTitle("Frozen");
+//        Review review = new Review(user,frozen,"the Review",5);
+//        instance.postReview(review);
 //    }
+//    
+//  
 //    
 //
 //    /**
@@ -77,34 +75,17 @@
 //        List<Movie> result = instance.getAllMovies();
 //        assertNotNull(result);
 //        
-//    }
-//
-//    /**
-//     * Test of postReview method, of class MovieFacade.
-//     */
-//    @Test
-//    public void testPostReview() {
-//        System.out.println("postReview");
-//        Review review = null;
-//        MovieFacade instance = null;
-//        instance.postReview(review);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+//    }  
 //
 //    /**
 //     * Test of getReviewsByUser method, of class MovieFacade.
 //     */
 //    @Test
 //    public void testGetReviewsByUser() {
-//        System.out.println("getReviewsByUser");
-//        User user = null;
-//        MovieFacade instance = null;
-//        List<Review> expResult = null;
+//        
 //        List<Review> result = instance.getReviewsByUser(user);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        assertEquals(instance.getMoviebyTitle("Frozen"), result.get(0).getMovie());
+//      
 //    }
 //
 //    /**
@@ -112,14 +93,10 @@
 //     */
 //    @Test
 //    public void testGetReviewsByMovie() {
-//        System.out.println("getReviewsByMovie");
-//        Movie movie = null;
-//        MovieFacade instance = null;
-//        List<Review> expResult = null;
-//        List<Review> result = instance.getReviewsByMovie(movie);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        
+//        Movie frozen = instance.getMoviebyTitle("Frozen");
+//        List<Review> result = instance.getReviewsByMovie(frozen);
+//        assertEquals(user, result.get(0).getUser());
 //    }
 //
 //    /**
@@ -127,12 +104,10 @@
 //     */
 //    @Test
 //    public void testUpvoteReview() {
-//        System.out.println("upvoteReview");
-//        Review review = null;
-//        MovieFacade instance = null;
+//        Review review = instance.getReviewsByUser(user).get(0);
+//        int defaultScore = review.getScore();
 //        instance.upvoteReview(review);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        assertEquals(instance.getReviewsByUser(user).get(0).getScore(),defaultScore +1);
 //    }
 //
 //    /**
@@ -140,12 +115,10 @@
 //     */
 //    @Test
 //    public void testDownVoteReview() {
-//        System.out.println("downVoteReview");
-//        Review review = null;
-//        MovieFacade instance = null;
-//        instance.downVoteReview(review);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        Review review = instance.getReviewsByUser(user).get(0);
+//        int defaultScore = review.getScore();
+//        instance.upvoteReview(review);
+//        assertEquals(instance.getReviewsByUser(user).get(0).getScore(),defaultScore -1);
 //    }
 //
 //    /**
@@ -153,14 +126,11 @@
 //     */
 //    @Test
 //    public void testUpdateMovie() {
-//        System.out.println("updateMovie");
-//        Movie movie = null;
-//        MovieFacade instance = null;
-//        Movie expResult = null;
+//        
+//        Movie movie = instance.getMoviebyTitle("Frozen");
+//        movie.setTitle("NotFrozen");
 //        Movie result = instance.updateMovie(movie);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+//        assertEquals("NotFrozen", instance.getMoviebyID("tt2294629").getTitle());
 //    }
 //    
 //}
