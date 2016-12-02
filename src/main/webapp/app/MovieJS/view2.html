@@ -1,4 +1,4 @@
-<div>
+<div >
     <table class="table">
         <thead>
             <tr>
@@ -10,14 +10,18 @@
                 <th>IMDB Rating</th>
                 <th>Language</th>
                 <th>Runtime</th>
-                
+
                 <th>Year</th>
-                
+
                 <th>Plot</th>
             </tr>
         </thead>
         <tbody>
-            <tr><td><img src="{{movieDetails.Poster}}" style="width: 10em; height: auto"/></td>
+            <tr><td><img src="{{movieDetails.Poster}}" style="width: 10em; height: auto"/>
+                    <input type="button" ng-click="openeditModal()" value="review"  name="Submit" ng-show="{{showButton}}" style="margin-top: 20px" /></td>
+
+
+
                 <td style="font-size: 20px;"><b>{{movieDetails.title}}</b><br><div style="font-size: 12px;">{{movieDetails.imdbid}}</div></td>
                 <td>{{movieDetails.Actors}}</td>
                 <td>{{movieDetails.Directors}}</td>
@@ -27,6 +31,44 @@
                 <td>{{movieDetails.Runtime}}</td>
                 <td>{{movieDetails.Year}}</td>
                 <td>{{movieDetails.plot}}</td></tr>
+        </tbody>
+
+
+
+    </table>
+
+    <script type="text/ng-template" id="movieReview.html">
+                       <div class="modal-header">
+                       <h3 class="modal-title">Your review</h3>
+                       </div>
+
+                       <div class="modal-body">
+                       <form  name="movieUpdate" ng-submit="ok()">
+                       <textarea style="width: 100%; height: 300px; resize: none" class="form-control" type="text" ng-model="movie.review" value="{{movie.review}}"/></textarea><br>
+                       <button style="width: 100%"  class="btn btn-success" type="submit" autofocus>Submit</button>
+                       </form>
+                       </div>
+
+                       <div class="modal-footer">
+                       <button class="btn btn-primary" style="width: 100%" ng-click="close()" autofocus>Close</button>
+                       </div>
+
+                        
+
+
+    </script>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody> 
+            <tr>
+                <td></td>
+                <td>{{ today | date }}</td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,6 +12,7 @@ import facades.MovieFacade;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
+import io.restassured.response.Response;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import static org.hamcrest.CoreMatchers.containsString;
@@ -48,7 +50,6 @@ public class RestMovie {
 
     }
 
-    
     // This will check if the server is running.
     @Test
     public void serverIsRunning() {
@@ -56,7 +57,7 @@ public class RestMovie {
                 when().get().
                 then().
                 statusCode(200);
-        
+
     }
 
     // This will test if the MovieList actually exists on the website, 
@@ -65,28 +66,41 @@ public class RestMovie {
     public void testGetMovieList() {
         given().when().get("api/movies/getMovieList").then().statusCode(200);
     }
-    
-    
+
     // This will test for movies in the movieList on the website, 
     // to check if there's a movie with the existing name.
     @Test
-    public void testGetMovieName(){
+    public void testGetMovieName() {
         given().when().get("api/movies/getMovieList").then().body(containsString("Frozen"));
         given().when().get("api/movies/getMovieList").then().body(containsString("The Flash"));
-    }    
-    
+    }
+
     @Test
-    public void testGetMovieId(){
+    public void testGetMovieId() {
         given().when().get("api/movies/getMovieList").then().body(containsString("tt2294629"));
     }
-    
-    
+
     @Test
-    public void testGetProfile(){
+    public void testGetProfile() {
         given().when().get("api/profile/user").then().statusCode(200);
-    
+
     }
-    
-    
+
+//    @Test
+//    public void createMovie() {
+//        given().when().get("api/movies/createByName").then().statusCode(200);
+//        
+//        
+//        
+//        
+//        Response r = given()
+//                .contentType("application/json").
+//                body("").
+//                when().
+//                post("api/movies/createByName");
+//
+//        String body = r.getBody().asString();
+//        System.out.println(body);
+//    }
 
 }

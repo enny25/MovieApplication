@@ -3,11 +3,25 @@
 angular.module('myApp.MovieJS', ['ngRoute'])
 
 
-        .controller('movieController', function ($http, $window, $scope) {
-            
-            
+        .controller('movieController', function ($http, $window, $scope, $uibModal, usernameInfo) {
+            $scope.username = usernameInfo.getUsername();
+            $scope.openeditModal = function (movie) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'movieReview.html',
+                    controller: 'movieReviewController',
+                    resolve: {
+                        items: function () {
+                            return movie;
+                        }
+                    }
+                });
+            };
+            $scope.showButton = true;
             $scope.searchMovie = function () {
-
+                console.log("Before" + $scope.showButton);
+                $scope.showButton = true;
+                console.log("After: " + $scope.showButton);
                 var movieGet = $scope.movie;
 
                 var postObject = {};
@@ -34,17 +48,27 @@ angular.module('myApp.MovieJS', ['ngRoute'])
 
 
 
-                }).then(function successCallback(res) { 
+                }).then(function successCallback(res) {
                     console.log(res.data)
+
                     $scope.movieDetails = res.data;
                     $window.location.href = '#/movie';
-                    
+
+
                 }, function errorCallback(res) {
-                     $scope.openErrorModal("This movie does not exist in our List!");
-                    
+                    $scope.openErrorModal("This movie does not exist in our List!");
+
                 });
 
             };
+        })
+        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance) {
+            $scope.close = function () {
+                $uibModalInstance.close();
+            };
+        })
+        .controller('datCtrl', function ($scope) {
+            $scope.today = new Date();
         })
         .config(['$routeProvider', function ($routeProvider) {
                 $routeProvider.when('/movie', {
