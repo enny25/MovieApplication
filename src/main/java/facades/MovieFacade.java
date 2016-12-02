@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import entity.Movie;
 import entity.Review;
 import entity.User;
+import entity.Recommendation;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -200,5 +201,36 @@ public class MovieFacade {
 
         return updatedMovie;
     }
+    
+    public List<Recommendation> getRecommendationsByUser(User user){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.user = :user");
+        query.setParameter("user", user);
+        ArrayList<Recommendation> recresult = (ArrayList<Recommendation>) query.getResultList();
+        return recresult;
+    
+    }
+    public void postRecommendation (Recommendation recommendation){
+        EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(recommendation);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Recommendation> getRecommendationewsByMovie (Movie movie){
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.movie1 = :movie1");
+        query.setParameter("movie", movie);
+        ArrayList<Recommendation> result = (ArrayList<Recommendation>)query.getResultList();
+        return result;
+        
+    }
+    
 
 }

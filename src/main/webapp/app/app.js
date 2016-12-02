@@ -12,7 +12,6 @@ angular.module('myApp', [
     'myApp.adminAdd',
     'myApp.ViewList',
     'myApp.DocumentationView',
-    'myApp.personalpage',
     'myApp.view1',
     'myApp.filters',
     'myApp.directives',

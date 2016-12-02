@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 import security.IUser;
 import security.PasswordStorage;
 
@@ -37,16 +36,16 @@ public class UserFacade implements IUserFacade {
         }
     }
 
-    public ArrayList<User> getFriendListById(String id) {
+    public List<User> getFriendListById(String id) {
         User user = getUserByUserId(id);
-        ArrayList<User> friendList = (ArrayList) user.getFriendList();
+        List<User> friendList =  user.getFriendList();
         return friendList;
 
     }
 
-    public ArrayList<PersonalMovie> getPersonalMovieListById(String id) {
+    public List<PersonalMovie> getPersonalMovieListById(String id) {
         User user = getUserByUserId(id);
-        ArrayList<PersonalMovie> movieList = (ArrayList) user.getMovieList();
+        List<PersonalMovie> movieList =  user.getMovieList();
         return movieList;
     }
 
@@ -75,7 +74,7 @@ public class UserFacade implements IUserFacade {
         EntityManager em = getEntityManager();      
         Movie foundMovie = em.find(Movie.class, imdbid);
         PersonalMovie pm = new PersonalMovie(foundMovie, rating, status);
-        ArrayList<PersonalMovie> pmList = getPersonalMovieListById(username);
+        List<PersonalMovie> pmList = getPersonalMovieListById(username);
         pmList.add(pm);
         
         try {

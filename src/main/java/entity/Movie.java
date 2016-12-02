@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -23,7 +24,7 @@ public class Movie implements Serializable {
     private String imdbid;
     
     private String title;
-//    @Column(name="MovieYear")
+    @Column(name="MovieYear")
     private String Year;
     
     private String Runtime;
@@ -36,11 +37,11 @@ public class Movie implements Serializable {
     private String Poster;
     
     private String plot;
-//    @Column(name="MovieLanguage")
+    @Column(name="MovieLanguage")
     private String Language;
     private String ImdbRating;
     private List Reviews;
-    private List Reccommendations;
+    private List<Recommendation> Recommendations;
 
     public Movie(String imdbId) {
         this.imdbid = imdbId;
@@ -171,11 +172,11 @@ public class Movie implements Serializable {
     }
 
     public List getReccommendations() {
-        return Reccommendations;
+        return Recommendations;
     }
 
     public void setReccommendations(List Reccommendations) {
-        this.Reccommendations = Reccommendations;
+        this.Recommendations = Reccommendations;
     }
 
     public String getPoster() {
