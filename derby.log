@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Tue Nov 29 14:15:01 CET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0158-b039-6440-000006f413f8 
+Wed Nov 30 13:29:51 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0158-b536-6935-000005a9b930 
 on database directory C:\Users\Zygi\Documents\NetBeansProjects\new\MovieApplication\memory\testDB with class loader sun.misc.Launcher$AppClassLoader@6bc7c054 
 Loaded from file:/C:/Users/Zygi/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_102-b14
+java.runtime.version=1.8.0_77-b03
 user.dir=C:\Users\Zygi\Documents\NetBeansProjects\new\MovieApplication
 os.name=Windows 10
 os.arch=amd64
