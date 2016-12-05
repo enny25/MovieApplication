@@ -26,14 +26,14 @@ public class User implements IUser, Serializable{
   
   private String country;
   
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = CascadeType.PERSIST)
   List<Role> roles;
   
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.PERSIST)
   List<User> friendList;
   
-  @OneToMany(cascade = CascadeType.ALL)
-  List<PersonalMovie> movieList;
+  @OneToMany(cascade = CascadeType.PERSIST)
+   List<PersonalMovie> movieList;
   
   
   
@@ -56,11 +56,11 @@ public class User implements IUser, Serializable{
     }
   
   
-//  public User(String userName, String passwordHash,List<String> roles) {
-//    this.userName = userName;
-//    this.passwordHash = passwordHash;
-//    //this.roles = roles;
-//  }
+  public User(String userName, String passwordHash,List<String> roles) {
+    this.userName = userName;
+    this.passwordHash = passwordHash;
+    
+  }
   
   public void addRole(Role role){
     if(roles == null){
@@ -116,7 +116,7 @@ public class User implements IUser, Serializable{
     public void setMovieList(List<PersonalMovie> movieList) {
         this.movieList = movieList;
     }
-
+    
     public String getGender() {
         return gender;
     }
@@ -143,3 +143,4 @@ public class User implements IUser, Serializable{
     
      
 }
+

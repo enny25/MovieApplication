@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
+
 
 /**
  *
@@ -24,7 +22,7 @@ public class Movie implements Serializable {
     private String imdbid;
     
     private String title;
-//    @Column(name="MovieYear")
+    @Column(name="MovieYear")
     private String Year;
     
     private String Runtime;
@@ -40,8 +38,10 @@ public class Movie implements Serializable {
 //    @Column(name="MovieLanguage")
     private String Language;
     private String ImdbRating;
-    private List Reviews;
-    private List Reccommendations;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Review> Reviews;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List Reccommendations;
 
     public Movie(String imdbId) {
         this.imdbid = imdbId;
@@ -163,21 +163,21 @@ public class Movie implements Serializable {
         this.ImdbRating = ImdbRating;
     }
 
-    public List getReviews() {
+    public List<Review> getReviews() {
         return Reviews;
     }
 
-    public void setReviews(List Reviews) {
+    public void setReviews(List<Review> Reviews) {
         this.Reviews = Reviews;
     }
 
-    public List getReccommendations() {
-        return Reccommendations;
-    }
-
-    public void setReccommendations(List Reccommendations) {
-        this.Reccommendations = Reccommendations;
-    }
+//    public List getReccommendations() {
+//        return Reccommendations;
+//    }
+//
+//    public void setReccommendations(List Reccommendations) {
+//        this.Reccommendations = Reccommendations;
+//    }
 
     public String getPoster() {
         return Poster;

@@ -2,4 +2,5 @@
 <Context path="/seedMaven">
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="Seed" password="test" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/seed?zeroDateTimeBehavior=convertToNull" username="root"/>
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="movie" password="Passvord123" type="javax.sql.DataSource" url="jdbc:mysql://127.0.0.1:3306/semesterseednewest?zeroDateTimeBehavior=convertToNull" username="root1"/>
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="MovieDatabase" password="test" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/seeddatabase?zeroDateTimeBehavior=convertToNull" username="root"/>
 </Context>

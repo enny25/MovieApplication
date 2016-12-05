@@ -107,10 +107,12 @@ public class MovieFacade {
     
     public void postReview (Review review){
         EntityManager em = getEntityManager();
+        Movie movie = review.getMovie();
+                movie.getReviews().add(review);
         
         try {
             em.getTransaction().begin();
-            em.persist(review);
+            em.merge(movie);
             em.getTransaction().commit();
 
         } finally {
@@ -123,7 +125,7 @@ public class MovieFacade {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Review r WHERE r.user = :user");
         query.setParameter("user", user);
-        ArrayList<Review> result = (ArrayList<Review>)query.getResultList();
+        List<Review> result = query.getResultList();
        return result;
         
     }
@@ -131,7 +133,7 @@ public class MovieFacade {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Review r WHERE r.movie = :movie");
         query.setParameter("movie", movie);
-        ArrayList<Review> result = (ArrayList<Review>)query.getResultList();
+        List<Review> result = query.getResultList();
        return result;
         
     }
@@ -208,7 +210,7 @@ public class MovieFacade {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.user = :user");
         query.setParameter("user", user);
-        ArrayList<Recommendation> recresult = (ArrayList<Recommendation>) query.getResultList();
+        List<Recommendation> recresult = query.getResultList();
         return recresult;
     
     }
@@ -229,8 +231,21 @@ public class MovieFacade {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.movie1 = :movie1");
         query.setParameter("movie", movie);
-        ArrayList<Recommendation> result = (ArrayList<Recommendation>)query.getResultList();
+        List<Recommendation> result = query.getResultList();
         return result;
+        
+    }
+    public void persistMovie (Movie movie){
+         EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(movie);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
         
     }
     
