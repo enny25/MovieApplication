@@ -17,6 +17,8 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     }
                 });
             };
+            
+            
             $scope.showButton = true;
             $scope.searchMovie = function () {
                 console.log("Before" + $scope.showButton);
@@ -35,6 +37,8 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     var url = 'api/movies/movie';
                     console.log(postObject);
                 }
+                
+                
 
 
                 $http({
@@ -62,10 +66,25 @@ angular.module('myApp.MovieJS', ['ngRoute'])
 
             };
         })
+        // Review area.
         .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance) {
             $scope.close = function () {
                 $uibModalInstance.close();
             };
+            
+            $http({
+                    url: 'api/movies/movie',
+                    dataType: 'json',
+                    method: 'POST',
+                    data: postReview,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+
+
+
+                })
+            
         })
         .controller('datCtrl', function ($scope) {
             $scope.today = new Date();

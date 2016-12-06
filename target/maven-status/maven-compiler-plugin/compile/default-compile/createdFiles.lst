@@ -7,7 +7,6 @@ entity\Movie_.class
 entity\Review_.class
 entity\User_.class
 security\IUserFacade.class
-entity\test\Movie_.class
 security\PasswordStorage$CannotPerformOperationException.class
 entity\Role_.class
 security\UserFacadeFactory.class
@@ -16,7 +15,6 @@ security\Login.class
 tester\tester.class
 rest\ApplicationConfig.class
 DatabaseMappers\MovieMapper$1.class
-entity\test\User_.class
 entity\PersonalMovie.class
 httpErrors\NotFoundExceptionMapper.class
 security\UserPrincipal.class
@@ -26,16 +24,12 @@ entity\Recommendation_.class
 entity\Recommendation.class
 DatabaseMappers\MovieMapper.class
 security\IUser.class
-entity\test\PersonalMovie_.class
-entity\test\Recommendation_.class
 security\JWTAuthenticationFilter.class
 entity\User.class
-entity\test\Role_.class
 security\PasswordStorage.class
 entity\PersonalMovie_.class
 facades\MovieFacade.class
 security\JWTAuthenticationFilter$1.class
-entity\test\Review_.class
 security\PasswordStorage$InvalidHashException.class
 rest\Movies.class
 security\RolesAllowedFilter.class

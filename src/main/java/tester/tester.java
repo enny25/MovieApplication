@@ -24,8 +24,8 @@ import security.PasswordStorage;
 public class tester {
 
     public static void main(String[] args) throws PasswordStorage.CannotPerformOperationException {
-        Persistence.generateSchema("pu_development", null);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+        Persistence.generateSchema("pu_local", null);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_local");
         
 
        MovieFacade mf = new MovieFacade(emf);

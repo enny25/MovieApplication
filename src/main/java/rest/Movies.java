@@ -10,6 +10,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import entity.Movie;
+import entity.Review;
+import entity.User;
 import facades.MovieFacade;
 import facades.UserFacade;
 import java.util.List;
@@ -85,6 +87,22 @@ public class Movies {
     public String getAllCompanies() {
         List movies = facade.getAllMovies();
         return gson.toJson(movies);
+    }
+    
+    @POST
+    @Path("createReview")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addMovieReview(String jsonString) {
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        String movieString = json.get("imdbid").getAsString();
+        Movie movie = facade.getMoviebyID(movieString);
+        String userString = json.get("userid").getAsString();
+        User user = uFacade.getUserByUserId(userString);
+        String reviewText = json.get("reviewText").getAsString();
+        String score = json.get("score").getAsString();
+        Review review = new Review(user,movie,reviewText,Integer.parseInt(score));
+        facade.postReview(review);
     }
 
     @PUT
