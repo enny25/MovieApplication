@@ -24,6 +24,10 @@ angular.module('myApp.ViewList', ['ngRoute'])
             }).then(function successCallback(res) {
 
                 $scope.listDetails = res.data;
+
+
+
+
             }, function errorCallback(res) {
                 console.log("Does not work");
             });
@@ -39,6 +43,13 @@ angular.module('myApp.ViewList', ['ngRoute'])
                     }
                 });
             };
+
+            $scope.checkImage = function(image){
+                if(image == "N/A"){
+                    return "images/no-image.png";
+                }
+                return image;
+            }
             $scope.openaddModal = function (movie) {
                 if (usernameInfo.getUsername() === undefined) {
                     $scope.openErrorModal("You Need To Log In If You Want To Add A Movie!");
@@ -56,37 +67,40 @@ angular.module('myApp.ViewList', ['ngRoute'])
                 }
                 ;
             };
-        }).controller('MovieListControler', function ($scope, $uibModalInstance, items, $http)
-{
+        
+})
 
-    $scope.movie = items;
-    $scope.close = function () {
-        $uibModalInstance.close();
-    };
-    $scope.ok = function () {
-        var updates = $scope.movie;
+        .controller('MovieListControler', function ($scope, $uibModalInstance, items, $http)
+        {
+
+            $scope.movie = items;
+            $scope.close = function () {
+                $uibModalInstance.close();
+            };
+            $scope.ok = function () {
+                var updates = $scope.movie;
 //        console.log(updates);
-        $http({
-            url: 'api/movies/updateMovie',
-            dataType: 'json',
-            method: 'PUT',
-            data: updates,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(function successCallback(res) {
-            $scope.openSuccessModal("Movie has been updated!");
-            console.log(res.data);
-            console.log("Works");
-            $scope.isVisible = false;
-        }, function errorCallback(res) {
-            $scope.openErrorModal("Uknown error appeared!");
-            console.log("Does Not Work");
-            $scope.isVisible = false;
-        });
-        $uibModalInstance.close();
-    };
-}).controller('PersonalMovieControler', function ($scope, $uibModalInstance, items, $http, usernameInfo)
+                $http({
+                    url: 'api/movies/updateMovie',
+                    dataType: 'json',
+                    method: 'PUT',
+                    data: updates,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(function successCallback(res) {
+                    $scope.openSuccessModal("Movie has been updated!");
+                    console.log(res.data);
+                    console.log("Works");
+                    $scope.isVisible = false;
+                }, function errorCallback(res) {
+                    $scope.openErrorModal("Uknown error appeared!");
+                    console.log("Does Not Work");
+                    $scope.isVisible = false;
+                });
+                $uibModalInstance.close();
+            };
+        }).controller('PersonalMovieControler', function ($scope, $uibModalInstance, items, $http, usernameInfo)
 {
 
 
@@ -148,4 +162,4 @@ angular.module('myApp.ViewList', ['ngRoute'])
         $uibModalInstance.close();
     };
 });
-        
+

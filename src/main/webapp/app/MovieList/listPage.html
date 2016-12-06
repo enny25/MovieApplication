@@ -19,7 +19,10 @@
         <tbody>
             <tr ng-repeat="movie in listDetails">
 
-                <td><img src="{{movie.Poster}}" style="width: 15em; height: auto"/>
+
+                <td>
+                    
+                    <img src="{{checkImage(movie.Poster)}}" style="width: 15em; height: auto"/>
                 </td>
                 <td style="font-size: 20px;"><b>{{movie.title}}</b><div style="font-size: 12px">{{movie.imdbid}}</div>
 
@@ -59,17 +62,17 @@
 
                         <div class="modal-body">
                         <form  name="movieUpdate" ng-submit="ok()">
-                    
+
                         Status:
                         <select class="form-control" ng-model="selectedStatus" ng-options="st.status for st in statuses" ng-change="setStatus()">
-             
-                           </select>
-                 Rating:
+
+                        </select>
+                        Rating:
                         <select ng-disabled="isDisabled" class="form-control" ng-model="selectedRating" ng-options="rt.rate for rt in ratings" ng-change="setRate()">
-             
-                           </select>
-                </fieldset>
-                <br>
+
+                        </select>
+                        </fieldset>
+                        <br>
                         <button style="width: 100%"  class="btn btn-success" type="submit" autofocus>ADD TO MY LIST</button>
                         </form>
                         </div>
