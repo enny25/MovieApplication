@@ -131,67 +131,67 @@ public class MovieFacadeTest {
         assertNotNull(result);
         
     }  
-//
-//    /**
-//     * Test of getReviewsByUser method, of class MovieFacade.
-//     */
-//    
-//    @Test
-//    public void testGetReviewsByUser() throws PasswordStorage.CannotPerformOperationException {
-//       
-//        
-//        
-//        List<Review> result = instance.getReviewsByUser(userone);
-//        assertEquals(instance.getMoviebyTitle("Frozen").getImdbId(), result.get(0).getMovie().getImdbId());
-//      
-//    }
-//
-//    /**
-//     * Test of getReviewsByMovie method, of class MovieFacade.
-//     */
-//   
-//    @Test
-//    public void testGetReviewsByMovie() throws PasswordStorage.CannotPerformOperationException {
-//        Movie frozen = instance.getMoviebyTitle("Frozen");
-//        List<Review> result = instance.getReviewsByMovie(frozen);
-//        assertEquals(userone.getUserName(), result.get(0).getUser().getUserName());
-//    }
-//
-//    /**
-//     * Test of upvoteReview method, of class MovieFacade.
-//     */
-//    @Test
-//    public void testUpvoteReview() {
-//        Review review = instance.getReviewsByUser(userone).get(0);
-//        int defaultScore = review.getScore();
-//        instance.upvoteReview(review);
-//        assertEquals(instance.getReviewsByUser(userone).get(0).getScore(),defaultScore +1);
-//    }
-//
-//    /**
-//     * Test of downVoteReview method, of class MovieFacade.
-//     */
-//    
-//    @Test
-//    public void testDownVoteReview() {
-//        Review review = instance.getReviewsByUser(userone).get(0);
-//        int defaultScore = review.getScore();
-//        instance.downVoteReview(review);
-//        assertEquals(instance.getReviewsByUser(userone).get(0).getScore(),defaultScore -1);
-//    }
-//
-//    /**
-//     * Test of updateMovie method, of class MovieFacade.
-//     */
-//    
-//    @Test
-//    public void testUpdateMovie() {
-//        
-//        Movie movie = instance.getMoviebyTitle("Frozen");
-//        System.out.println(movie.getLanguage());
-//        movie.setLanguage("NotFrozen");
-//        Movie result = instance.updateMovie(movie);
-//        assertEquals("NotFrozen", instance.getMoviebyID("tt2294629").getLanguage());
-//    }
+
+    /**
+     * Test of getReviewsByUser method, of class MovieFacade.
+     */
+    
+    @Test
+    public void testGetReviewsByUser() throws PasswordStorage.CannotPerformOperationException {
+       
+        
+        
+        List<Review> result = instance.getReviewsByUser(userone);
+        assertEquals(instance.getMoviebyTitle("Frozen").getImdbId(), result.get(0).getMovie().getImdbId());
+      
+    }
+
+    /**
+     * Test of getReviewsByMovie method, of class MovieFacade.
+     */
+   
+    @Test
+    public void testGetReviewsByMovie() throws PasswordStorage.CannotPerformOperationException {
+        Movie frozen = instance.getMoviebyTitle("Frozen");
+        List<Review> result = instance.getReviewsByMovie(frozen);
+        assertEquals(userone.getUserName(), result.get(0).getUser().getUserName());
+    }
+
+    /**
+     * Test of upvoteReview method, of class MovieFacade.
+     */
+    @Test
+    public void testUpvoteReview() {
+        Review review = instance.getReviewsByUser(userone).get(0);
+        int defaultScore = review.getScore();
+        instance.upvoteReview(review);
+        assertEquals(instance.getReviewsByUser(userone).get(0).getScore(),defaultScore +1);
+    }
+
+    /**
+     * Test of downVoteReview method, of class MovieFacade.
+     */
+    
+    @Test
+    public void testDownVoteReview() {
+        Review review = instance.getReviewsByUser(userone).get(0);
+        int defaultScore = review.getScore();
+        instance.downVoteReview(review);
+        assertEquals(instance.getReviewsByUser(userone).get(0).getScore(),defaultScore -1);
+    }
+
+    /**
+     * Test of updateMovie method, of class MovieFacade.
+     */
+    
+    @Test
+    public void testUpdateMovie() {
+        
+        Movie movie = instance.getMoviebyTitle("Frozen");
+        System.out.println(movie.getLanguage());
+        movie.setLanguage("NotFrozen");
+        Movie result = instance.updateMovie(movie);
+        assertEquals("NotFrozen", instance.getMoviebyID("tt2294629").getLanguage());
+    }
     
 }

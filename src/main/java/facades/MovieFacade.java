@@ -194,7 +194,7 @@ public class MovieFacade {
             updatedMovie.setDirectors(movie.getDirectors());
             updatedMovie.setActors(movie.getActors());
             updatedMovie.setPlot(movie.getPlot());
-            updatedMovie.setLanguage(movie.getPlot());
+            updatedMovie.setLanguage(movie.getLanguage());
             updatedMovie.setImdbRating(movie.getImdbRating());
             updatedMovie.setPoster(movie.getPoster());
             em.getTransaction().commit();
