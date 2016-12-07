@@ -6,10 +6,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -22,30 +25,28 @@ public class Movie implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String imdbid;
-    
     private String title;
-//    @Column(name="MovieYear")
     private String Year;
-    
     private String Runtime;
-    
     private String Genre;
-    
     private String Directors;
-    
     private String Actors;
     private String Poster;
-    
     private String plot;
-//    @Column(name="MovieLanguage")
     private String Language;
     private String ImdbRating;
-    private List Reviews;
-    private List Reccommendations;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "movie")
+    private List<PersonalMovie> p_movies;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "movie")
+    private List<Review> Reviews;
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "movie")
+    private List<Recommendation> Recommendations;
 
     public Movie(String imdbId) {
         this.imdbid = imdbId;
     }
+
     public Movie(String imdbId, String Title) {
         this.imdbid = imdbId;
         this.title = Title;
@@ -64,7 +65,7 @@ public class Movie implements Serializable {
         this.ImdbRating = ImdbRating;
 
     }
-    
+
     public Movie(String imdbId, String Title, String Year, String Runtime, String Genre, String Directors, String Actors, String plot, String Language, String ImdbRating, String Poster) {
         this.imdbid = imdbId;
         this.title = Title;
@@ -78,9 +79,53 @@ public class Movie implements Serializable {
         this.ImdbRating = ImdbRating;
         this.Poster = Poster;
     }
-    
 
     public Movie() {
+    }
+
+    // ADD METHODS
+    //------------------------------------------------------------------
+    public void addP_movies(PersonalMovie movie) {
+        if (p_movies == null) {
+            p_movies = new ArrayList();
+        }
+        p_movies.add(movie);
+
+    }
+
+    public void addReview(Review review) {
+        if (Reviews == null) {
+            Reviews = new ArrayList();
+        }
+        Reviews.add(review);
+    }
+
+    public void addRecommendation(Recommendation recommendation) {
+        if (Recommendations == null) {
+            Recommendations = new ArrayList();
+        }
+        Recommendations.add(recommendation);
+    }
+    //------------------------------------------------------------------
+
+    public void setP_movies(List<PersonalMovie> p_movies) {
+        this.p_movies = p_movies;
+    }
+
+    public void setReviews(List<Review> Reviews) {
+        this.Reviews = Reviews;
+    }
+
+    public void setRecommendations(List<Recommendation> Recommendations) {
+        this.Recommendations = Recommendations;
+    }
+
+    public List<Recommendation> getRecommendations() {
+        return Recommendations;
+    }
+
+    public List<Review> getReviews() {
+        return Reviews;
     }
 
     public String getImdbId() {
@@ -163,22 +208,6 @@ public class Movie implements Serializable {
         this.ImdbRating = ImdbRating;
     }
 
-    public List getReviews() {
-        return Reviews;
-    }
-
-    public void setReviews(List Reviews) {
-        this.Reviews = Reviews;
-    }
-
-    public List getReccommendations() {
-        return Reccommendations;
-    }
-
-    public void setReccommendations(List Reccommendations) {
-        this.Reccommendations = Reccommendations;
-    }
-
     public String getPoster() {
         return Poster;
     }
@@ -186,17 +215,9 @@ public class Movie implements Serializable {
     public void setPoster(String Poster) {
         this.Poster = Poster;
     }
-    
-    
-    
-    
-   
-    
-    
-    
-    
-    
 
-    
-    
+    public List<PersonalMovie> getP_movies() {
+        return p_movies;
+    }
+
 }

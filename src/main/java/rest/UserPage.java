@@ -70,6 +70,6 @@ public class UserPage {
         String username = json.get("username").getAsString();
         String status = json.get("status").getAsString();
         int rating = json.get("rating").getAsInt();
-        uFacade.addToPersonalMovieList(username, status, imdbid, rating);
+        uFacade.beforeAddToPersonalMovieList(username, status, imdbid, rating);
     }
 }

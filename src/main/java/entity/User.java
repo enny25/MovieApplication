@@ -11,72 +11,99 @@ import javax.persistence.OneToMany;
 import security.IUser;
 import security.PasswordStorage;
 
-@Entity(name = "SEED_USER")
-public class User implements IUser, Serializable{
- 
-  private String passwordHash; 
-  
-  @Id
-  private String userName;
-  
-  
-  private String gender;
-  
-  private String birthday;
-  
-  private String country;
-  
-  @ManyToMany(cascade = CascadeType.ALL)
-  List<Role> roles;
-  
-  @OneToMany(cascade = CascadeType.ALL)
-  List<User> friendList;
-  
-  @OneToMany(cascade = CascadeType.ALL)
-  List<PersonalMovie> movieList;
-  
-  
-  
-  
- 
-  public User() {
-  }
+@Entity
+public class User implements IUser, Serializable {
 
-  public User(String userName, String password) throws PasswordStorage.CannotPerformOperationException {
-    this.userName = userName;
-    this.passwordHash = PasswordStorage.createHash(password);
-  }
+    private String passwordHash;
 
-    public User(String userName,String password, String gender, String birthday, String country)throws PasswordStorage.CannotPerformOperationException {
+    @Id
+    private String userName;
+
+    private String gender;
+
+    private String birthday;
+
+    private String country;
+
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "users")
+    List<Role> roles;
+
+    @OneToMany(cascade = CascadeType.PERSIST)
+    List<User> friendList;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    List<PersonalMovie> movieList;
+
+    public User() {
+    }
+
+    public User(String userName, String password) throws PasswordStorage.CannotPerformOperationException {
+        this.userName = userName;
+        this.passwordHash = PasswordStorage.createHash(password);
+    }
+
+    public User(String userName, String password, String gender, String birthday, String country) throws PasswordStorage.CannotPerformOperationException {
         this.userName = userName;
         this.passwordHash = PasswordStorage.createHash(password);
         this.gender = gender;
         this.birthday = birthday;
         this.country = country;
     }
-  
-  
+
 //  public User(String userName, String passwordHash,List<String> roles) {
 //    this.userName = userName;
 //    this.passwordHash = passwordHash;
 //    //this.roles = roles;
 //  }
-  
-  public void addRole(Role role){
-    if(roles == null){
-      roles = new ArrayList();
-    }
-    roles.add(role);
-    role.addUser(this);
-  }
-  
-  public List<Role> getRoles(){
-    return roles;
-  }
     
-  @Override
-  public List<String> getRolesAsStrings() {
-   if (roles.isEmpty()) {
+    // ADD METHODS
+    //----------------------------------------------------------
+    public void addMovie(PersonalMovie movie) {
+        if (movieList == null) {
+            movieList = new ArrayList();
+        }
+        
+        movieList.add(movie);
+    }
+
+    public void addFriendList(User user) {
+        if (friendList == null) {
+            friendList = new ArrayList();
+        }
+        friendList.add(user);
+    }
+
+    public void addRole(Role role) {
+        if (roles == null) {
+            roles = new ArrayList();
+        }
+        roles.add(role);
+        role.addUser(this);
+    }
+    //-----------------------------------------------------------
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setFriendList(List<User> friendList) {
+        this.friendList = friendList;
+    }
+
+    public void setMovieList(List<PersonalMovie> movieList) {
+        this.movieList = movieList;
+    }
+    
+    
+    
+    
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    @Override
+    public List<String> getRolesAsStrings() {
+        if (roles.isEmpty()) {
             return null;
         }
         List<String> rolesAsStrings = new ArrayList();
@@ -84,37 +111,28 @@ public class User implements IUser, Serializable{
             rolesAsStrings.add(role.getRoleName());
         }
         return rolesAsStrings;
-  }
- 
-  @Override
-  public String getPassword() {
-    return passwordHash;
-  }
-  
+    }
 
-  public void setPassword(String password) throws PasswordStorage.CannotPerformOperationException {
-    this.passwordHash = PasswordStorage.createHash(password);
-  }
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
 
-  @Override
-  public String getUserName() {
-    return userName;
-  }
+    public void setPassword(String password) throws PasswordStorage.CannotPerformOperationException {
+        this.passwordHash = PasswordStorage.createHash(password);
+    }
+
+    @Override
+    public String getUserName() {
+        return userName;
+    }
 
     public List<User> getFriendList() {
         return friendList;
     }
 
-    public void setFriendList(List<User> friendList) {
-        this.friendList = friendList;
-    }
-
     public List<PersonalMovie> getMovieList() {
         return movieList;
-    }
-
-    public void setMovieList(List<PersonalMovie> movieList) {
-        this.movieList = movieList;
     }
 
     public String getGender() {
@@ -140,6 +158,5 @@ public class User implements IUser, Serializable{
     public void setCountry(String country) {
         this.country = country;
     }
-    
-     
+
 }
