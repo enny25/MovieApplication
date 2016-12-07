@@ -67,10 +67,16 @@ angular.module('myApp.MovieJS', ['ngRoute'])
             };
         })
         // Review area.
-        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance) {
+        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance,items,usernameinfo) {
             $scope.close = function () {
                 $uibModalInstance.close();
             };
+            $scope.movie=items;
+            console.log(items);
+            $scope.ok=function(){
+                console.log($scope.movieDetails);
+                var movieReview = {review : movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername()};
+                console.log(movieReview);
             
             $http({
                     url: 'api/movies/movie',
@@ -82,8 +88,8 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     }
 
 
-
-                })
+            
+                })};
             
         })
         .controller('datCtrl', function ($scope) {
