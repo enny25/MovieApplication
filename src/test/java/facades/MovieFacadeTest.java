@@ -18,22 +18,23 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import security.PasswordStorage;
 
 public class MovieFacadeTest {
-    private  EntityManagerFactory emf =Persistence.createEntityManagerFactory("pu_test");
+    private static  EntityManagerFactory emf =Persistence.createEntityManagerFactory("pu_test");
     private EntityManager em = emf.createEntityManager();
     
-     MovieFacade instance = new MovieFacade(emf);
-     UserFacade uFacade = new UserFacade(emf);
-     User userone;
+    private static MovieFacade instance = new MovieFacade(emf);
+   private static UserFacade uFacade = new UserFacade(emf);
+    private static User userone;
     
     
     public MovieFacadeTest() throws PasswordStorage.CannotPerformOperationException {
         
     }
-    @Before
-    public void setup () throws PasswordStorage.CannotPerformOperationException{
+    @BeforeClass
+    public static void setup () throws PasswordStorage.CannotPerformOperationException{
        
         
         Movie frozen = new Movie("tt2294629","Frozen","2013","102 min","Animation, Adventure, Comedy","Chris Buck, Jennifer Lee,",
@@ -59,27 +60,27 @@ public class MovieFacadeTest {
         Review review = new Review(userone,frozen,"the Review",5);
         instance.postReview(review);
     }
-    @After
-    public void TearDown(){
-               Query q1 = em.createQuery("DELETE FROM Movie");
-    Query q3 = em.createQuery("DELETE FROM Review");
-    Query q2 = em.createQuery("DELETE FROM SEED_USER");
-    Query q4 = em.createQuery("DELETE FROM USER_ROLE");
-    
-        try{
-        em.getTransaction().begin();
-       q3.executeUpdate();
-       q4.executeUpdate();
-       q1.executeUpdate();
-       q2.executeUpdate();
-
-        em.getTransaction().commit();
-        }
-        finally{
-            em.close();
-        }
-        
-    }
+//    @After
+//    public void TearDown(){
+//               Query q1 = em.createQuery("DELETE FROM Movie");
+//    Query q3 = em.createQuery("DELETE FROM Review");
+//    Query q2 = em.createQuery("DELETE FROM SEED_USER");
+//    Query q4 = em.createQuery("DELETE FROM USER_ROLE");
+//    
+//        try{
+//        em.getTransaction().begin();
+//       q3.executeUpdate();
+//       q4.executeUpdate();
+//       q1.executeUpdate();
+//       q2.executeUpdate();
+//
+//        em.getTransaction().commit();
+//        }
+//        finally{
+//            em.close();
+//        }
+//        
+//    }
         
     
     
