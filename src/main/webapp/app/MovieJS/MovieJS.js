@@ -86,10 +86,21 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     headers: {
                         "Content-Type": "application/json"
                     }
+                    
+                })
+                
+                        .then(function sucessCallback(res){
+                            console.log(res.data)
+                            $scope.movieDetails = res.data;
+                        }
+                               , function errorCallback(res){
+                                   $scope.openErrorModal("This movie does not exist in our List!")
+                                    
+                               });
 
 
             
-                })};
+                };
             
         })
         .controller('datCtrl', function ($scope) {
