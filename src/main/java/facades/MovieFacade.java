@@ -105,12 +105,14 @@ public class MovieFacade {
 
     }
     
-    public void postReview (Review review){
+     public void postReview (Review review){
         EntityManager em = getEntityManager();
+        Movie movie = review.getMovie();
+                movie.getReviews().add(review);
         
         try {
             em.getTransaction().begin();
-            em.persist(review);
+            em.merge(movie);
             em.getTransaction().commit();
 
         } finally {
@@ -235,6 +237,19 @@ public class MovieFacade {
         query.setParameter("movie", movie);
         ArrayList<Recommendation> result = (ArrayList<Recommendation>)query.getResultList();
         return result;
+        
+    }
+    public void persistMovie (Movie movie){
+         EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            em.persist(movie);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
         
     }
     
