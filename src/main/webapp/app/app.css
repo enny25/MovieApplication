@@ -1,30 +1,94 @@
- ol.list {
-    list-style-type: none;
-    margin: 0;
-    margin-left: 3em;
-    padding: 0;  
-    counter-reset: li-counter;
-}
-ol.list > li{
-    position: relative;
-    margin-bottom: 10px;
-    padding-left: 0.5em;
-    min-height: 1.5em;
-    border-left: 2px solid #CCCCCC;
+
+#logo { 
+    float: left;
+    height: 40em;
 }
 
-ol.list > li:before {
-    position: absolute;
-    top: 0;
-    left: -1em;
-    width: 0.8em;
-     
-    font-size: 1.5em;
-    line-height: 1;
-    font-weight: bold;
-    text-align: right;
-    color: #464646;
- 
-    content: counter(li-counter);
-    counter-increment: li-counter;
+#login{
+    /*float: right;*/
+    /*position:relative;*/
+    /*clear: both;*/
+    /*width: 30em;*/
+
 }
+
+#Profile{
+    /*vertical-align: middle;*/
+    text-align: center;
+}
+
+.navbar-brand {
+    transform: translateX(-50%);
+    left: 50%;
+    position: absolute;
+    
+}
+
+#buttonProf{
+    color: black;
+    background: darkgray;
+    border-color: transparent;
+}
+
+#nav
+{
+    /*background: url(http://4.bp.blogspot.com/-dVtgikk-kOY/UprtswP0yGI/AAAAAAAADag/Og0DtZ8t_oQ/s1600/header+base.png) no-repeat scroll top left;*/    
+    /*background: url(https://www.2webdesign.com/public/images/inner-header.jpg) no-repeat scroll top left;*/    
+    background-color: transparent;
+   /*background: lightblue;*/
+background:rgba(0,0,0,0.4);
+   border-color: transparent;
+    width: 100%;
+    height:10%;
+    box-shadow: 0px 1px 10px #5E5E5E;
+    position:fixed;
+    top:0px;
+
+}
+
+
+
+#nav a
+{
+    display: block;
+    font-size: 1.6em;
+    
+    text-transform: uppercase;
+    text-shadow: 0 0 0.3em #464646;
+    font-weight: bold;
+    font-family:century gothic;
+    margin-left: 20%;
+
+    font-size: 15px;
+    text-decoration:none;
+    color:black;
+    opacity:0.66;
+} 
+#nav a:hover 
+{
+    opacity:0.36;
+}
+
+
+#main{
+    /*width: 100%;*/
+    /*padding: 16px;*/
+    margin-top: 100px;
+    height: 1500px;
+    
+}
+
+
+
+/*#profile {
+    float:right; width: 25em; margin-right: 0.5em;
+
+}*/
+
+#Profile{
+
+    
+
+}
+
+

@@ -9,7 +9,7 @@ angular.module('myApp.PersonalProfile', ['ngRoute'])
                 });
             }])
 
-        .controller('profileCtrl', function (InfoFactory, $scope, usernameInfo) {
+        .controller('profileCtrl', function (InfoFactory, $scope, usernameInfo, $http) {
             $http({
                 url: 'api/profile/'+usernameInfo.getUsername(),
                 dataType: 'json',
@@ -23,6 +23,7 @@ angular.module('myApp.PersonalProfile', ['ngRoute'])
             }).then(function successCallback(res) {
 
                 $scope.listDetails = res.data;
+                console.log($scope.listDetails);
             }, function errorCallback(res) {
                 console.log("Does not work");
             });

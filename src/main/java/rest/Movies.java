@@ -95,18 +95,14 @@ public class Movies {
     @POST
     @Path("createReview")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     public void addMovieReview(String jsonString) {
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        String movieString = json.get("imdbid").getAsString();
-        Movie movie = facade.getMoviebyID(movieString);
-        String userString = json.get("userid").getAsString();
-        User user = uFacade.getUserByUserId(userString);
-        String reviewText = json.get("reviewText").getAsString();
+        String movieString = json.get("movie").getAsString();
+        String userString = json.get("username").getAsString();
+        String reviewText = json.get("review").getAsString();
         String score = json.get("score").getAsString();
-        Review review = new Review("zygi", reviewText, Integer.parseInt(score));
-        movie.addReview(review);
-        facade.updateMovie(movie);
+        int scoreInt = Integer.parseInt(score);
+        facade.postReview(movieString, userString, reviewText, scoreInt);
     }
 
     @PUT

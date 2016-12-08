@@ -70,8 +70,9 @@ public class User implements IUser, Serializable {
         if (friendList == null) {
             friendList = new ArrayList();
         }
+        if(user != this){
         friendList.add(user);
-       
+        }
     }
 
     public void addRole(Role role) {

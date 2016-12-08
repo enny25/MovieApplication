@@ -35,15 +35,16 @@ public class tester {
         User emil = new User("emil", "test", "male", "OLD AF", "Denmark");
         User daniel = new User("daniel", "test", "male", "OLD AF", "Denmark");
         User plamen = new User("plamen", "password", "male", "3RD STRONGES IMMORTAL", "Bulgaria");
+        User summer = new User("bring", "summer", "back", "3RD STRONGES IMMORTAL", "Bulgaria");
         Role admin = new Role("Admin");
         Role user = new Role("User");
         Role slave = new Role("Slave");
-        
-         uf.createUser(zygi);
+
+        uf.createUser(zygi);
         uf.createUser(emil);
         uf.createUser(daniel);
         uf.createUser(plamen);
-        
+        uf.createUser(summer);
         zygi.addRole(admin);
         emil.addRole(user);
         emil.addRole(slave);
@@ -59,17 +60,7 @@ public class tester {
         emil.addFriendList(zygi);
         plamen.addFriendList(zygi);
         daniel.addFriendList(zygi);
-       
-        User userOne;
-        User userTwo;
-        userOne = new User("Username","Password","Male","25-04-2890","Glorius Nation of Kazakhstan");
-       uf.createUser(userOne);
-      userTwo = new User ("Johhny","Password","Male","24-04-120","China");
-       Role userRole = new Role("user");
-       userOne.addRole(userRole);
-       userOne.addFriendList(userTwo);
-      uf.updateUser(userOne);
-        
+
         mf.createMoviebyTitle("Frozen");
         mf.createMoviebyTitle("Grease");
         mf.createMoviebyTitle("Black Hawk Down");
@@ -78,7 +69,7 @@ public class tester {
         Movie movieTest2 = mf.getMoviebyTitle("Grease");
         Movie movieTest3 = mf.getMoviebyTitle("Black Hawk Down");
         Movie movieTest4 = mf.getMoviebyTitle("The Grudge");
-        
+
         PersonalMovie pm1 = new PersonalMovie(movieTest1, 5, "Completed");
         PersonalMovie pm2 = new PersonalMovie(movieTest2, 3, "Watching");
         PersonalMovie pm3 = new PersonalMovie(movieTest3, 4, "Watching");
@@ -99,15 +90,14 @@ public class tester {
         uf.updateUser(emil);
         uf.updateUser(daniel);
         uf.updateUser(plamen);
-        
-        
+
         Recommendation recTest1 = new Recommendation("tt4508902", "zygi", "Hot AF");
         Review revTest1 = new Review("zygi", "Hella Good", 5);
         Review revTest2 = new Review("zygi", "Quite cool I'd say", 3);
         Review revTest3 = new Review("zygi", "Impressive", 4);
         Review revTest4 = new Review("zygi", "Dumb idea", 1);
         Review revTest5 = new Review("emil", "Boring", 2);
-        Review revTest6= new Review("emil", "Average", 3);
+        Review revTest6 = new Review("emil", "Average", 3);
         Review revTest7 = new Review("emil", "Entertaining", 4);
         movieTest1.addRecommendation(recTest1);
         movieTest1.addReview(revTest1);
@@ -124,7 +114,6 @@ public class tester {
 //        
 //        uf.addToPersonalMovieList(pm3);
 //        uf.addToPersonalMovieList(pm4);
-        
 
     }
 
