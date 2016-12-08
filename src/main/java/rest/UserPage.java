@@ -70,6 +70,18 @@ public class UserPage {
         String username = json.get("username").getAsString();
         String status = json.get("status").getAsString();
         int rating = json.get("rating").getAsInt();
-        uFacade.addToPersonalMovieList(username, status, imdbid, rating);
+        uFacade.beforeAddToPersonalMovieList(username, status, imdbid, rating);
+    }
+    
+    @POST
+    @Path("addBuddy")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addBuddy(String jsonString){
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        String username = json.get("username").getAsString();
+        User user = uFacade.getUserByUsername(username);
+        uFacade.addBuddy(user);
+        
     }
 }

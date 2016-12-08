@@ -105,7 +105,7 @@ public class MovieFacade {
 
     }
     
-    public void postReview (Review review){
+     public void postReview (Review review){
         EntityManager em = getEntityManager();
         Movie movie = review.getMovie();
                 movie.getReviews().add(review);
@@ -197,6 +197,10 @@ public class MovieFacade {
             updatedMovie.setLanguage(movie.getLanguage());
             updatedMovie.setImdbRating(movie.getImdbRating());
             updatedMovie.setPoster(movie.getPoster());
+            updatedMovie.setRecommendations(movie.getRecommendations());
+            updatedMovie.setReviews(movie.getReviews());
+            updatedMovie.setP_movies(movie.getP_movies());
+            
             em.getTransaction().commit();
 
         } finally {

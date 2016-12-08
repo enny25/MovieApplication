@@ -17,6 +17,8 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     }
                 });
             };
+            
+            
             $scope.showButton = true;
             $scope.searchMovie = function () {
                 console.log("Before" + $scope.showButton);
@@ -35,6 +37,8 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     var url = 'api/movies/movie';
                     console.log(postObject);
                 }
+                
+                
 
 
                 $http({
@@ -62,10 +66,42 @@ angular.module('myApp.MovieJS', ['ngRoute'])
 
             };
         })
-        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance) {
+        // Review area.
+        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance,items,usernameinfo) {
             $scope.close = function () {
                 $uibModalInstance.close();
             };
+            $scope.movie=items;
+            console.log(items);
+            $scope.ok=function(){
+                console.log($scope.movieDetails);
+                var movieReview = {review : movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername()};
+                console.log(movieReview);
+            
+            $http({
+                    url: 'api/movies/movie',
+                    dataType: 'json',
+                    method: 'POST',
+                    data: postReview,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                    
+                })
+                
+                        .then(function sucessCallback(res){
+                            console.log(res.data)
+                            $scope.movieDetails = res.data;
+                        }
+                               , function errorCallback(res){
+                                   $scope.openErrorModal("This movie does not exist in our List!")
+                                    
+                               });
+
+
+            
+                };
+            
         })
         .controller('datCtrl', function ($scope) {
             $scope.today = new Date();

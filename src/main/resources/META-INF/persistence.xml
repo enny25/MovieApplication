@@ -4,11 +4,11 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <non-jta-data-source>MovieDatabase</non-jta-data-source>
     <class>entity.Movie</class>
+    <class>entity.PersonalMovie</class>
+    <class>entity.Recommendation</class>
+    <class>entity.Review</class>
     <class>entity.Role</class>
     <class>entity.User</class>
-    <class>entity.PersonalMovie</class>
-    <class>entity.Review</class>
-    <class>entity.Recommendation</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql:///localhost:3306/seeddatabase?zeroDateTimeBehavior=convertToNull"/>
@@ -19,6 +19,23 @@
     </properties>
   </persistence-unit>
     <persistence-unit name="pu_test" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entity.Movie</class>
+    <class>entity.Review</class>
+    <class>entity.User</class>
+    <class>entity.Role</class>
+    <class>entity.Recommendation</class>
+    <class>entity.PersonalMovie</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory/testDB;create=true"/>
+      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+      <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+      <property name="eclipselink.canonicalmodel.subpackage" value="test"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="pu_test" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.Movie</class>
     <class>entity.Review</class>

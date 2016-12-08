@@ -37,19 +37,21 @@ public class UserFacade implements IUserFacade {
 
     public List<User> getFriendListById(String id) {
         User user = getUserByUserId(id);
-        List<User> friendList =  user.getFriendList();
+        List<User> friendList = user.getFriendList();
         return friendList;
 
     }
 
     public List<PersonalMovie> getPersonalMovieListById(String id) {
         User user = getUserByUserId(id);
-        List<PersonalMovie> movieList =  user.getMovieList();
+        List<PersonalMovie> movieList = user.getMovieList();
         return movieList;
     }
 
     public User updateUser(User user) {
 
+        List movies = user.getMovieList();
+        System.out.println(movies);
         User updatedUser = getUserByUserId(user.getUserName());
         EntityManager em = getEntityManager();
         updatedUser.setBirthday(user.getBirthday());
@@ -57,6 +59,7 @@ public class UserFacade implements IUserFacade {
         updatedUser.setGender(user.getGender());
         updatedUser.setFriendList(user.getFriendList());
         updatedUser.setMovieList(user.getMovieList());
+        updatedUser.setRoles(user.getRoles());
         try {
             em.getTransaction().begin();
             em.merge(updatedUser);
@@ -68,14 +71,20 @@ public class UserFacade implements IUserFacade {
         return updatedUser;
     }
 
-    public void addToPersonalMovieList(String username, String status, String imdbid, int rating) {
-
-        EntityManager em = getEntityManager();      
+    public void beforeAddToPersonalMovieList(String username, String status, String imdbid, int rating) {
+        EntityManager em = getEntityManager();
         Movie foundMovie = em.find(Movie.class, imdbid);
-        PersonalMovie pm = new PersonalMovie(foundMovie, rating, status);
-        List<PersonalMovie> pmList = getPersonalMovieListById(username);
+        User foundUser = em.find(User.class, username);
+        PersonalMovie pm = new PersonalMovie(foundMovie, rating, status, foundUser);
+        addToPersonalMovieList(pm);
+    }
+
+    public void addToPersonalMovieList(PersonalMovie pm) {
+
+        EntityManager em = getEntityManager();
+        List<PersonalMovie> pmList = getPersonalMovieListById(pm.getUser().getUserName());
         pmList.add(pm);
-        
+
         try {
             em.getTransaction().begin();
             em.merge(pmList);
@@ -84,26 +93,49 @@ public class UserFacade implements IUserFacade {
         } finally {
             em.close();
         }
-      
-      
-  }
-  public boolean createUser (User user){
-       EntityManager em = getEntityManager();
-      
-         try {
+
+    }
+
+    public boolean createUser(User user) {
+        EntityManager em = getEntityManager();
+
+        try {
             em.getTransaction().begin();
             em.merge(user);
             em.getTransaction().commit();
-            
+
         } finally {
             em.close();
-            
-        }
-         return (getUserByUserId(user.getUserName())!= null);
-      
-  }
 
+        }
+        return (getUserByUserId(user.getUserName()) != null);
+
+    }
     
+    public User getUserByUsername(String username) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(User.class, username);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void addBuddy(User user){
+        EntityManager em = getEntityManager();
+        List<User> buddyList = getFriendListById(user.getUserName());
+        buddyList.add(user);
+
+        try {
+            em.getTransaction().begin();
+            em.merge(buddyList);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+
+    }
 
     /*
   Return the Roles if users could be authenticated, otherwise null
@@ -119,5 +151,4 @@ public class UserFacade implements IUserFacade {
         }
     }
 
-    
 }

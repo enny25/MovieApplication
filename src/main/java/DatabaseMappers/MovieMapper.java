@@ -22,75 +22,76 @@ import java.util.Map;
  * @author Lenovo
  */
 public class MovieMapper {
-    public static Movie movieGetterById (String imdbId){
+
+    public static Movie movieGetterById(String imdbId) {
         try {
 
-        String selectedItem = imdbId ;
+            String selectedItem = imdbId;
 
-        InputStream input = new URL("http://www.omdbapi.com/?i=" + URLEncoder.encode(selectedItem, "UTF-8")).openStream();
-        Map<String, String> map = new Gson().fromJson(new InputStreamReader(input, "UTF-8"), new TypeToken<Map<String, String>>(){}.getType());
+            InputStream input = new URL("http://www.omdbapi.com/?i=" + URLEncoder.encode(selectedItem, "UTF-8")).openStream();
+            Map<String, String> map = new Gson().fromJson(new InputStreamReader(input, "UTF-8"), new TypeToken<Map<String, String>>() {
+            }.getType());
 
-        String title = map.get("Title");
-        String year = map.get("Year");
+            String title = map.get("Title");
+            String year = map.get("Year");
 //        String released = map.get("Released");
-        String runtime = map.get("Runtime");
-        String genre = map.get("Genre");
-        String actors = map.get("Actors");
-        String plot = map.get("Plot");
-        String imdbRating = map.get("imdbRating");
-        String directors = map.get("Director");
-        String language = map.get("Language");
-        String poster = map.get("Poster");
-           if(title == null){
+            String runtime = map.get("Runtime");
+            String genre = map.get("Genre");
+            String actors = map.get("Actors");
+            String plot = map.get("Plot");
+            String imdbRating = map.get("imdbRating");
+            String directors = map.get("Director");
+            String language = map.get("Language");
+            String poster = map.get("Poster");
+            if (title == null) {
+                return null;
+            }
+            
+            Movie movie = new Movie(imdbId, title, year, runtime, genre, directors, actors, plot, language, imdbRating, poster);
+
+            return movie;
+
+        } catch (JsonIOException | JsonSyntaxException | IOException e) {
+            System.out.println(e);
             return null;
         }
-        Movie movie = new Movie(imdbId,title, year, runtime, genre,directors, actors, plot,language,imdbRating, poster);
-        
-        return movie;
 
-        
+    }
 
-    } catch (JsonIOException | JsonSyntaxException | IOException e){
-        System.out.println(e);
-        return null;
-    }
-        
-    }
-        public static Movie movieGetterByTitle (String MovieTitle){
+    public static Movie movieGetterByTitle(String MovieTitle) {
         try {
 
-        String selectedItem = MovieTitle ;
+            String selectedItem = MovieTitle;
 
-        InputStream input = new URL("http://www.omdbapi.com/?t=" + URLEncoder.encode(selectedItem, "UTF-8")).openStream();
-        Map<String, String> map = new Gson().fromJson(new InputStreamReader(input, "UTF-8"), new TypeToken<Map<String, String>>(){}.getType());
+            InputStream input = new URL("http://www.omdbapi.com/?t=" + URLEncoder.encode(selectedItem, "UTF-8")).openStream();
+            Map<String, String> map = new Gson().fromJson(new InputStreamReader(input, "UTF-8"), new TypeToken<Map<String, String>>() {
+            }.getType());
 
-        String imdbID = map.get("imdbID");
-        String year = map.get("Year");
-        String runtime = map.get("Runtime");
-        String genre = map.get("Genre");
-        String actors = map.get("Actors");
-        String plot = map.get("Plot");
-        String imdbRating = map.get("imdbRating");
-        String directors = map.get("Director");
-        String language = map.get("Language");
-        String title = map.get("Title");
-        String poster = map.get("Poster");
-        if(imdbID ==null){
+            String imdbID = map.get("imdbID");
+            String year = map.get("Year");
+            String runtime = map.get("Runtime");
+            String genre = map.get("Genre");
+            String actors = map.get("Actors");
+            String plot = map.get("Plot");
+            String imdbRating = map.get("imdbRating");
+            String directors = map.get("Director");
+            String language = map.get("Language");
+            String title = map.get("Title");
+            String poster = map.get("Poster");
+            if (imdbID == null) {
+                return null;
+            }
+            
+
+            Movie movie = new Movie(imdbID, title, year, runtime, genre, directors, actors, plot, language, imdbRating, poster);
+
+            return movie;
+
+        } catch (JsonIOException | JsonSyntaxException | IOException e) {
+            System.out.println(e);
             return null;
         }
-            
-        Movie movie = new Movie(imdbID,title, year, runtime, genre,directors, actors, plot,language,imdbRating, poster);
-        
-        return movie;
 
-        
+    }
 
-    } catch (JsonIOException | JsonSyntaxException | IOException e){
-        System.out.println(e);
-        return null;
-    }
-        
-    }
-    
-    
 }
