@@ -10,12 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Plamen
  */
-@Entity(name="PersonalMovie")
+@Entity
 public class PersonalMovie implements Serializable {
     
     
@@ -26,13 +27,12 @@ public class PersonalMovie implements Serializable {
     Movie movie;
     int rating;
     String status;
-    User user;
 
-    public PersonalMovie(Movie movie, int rating, String status, User user) {
+
+    public PersonalMovie(Movie movie, int rating, String status) {
         this.movie = movie;
         this.rating = rating;
         this.status = status;
-        this.user = user;
     }
 
     
@@ -73,13 +73,7 @@ public class PersonalMovie implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+  
     
         
 

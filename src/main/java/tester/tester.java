@@ -68,14 +68,14 @@ public class tester {
         Movie movieTest3 = mf.getMoviebyTitle("Black Hawk Down");
         Movie movieTest4 = mf.getMoviebyTitle("The Grudge");
         
-        PersonalMovie pm1 = new PersonalMovie(movieTest1, 5, "Completed",zygi);
-        PersonalMovie pm2 = new PersonalMovie(movieTest2, 3, "Watching",zygi);
-        PersonalMovie pm3 = new PersonalMovie(movieTest3, 4, "Watching", emil);
-        PersonalMovie pm4 = new PersonalMovie(movieTest4, 2, "Completed", emil);
-        PersonalMovie pm5 = new PersonalMovie(movieTest1, 5, "Completed",emil);
-        PersonalMovie pm6 = new PersonalMovie(movieTest2, 3, "Watching",emil);
-        PersonalMovie pm7 = new PersonalMovie(movieTest3, 4, "Watching", zygi);
-        PersonalMovie pm8 = new PersonalMovie(movieTest4, 2, "Completed", zygi);
+        PersonalMovie pm1 = new PersonalMovie(movieTest1, 5, "Completed");
+        PersonalMovie pm2 = new PersonalMovie(movieTest2, 3, "Watching");
+        PersonalMovie pm3 = new PersonalMovie(movieTest3, 4, "Watching");
+        PersonalMovie pm4 = new PersonalMovie(movieTest4, 2, "Completed");
+        PersonalMovie pm5 = new PersonalMovie(movieTest1, 5, "Completed");
+        PersonalMovie pm6 = new PersonalMovie(movieTest2, 3, "Watching");
+        PersonalMovie pm7 = new PersonalMovie(movieTest3, 4, "Watching");
+        PersonalMovie pm8 = new PersonalMovie(movieTest4, 2, "Completed");
         zygi.addMovie(pm1);
         zygi.addMovie(pm2);
         zygi.addMovie(pm7);
@@ -90,14 +90,14 @@ public class tester {
         uf.updateUser(plamen);
         
         
-        Recommendation recTest1 = new Recommendation(movieTest1, movieTest2, zygi, "Hot AF");
-        Review revTest1 = new Review(zygi, movieTest1, "Hella Good", 5);
-        Review revTest2 = new Review(zygi, movieTest2, "Quite cool I'd say", 3);
-        Review revTest3 = new Review(zygi, movieTest3, "Impressive", 4);
-        Review revTest4 = new Review(zygi, movieTest4, "Dumb idea", 1);
-        Review revTest5 = new Review(emil, movieTest4, "Boring", 2);
-        Review revTest6= new Review(emil, movieTest3, "Average", 3);
-        Review revTest7 = new Review(emil, movieTest2, "Entertaining", 4);
+        Recommendation recTest1 = new Recommendation("tt4508902", "zygi", "Hot AF");
+        Review revTest1 = new Review("zygi", "Hella Good", 5);
+        Review revTest2 = new Review("zygi", "Quite cool I'd say", 3);
+        Review revTest3 = new Review("zygi", "Impressive", 4);
+        Review revTest4 = new Review("zygi", "Dumb idea", 1);
+        Review revTest5 = new Review("emil", "Boring", 2);
+        Review revTest6= new Review("emil", "Average", 3);
+        Review revTest7 = new Review("emil", "Entertaining", 4);
         movieTest1.addRecommendation(recTest1);
         movieTest1.addReview(revTest1);
         movieTest2.addReview(revTest2);

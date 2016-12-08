@@ -21,56 +21,28 @@ public class Review implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
     
-    private User user;
-    private Movie movie;
+    private String username;
     private String reviewText;
     private int Score;
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
     public Review() {
     }
 
-    public Review(User user, Movie movie, String reviewText, int Score) {
-        this.user = user;
-        this.movie = movie;
+    public Review(String username, String reviewText, int Score) {
+        this.username = username;
         this.reviewText = reviewText;
         this.Score = Score;
     }
+
     
 
-    public Review(Long id, User user, Movie movie, String reviewText, int Score) {
-        this.id = id;
-        this.user = user;
-        this.movie = movie;
-        this.reviewText = reviewText;
-        this.Score = Score;
-    }
-    
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
+   
 
     public String getReviewText() {
         return reviewText;
@@ -88,6 +60,15 @@ public class Review implements Serializable {
         this.Score = Score;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    
   
     
 }
