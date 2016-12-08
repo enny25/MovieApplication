@@ -31,7 +31,7 @@ public class User implements IUser, Serializable {
     @OneToMany(cascade = CascadeType.PERSIST)
     List<User> friendList;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.PERSIST)
     List<PersonalMovie> movieList;
 
     public User() {
@@ -71,6 +71,7 @@ public class User implements IUser, Serializable {
             friendList = new ArrayList();
         }
         friendList.add(user);
+       
     }
 
     public void addRole(Role role) {

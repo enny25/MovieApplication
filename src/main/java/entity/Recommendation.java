@@ -22,51 +22,28 @@ public class Recommendation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    
-    @OneToOne
-    public Movie movie1;
-    
-    @OneToOne
-    public Movie movie2;
-    
-    @OneToOne
-    public User user;
-    private String description;
+    private int id;
 
-    public Recommendation(Movie movie1, Movie movie2, User user, String description) {
-        this.movie1 = movie1;
-        this.movie2 = movie2;
-        this.user = user;
+    public String username;
+    private String description;
+    private String suggestedMovie;
+
+    public Recommendation() {
+
+    }
+
+    public Recommendation(String suggestedMovie, String username, String description) {
+        this.suggestedMovie = suggestedMovie;
+        this.username = username;
         this.description = description;
     }
-    
-    public Recommendation() {
-        
+
+    public String getUsername() {
+        return username;
     }
 
-    public Movie getMovie1() {
-        return movie1;
-    }
-
-    public void setMovie1(Movie movie1) {
-        this.movie1 = movie1;
-    }
-
-    public Movie getMovie2() {
-        return movie2;
-    }
-
-    public void setMovie2(Movie movie2) {
-        this.movie2 = movie2;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getDescription() {
@@ -76,41 +53,12 @@ public class Recommendation implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    
-    public Long getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getSuggestedMovie() {
+        return suggestedMovie;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Recommendation)) {
-            return false;
-        }
-        Recommendation other = (Recommendation) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entity.Recommendation[ id=" + id + " ]";
-    }
-    
 }
-

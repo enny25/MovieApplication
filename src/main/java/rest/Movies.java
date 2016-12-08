@@ -16,6 +16,7 @@ import facades.MovieFacade;
 import facades.UserFacade;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import javax.json.Json;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -84,11 +85,13 @@ public class Movies {
     @GET
     @Path("getMovieList")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllCompanies() {
-        List movies = facade.getAllMovies();
-        return gson.toJson(movies);
+    public String getAllMovies() {
+
+        List Movie = facade.getAllMovies();
+
+        return gson.toJson(Movie);
     }
-    
+
     @POST
     @Path("createReview")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -101,8 +104,9 @@ public class Movies {
         User user = uFacade.getUserByUserId(userString);
         String reviewText = json.get("reviewText").getAsString();
         String score = json.get("score").getAsString();
-        Review review = new Review(user,movie,reviewText,Integer.parseInt(score));
-        facade.postReview(review);
+        Review review = new Review("zygi", reviewText, Integer.parseInt(score));
+        movie.addReview(review);
+        facade.updateMovie(movie);
     }
 
     @PUT

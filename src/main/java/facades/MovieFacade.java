@@ -6,6 +6,8 @@
 package facades;
 
 import DatabaseMappers.MovieMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import entity.Movie;
 import entity.Review;
@@ -23,6 +25,7 @@ import javax.persistence.Query;
  */
 public class MovieFacade {
 
+    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
     EntityManagerFactory emf;
     MovieMapper moviemapper = new MovieMapper();
     Movie mov1 = new Movie();
@@ -95,8 +98,7 @@ public class MovieFacade {
         Query query = em.createQuery("SELECT m FROM Movie m");
 
         List<Movie> addressList = query.getResultList();
-        System.out.println("This works");
-        System.out.println(addressList);
+        String str = gson.toJson(addressList);
         try {
             return addressList;
         } finally {
@@ -105,10 +107,10 @@ public class MovieFacade {
 
     }
     
-     public void postReview (Review review){
+     public void postReview (Review review, String imdbID){
         EntityManager em = getEntityManager();
-        Movie movie = review.getMovie();
-                movie.getReviews().add(review);
+        Movie movie = getMoviebyID(imdbID);
+                movie.addReview(review);
         
         try {
             em.getTransaction().begin();
@@ -118,32 +120,33 @@ public class MovieFacade {
         } finally {
             em.close();
         }
-        
+
     }
-    
-    public List<Review> getReviewsByUser (User user){
+
+    public List<Review> getReviewsByUser(User user) {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Review r WHERE r.user = :user");
         query.setParameter("user", user);
-        ArrayList<Review> result = (ArrayList<Review>)query.getResultList();
+        List<Review> result = query.getResultList();
        return result;
         
     }
-     public List<Review> getReviewsByMovie (Movie movie){
+
+    public List<Review> getReviewsByMovie(Movie movie) {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Review r WHERE r.movie = :movie");
         query.setParameter("movie", movie);
-        ArrayList<Review> result = (ArrayList<Review>)query.getResultList();
+        List<Review> result = query.getResultList();
        return result;
         
     }
-     public void upvoteReview(Review review){
-          EntityManager em = getEntityManager();
-           Review updatedReview = (Review) em.find(Review.class, review.getId());
-           int updatedScore = updatedReview.getScore()+1;
-           updatedReview.setScore(updatedScore);
 
-        
+    public void upvoteReview(Review review) {
+        EntityManager em = getEntityManager();
+        Review updatedReview = (Review) em.find(Review.class, review.getId());
+        int updatedScore = updatedReview.getScore() + 1;
+        updatedReview.setScore(updatedScore);
+
         try {
             em.getTransaction().begin();
             em.persist(updatedReview);
@@ -152,17 +155,15 @@ public class MovieFacade {
         } finally {
             em.close();
         }
-         
-         
-     }
-     
-      public void downVoteReview(Review review){
-          EntityManager em = getEntityManager();
-           Review updatedReview = (Review) em.find(Review.class, review.getId());
-           int updatedScore = updatedReview.getScore()-1;
-           updatedReview.setScore(updatedScore);
 
-        
+    }
+
+    public void downVoteReview(Review review) {
+        EntityManager em = getEntityManager();
+        Review updatedReview = (Review) em.find(Review.class, review.getId());
+        int updatedScore = updatedReview.getScore() - 1;
+        updatedReview.setScore(updatedScore);
+
         try {
             em.getTransaction().begin();
             em.persist(updatedReview);
@@ -171,11 +172,8 @@ public class MovieFacade {
         } finally {
             em.close();
         }
-         
-         
-     }
-    
-    
+
+    }
 
     public Movie updateMovie(Movie movie) {
 
@@ -199,8 +197,7 @@ public class MovieFacade {
             updatedMovie.setPoster(movie.getPoster());
             updatedMovie.setRecommendations(movie.getRecommendations());
             updatedMovie.setReviews(movie.getReviews());
-            updatedMovie.setP_movies(movie.getP_movies());
-            
+
             em.getTransaction().commit();
 
         } finally {
@@ -209,18 +206,19 @@ public class MovieFacade {
 
         return updatedMovie;
     }
-    
-    public List<Recommendation> getRecommendationsByUser(User user){
+
+    public List<Recommendation> getRecommendationsByUser(User user) {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.user = :user");
         query.setParameter("user", user);
-        ArrayList<Recommendation> recresult = (ArrayList<Recommendation>) query.getResultList();
+        List<Recommendation> recresult = query.getResultList();
         return recresult;
-    
+
     }
-    public void postRecommendation (Recommendation recommendation){
+
+    public void postRecommendation(Recommendation recommendation) {
         EntityManager em = getEntityManager();
-        
+
         try {
             em.getTransaction().begin();
             em.persist(recommendation);
@@ -230,14 +228,14 @@ public class MovieFacade {
             em.close();
         }
     }
-    
-    public List<Recommendation> getRecommendationewsByMovie (Movie movie){
+
+    public List<Recommendation> getRecommendationewsByMovie(Movie movie) {
         EntityManager em = getEntityManager();
         Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.movie1 = :movie1");
         query.setParameter("movie", movie);
-        ArrayList<Recommendation> result = (ArrayList<Recommendation>)query.getResultList();
+        List<Recommendation> result = query.getResultList();
         return result;
-        
+
     }
     public void persistMovie (Movie movie){
          EntityManager em = getEntityManager();
