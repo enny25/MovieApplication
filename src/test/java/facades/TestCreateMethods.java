@@ -99,5 +99,15 @@ public class TestCreateMethods {
         
     }
     
+    @Test
+    public void testAddBuddy() throws PasswordStorage.CannotPerformOperationException{
+        userOne= new User("UserOne","Password","Male","24-24-24","Zygiland");
+        userTwo = new User("UserTwo","Password","Male","24-24-24","Zygiland");
+        uFacade.createUser(userOne);
+        uFacade.createUser(userTwo);
+        uFacade.addBuddy(userOne, userTwo);
+        assertEquals(uFacade.getFriendListById(userOne.getUserName()).get(0).getUserName(),"UserTwo");
+        
+    }
 
 }

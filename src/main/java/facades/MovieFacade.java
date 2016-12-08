@@ -212,8 +212,8 @@ public class MovieFacade {
 
     public List<Recommendation> getRecommendationewsByMovie(Movie movie) {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.movie1 = :movie1");
-        query.setParameter("movie", movie);
+        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.suggestedMovie = :movie");
+        query.setParameter("movie", movie.getImdbId());
         List<Recommendation> result = query.getResultList();
         return result;
 
