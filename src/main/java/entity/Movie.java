@@ -31,7 +31,7 @@ public class Movie implements Serializable {
     private String Actors;
     private String Poster;
     private String plot;
-    @Column(name="MovieYear")
+    @Column(name="MovieLanguage")
     private String Language;
     private String ImdbRating;
 
