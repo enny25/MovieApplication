@@ -172,24 +172,11 @@ public class MovieFacade {
 
         EntityManager em = getEntityManager();
 
-        Movie updatedMovie = (Movie) em.find(Movie.class, movie.getImdbId());
 
         try {
             em.getTransaction().begin();
 
-            updatedMovie.setImdbId(movie.getImdbId());
-            updatedMovie.setTitle(movie.getTitle());
-            updatedMovie.setYear(movie.getYear());
-            updatedMovie.setRuntime(movie.getRuntime());
-            updatedMovie.setGenre(movie.getGenre());
-            updatedMovie.setDirectors(movie.getDirectors());
-            updatedMovie.setActors(movie.getActors());
-            updatedMovie.setPlot(movie.getPlot());
-            updatedMovie.setLanguage(movie.getLanguage());
-            updatedMovie.setImdbRating(movie.getImdbRating());
-            updatedMovie.setPoster(movie.getPoster());
-            updatedMovie.setRecommendations(movie.getRecommendations());
-            updatedMovie.setReviews(movie.getReviews());
+           em.merge(movie);
 
             em.getTransaction().commit();
 
@@ -197,7 +184,7 @@ public class MovieFacade {
             em.close();
         }
 
-        return updatedMovie;
+        return movie;
     }
 
     public List<Recommendation> getRecommendationsByUser(User user) {

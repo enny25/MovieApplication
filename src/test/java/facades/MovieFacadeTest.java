@@ -58,8 +58,7 @@ public class MovieFacadeTest {
        userOne.addFriendList(userTwo);
       uFacade.updateUser(userOne);
        
-        Review review = new Review(userOne.getUserName(),"the Review",5);
-        instance.postReview(review,frozen.getImdbId());
+        instance.postReview(frozen.getImdbId(),userOne.getUserName(),"the Review",5);
     }
 
     /**

@@ -49,16 +49,16 @@ public class TestCreateMethods {
         "Kristen Bell, Idina Menzel, Jonathan Groff, Josh Gad",
         "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister, Anna, teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition."
          ,"English, Icelandic","7.6","https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg");
-        
+        instance.persistMovie(frozen);
         userOne = new User("tonny","bonde","male","24-06-2890","Kazakstan");
         uFacade.createUser(userOne);
         Role user = new Role();
         userOne.addRole(user);  
         
         Review review = new Review(userOne.getUserName(),"the Review",5);
-        instance.postReview(review,frozen.getImdbId());
+         instance.postReview(frozen.getImdbId(),userOne.getUserName(),"the Review",5);
         
-        assertEquals(instance.getReviewsByUser(userOne.getUserName()).get(0),review);
+        assertEquals(instance.getReviewsByUser(userOne.getUserName()).get(0).getReviewText(),review.getReviewText());
       
     }
     
@@ -74,6 +74,17 @@ public class TestCreateMethods {
         assertEquals("tt0077631",instance.getMoviebyTitle("Grease").getImdbId());
     }
     
+    @Test
+    public void testCreateUser() throws PasswordStorage.CannotPerformOperationException{
+        userTwo = new User("Johhny","bonde","male","24-24-24","Zygiland");
+        uFacade.createUser(userTwo);
+        assertNotNull(uFacade.getUserByUserId(userTwo.getUserName()));
+        
+    }
+    @Test
+    public void testPostRecommendation(){
+        
+    }
     
 
 }
