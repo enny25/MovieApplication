@@ -51,7 +51,6 @@ public class UserFacade implements IUserFacade {
     public User updateUser(User user) {
 
         List movies = user.getMovieList();
-        System.out.println(movies);
         User updatedUser = getUserByUserId(user.getUserName());
         EntityManager em = getEntityManager();
         updatedUser.setBirthday(user.getBirthday());
@@ -75,19 +74,19 @@ public class UserFacade implements IUserFacade {
         EntityManager em = getEntityManager();
         Movie foundMovie = em.find(Movie.class, imdbid);
         User foundUser = em.find(User.class, username);
-        PersonalMovie pm = new PersonalMovie(foundMovie, rating, status, foundUser);
-        addToPersonalMovieList(pm);
+        PersonalMovie pm = new PersonalMovie(foundMovie, rating, status);
+        foundUser.addMovie(pm);
+        addToPersonalMovieList(foundUser);
+        
     }
 
-    public void addToPersonalMovieList(PersonalMovie pm) {
+    public void addToPersonalMovieList(User user) {
 
         EntityManager em = getEntityManager();
-        List<PersonalMovie> pmList = getPersonalMovieListById(pm.getUser().getUserName());
-        pmList.add(pm);
 
         try {
             em.getTransaction().begin();
-            em.merge(pmList);
+            em.merge(user);
             em.getTransaction().commit();
 
         } finally {

@@ -22,7 +22,7 @@ public class MovieFacadeTest {
     
     private static MovieFacade instance = new MovieFacade(emf);
    private static UserFacade uFacade = new UserFacade(emf);
-    private static User userone;
+    private static User userOne;
     
     
     public MovieFacadeTest() throws PasswordStorage.CannotPerformOperationException {
@@ -47,13 +47,13 @@ public class MovieFacadeTest {
 //        instance.persistMovie(BHD);
         instance.persistMovie(Grease);
 //        
-      userone = new User("Username","Password","Male","25-04-2890","Glorius Nation of Kazakhstan");
+      userOne = new User("Username","Password","Male","25-04-2890","Glorius Nation of Kazakhstan");
         Role user = new Role("user");
-       userone.addRole(user);
-       user.addUser(userone);
-       uFacade.createUser(userone);
-        Review review = new Review(userone,frozen,"the Review",5);
-        instance.postReview(review);
+       userOne.addRole(user); 
+       user.addUser(userOne);
+       uFacade.createUser(userOne);
+        Review review = new Review(userOne.getUserName(),"the Review",5);
+        instance.postReview(review,frozen.getImdbId());
     }
 //    @After
 //    public void TearDown(){
@@ -136,7 +136,7 @@ public class MovieFacadeTest {
        
         
         
-        List<Review> result = instance.getReviewsByUser(userone);
+        List<Review> result = instance.getReviewsByUser(userOne);
         assertEquals(instance.getMoviebyTitle("Frozen").getImdbId(), result.get(0).getMovie().getImdbId());
       
     }
@@ -149,7 +149,7 @@ public class MovieFacadeTest {
     public void testGetReviewsByMovie() throws PasswordStorage.CannotPerformOperationException {
         Movie frozen = instance.getMoviebyTitle("Frozen");
         List<Review> result = instance.getReviewsByMovie(frozen);
-        assertEquals(userone.getUserName(), result.get(0).getUser().getUserName());
+        assertEquals(userOne.getUserName(), result.get(0).getUser().getUserName());
     }
 
     /**
@@ -157,10 +157,10 @@ public class MovieFacadeTest {
      */
     @Test
     public void testUpvoteReview() {
-        Review review = instance.getReviewsByUser(userone).get(0);
+        Review review = instance.getReviewsByUser(userOne).get(0);
         int defaultScore = review.getScore();
         instance.upvoteReview(review);
-        assertEquals(instance.getReviewsByUser(userone).get(0).getScore(),defaultScore +1);
+        assertEquals(instance.getReviewsByUser(userOne).get(0).getScore(),defaultScore +1);
     }
 
     /**
@@ -169,10 +169,10 @@ public class MovieFacadeTest {
     
     @Test
     public void testDownVoteReview() {
-        Review review = instance.getReviewsByUser(userone).get(0);
+        Review review = instance.getReviewsByUser(userOne).get(0);
         int defaultScore = review.getScore();
         instance.downVoteReview(review);
-        assertEquals(instance.getReviewsByUser(userone).get(0).getScore(),defaultScore -1);
+        assertEquals(instance.getReviewsByUser(userOne).get(0).getScore(),defaultScore -1);
     }
 
     /**

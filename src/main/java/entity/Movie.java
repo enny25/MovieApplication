@@ -35,11 +35,10 @@ public class Movie implements Serializable {
     private String Language;
     private String ImdbRating;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "movie")
-    private List<PersonalMovie> p_movies;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "movie")
+    
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Review> Reviews;
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "movie")
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Recommendation> Recommendations;
 
     public Movie(String imdbId) {
@@ -84,13 +83,7 @@ public class Movie implements Serializable {
 
     // ADD METHODS
     //------------------------------------------------------------------
-    public void addP_movies(PersonalMovie movie) {
-        if (p_movies == null) {
-            p_movies = new ArrayList();
-        }
-        p_movies.add(movie);
-
-    }
+    
 
     public void addReview(Review review) {
         if (Reviews == null) {
@@ -107,9 +100,6 @@ public class Movie implements Serializable {
     }
     //------------------------------------------------------------------
 
-    public void setP_movies(List<PersonalMovie> p_movies) {
-        this.p_movies = p_movies;
-    }
 
     public void setReviews(List<Review> Reviews) {
         this.Reviews = Reviews;
@@ -215,8 +205,5 @@ public class Movie implements Serializable {
         this.Poster = Poster;
     }
 
-    public List<PersonalMovie> getP_movies() {
-        return p_movies;
-    }
 
 }
