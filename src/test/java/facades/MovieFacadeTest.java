@@ -83,19 +83,7 @@
 //        
 //    }
 ////
-////    /**
-////     * Test of getMoviebyID method, of class MovieFacade.
-////     */
-////    
-////    @Test
-////    public void testGetMoviebyID() {
-////        System.out.println("getMoviebyID");
-////        String imdbid = "tt0077631";
-////        String expResult = "Grease";
-////        Movie result = instance.getMoviebyID(imdbid);
-////        assertEquals(expResult, result.getTitle());
-////        
-////    }
+//// 
 ////
 //    /**
 //     * Test of getAllMovies method, of class MovieFacade.
