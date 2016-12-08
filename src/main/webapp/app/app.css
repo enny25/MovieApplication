@@ -1,15 +1,19 @@
 
 #logo { 
-    float: left;
-    height: 40em;
+    display: block;
+    margin:  auto;
 }
 
 #login{
-    /*float: right;*/
+    /*float: right;
     /*position:relative;*/
     /*clear: both;*/
     /*width: 30em;*/
 
+}
+
+#profilePro{
+    margin-top: 25%;
 }
 
 #Profile{
@@ -21,7 +25,7 @@
     transform: translateX(-50%);
     left: 50%;
     position: absolute;
-    
+
 }
 
 #buttonProf{
@@ -30,14 +34,20 @@
     border-color: transparent;
 }
 
+#buttonProf:hover{
+    background-color: red;
+    opacity:0.40;
+}
+
+
 #nav
 {
     /*background: url(http://4.bp.blogspot.com/-dVtgikk-kOY/UprtswP0yGI/AAAAAAAADag/Og0DtZ8t_oQ/s1600/header+base.png) no-repeat scroll top left;*/    
     /*background: url(https://www.2webdesign.com/public/images/inner-header.jpg) no-repeat scroll top left;*/    
     background-color: transparent;
-   /*background: lightblue;*/
-background:rgba(0,0,0,0.4);
-   border-color: transparent;
+    /*background: lightblue;*/
+    background:rgba(0,0,0,0.4);
+    border-color: transparent;
     width: 100%;
     height:10%;
     box-shadow: 0px 1px 10px #5E5E5E;
@@ -52,13 +62,13 @@ background:rgba(0,0,0,0.4);
 {
     display: block;
     font-size: 1.6em;
-    
+
     text-transform: uppercase;
     text-shadow: 0 0 0.3em #464646;
     font-weight: bold;
     font-family:century gothic;
     margin-left: 20%;
-
+    /*margin-top: 25%;*/
     font-size: 15px;
     text-decoration:none;
     color:black;
@@ -66,29 +76,24 @@ background:rgba(0,0,0,0.4);
 } 
 #nav a:hover 
 {
-    opacity:0.36;
+    opacity:0.40;
 }
 
 
 #main{
     /*width: 100%;*/
     /*padding: 16px;*/
-    margin-top: 100px;
-    height: 1500px;
-    
-}
-
-
-
-/*#profile {
-    float:right; width: 25em; margin-right: 0.5em;
-
-}*/
-
-#Profile{
-
-    
+    margin-top: 6%;
+    /*height: 200px;*/
 
 }
 
+#slider .item{
+    margin: 10px;
+}
+#slider .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
 
