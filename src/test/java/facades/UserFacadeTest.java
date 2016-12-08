@@ -1,67 +1,70 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package facades;
-//
-//import entity.PersonalMovie;
-//import entity.Role;
-//import entity.User;
-//import java.util.List;
-//import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
-//import javax.persistence.Persistence;
-//import org.junit.Before;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//import org.junit.BeforeClass;
-//import security.PasswordStorage;
-//
-///**
-// *
-// * @author Lenovo
-// */
-//public class UserFacadeTest {
-//
-//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_test");
-//    private EntityManager em = emf.createEntityManager();
-//
-//    private static MovieFacade instance = new MovieFacade(emf);
-//    private static UserFacade uFacade = new UserFacade(emf);
-//    private static User userOne;
-//    private static User userTwo;
-//
-//    public UserFacadeTest() {
-//    }
-//
-//    @BeforeClass
-//    public static void setUp() throws PasswordStorage.CannotPerformOperationException {
-//        userOne = new User("Username", "Password", "Male", "25-04-2890", "Glorius Nation of Kazakhstan");
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package facades;
+
+import entity.PersonalMovie;
+import entity.Role;
+import entity.User;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import security.PasswordStorage;
+
+/**
+ *
+ * @author Lenovo
+ */
+public class UserFacadeTest {
+
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_test");
+    private EntityManager em = emf.createEntityManager();
+
+    private static MovieFacade instance = new MovieFacade(emf);
+    private static UserFacade uFacade = new UserFacade(emf);
+    private static User userOne;
+    private static User userTwo;
+
+    public UserFacadeTest() {
+    }
+
+    @BeforeClass
+    public static void setUp() throws PasswordStorage.CannotPerformOperationException {
+        userOne = new User("Username", "Password", "Male", "25-04-2890", "Glorius Nation of Kazakhstan");
+        uFacade.createUser(userOne);
 //        Role user = new Role("user");
 //        userOne.addRole(user);
-//        user.addUser(userOne);
-//        uFacade.createUser(userOne);
+//        uFacade.updateUser(userOne);
+        
 //        userTwo = new User ("Johhny","Password","Male","24-04-120","China");
+//        uFacade.createUser(userTwo);
 //        userTwo.addRole(user);
 //        user.addUser(userTwo);
-//         userOne.addFriendList(userTwo);
-//         uFacade.createUser(userTwo);
+////         userOne.addFriendList(userTwo);
+////         uFacade.updateUser(userTwo);
+//         
 //
-//    }
+    }
 //
-//    /**
-//     * Test of getUserByUserId method, of class UserFacade.
-//     */
-//    @Test
-//    public void testGetUserByUserId() {
-//        String id = "Username";
-//
-//        String Birthday ="25-04-2890";
-//        User result = uFacade.getUserByUserId(id);
-//        assertEquals(Birthday, result.getBirthday());
-//    }
-//
+    /**
+     * Test of getUserByUserId method, of class UserFacade.
+     */
+    @Test
+    public void testGetUserByUserId() {
+        String id = "Username";
+
+        String Birthday ="25-04-2890";
+        User result = uFacade.getUserByUserId(id);
+        assertEquals(Birthday, result.getBirthday());
+    }
+
 //    /**
 //     * Test of getFriendListById method, of class UserFacade.
 //     */
@@ -130,4 +133,4 @@
 //        assertNotNull( result);
 //    }
 //
-//}
+}

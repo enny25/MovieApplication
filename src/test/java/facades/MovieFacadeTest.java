@@ -49,39 +49,11 @@
 ////        
 //      userOne = new User("Username","Password","Male","25-04-2890","Glorius Nation of Kazakhstan");
 //        Role user = new Role("user");
-//       userOne.addRole(user); 
-//       user.addUser(userOne);
+//       userOne.addRole(user);
 //       uFacade.createUser(userOne);
 //        Review review = new Review(userOne.getUserName(),"the Review",5);
 //        instance.postReview(review,frozen.getImdbId());
 //    }
-////    @After
-////    public void TearDown(){
-////               Query q1 = em.createQuery("DELETE FROM Movie");
-////    Query q3 = em.createQuery("DELETE FROM Review");
-////    Query q2 = em.createQuery("DELETE FROM SEED_USER");
-////    Query q4 = em.createQuery("DELETE FROM USER_ROLE");
-////    
-////        try{
-////        em.getTransaction().begin();
-////       q3.executeUpdate();
-////       q4.executeUpdate();
-////       q1.executeUpdate();
-////       q2.executeUpdate();
-////
-////        em.getTransaction().commit();
-////        }
-////        finally{
-////            em.close();
-////        }
-////        
-////    }
-//        
-//    
-//    
-//    
-//  
-//    
 //
 //    /**
 //     * Test of getMoviebyID method, of class MovieFacade.
@@ -111,7 +83,19 @@
 //        
 //    }
 ////
-//// 
+////    /**
+////     * Test of getMoviebyID method, of class MovieFacade.
+////     */
+////    
+////    @Test
+////    public void testGetMoviebyID() {
+////        System.out.println("getMoviebyID");
+////        String imdbid = "tt0077631";
+////        String expResult = "Grease";
+////        Movie result = instance.getMoviebyID(imdbid);
+////        assertEquals(expResult, result.getTitle());
+////        
+////    }
 ////
 //    /**
 //     * Test of getAllMovies method, of class MovieFacade.
@@ -137,7 +121,7 @@
 //        
 //        
 //        List<Review> result = instance.getReviewsByUser(userOne);
-//        assertEquals(instance.getMoviebyTitle("Frozen").getImdbId(), result.get(0).getMovie().getImdbId());
+//        assertEquals("The Review", result.get(0).getReviewText());
 //      
 //    }
 //
@@ -149,7 +133,7 @@
 //    public void testGetReviewsByMovie() throws PasswordStorage.CannotPerformOperationException {
 //        Movie frozen = instance.getMoviebyTitle("Frozen");
 //        List<Review> result = instance.getReviewsByMovie(frozen);
-//        assertEquals(userOne.getUserName(), result.get(0).getUser().getUserName());
+//        assertEquals("The Review", result.get(0).getReviewText());
 //    }
 //
 //    /**
