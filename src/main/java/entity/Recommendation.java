@@ -23,19 +23,28 @@ public class Recommendation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
+    
+    
     public String username;
     private String description;
     private String suggestedMovie;
-
-    public Recommendation() {
-
-    }
 
     public Recommendation(String suggestedMovie, String username, String description) {
         this.suggestedMovie = suggestedMovie;
         this.username = username;
         this.description = description;
+    }
+    
+    public Recommendation() {
+        
+    }
+
+    public String getSuggestedMovie() {
+        return suggestedMovie;
+    }
+
+    public void setSuggestedMovie(String suggestedMovie) {
+        this.suggestedMovie = suggestedMovie;
     }
 
     public String getUsername() {
@@ -46,6 +55,10 @@ public class Recommendation implements Serializable {
         this.username = username;
     }
 
+   
+
+ 
+
     public String getDescription() {
         return description;
     }
@@ -53,12 +66,11 @@ public class Recommendation implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    
+    
+    
     public int getId() {
         return id;
     }
-
-    public String getSuggestedMovie() {
-        return suggestedMovie;
-    }
+    
 }

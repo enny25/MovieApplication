@@ -100,7 +100,7 @@ public class UserFacade implements IUserFacade {
 
         try {
             em.getTransaction().begin();
-            em.merge(user);
+            em.persist(user);
             em.getTransaction().commit();
 
         } finally {
