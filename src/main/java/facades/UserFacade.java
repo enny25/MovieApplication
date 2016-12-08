@@ -112,14 +112,6 @@ public class UserFacade implements IUserFacade {
 
     }
     
-    public User getUserByUsername(String username) {
-        EntityManager em = getEntityManager();
-        try {
-            return em.find(User.class, username);
-        } finally {
-            em.close();
-        }
-    }
     
     public void addBuddy(User user){
         EntityManager em = getEntityManager();

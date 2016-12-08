@@ -95,7 +95,7 @@ public class UserFacadeTest {
     public void testUpdateUser() {
         String expResult = "NotChina";
         
-                
+        userTwo.setCountry(expResult);
         User result = uFacade.updateUser(userTwo);
         assertEquals(expResult, result.getCountry());
     }
@@ -129,48 +129,17 @@ public class UserFacadeTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of getUserByUsername method, of class UserFacade.
-     */
-    @Test
-    public void testGetUserByUsername() {
-        System.out.println("getUserByUsername");
-        String username = "";
-        UserFacade instance = null;
-        User expResult = null;
-        User result = instance.getUserByUsername(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
-    /**
-     * Test of addBuddy method, of class UserFacade.
-     */
-    @Test
-    public void testAddBuddy() {
-        System.out.println("addBuddy");
-        User user = null;
-        UserFacade instance = null;
-        instance.addBuddy(user);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of authenticateUser method, of class UserFacade.
      */
     @Test
     public void testAuthenticateUser() {
-        System.out.println("authenticateUser");
-        String userName = "";
-        String password = "";
-        UserFacade instance = null;
-        List<String> expResult = null;
-        List<String> result = instance.authenticateUser(userName, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String userName = "Username";
+        String password = "Password";
+        List<String> result = uFacade.authenticateUser(userName, password);
+        assertNotNull( result);
     }
 
 }
