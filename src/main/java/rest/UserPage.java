@@ -79,9 +79,11 @@ public class UserPage {
     @Produces(MediaType.APPLICATION_JSON)
     public void addBuddy(String jsonString){
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
-        String username = json.get("username").getAsString();
+        String username = json.get("user1").getAsString();
+        String username2 = json.get("user2").getAsString();
         User user = uFacade.getUserByUserId(username);
-        uFacade.addBuddy(user);
+        User user2 = uFacade.getUserByUserId(username2);
+        uFacade.addBuddy(user,user2);
         
     }
     
