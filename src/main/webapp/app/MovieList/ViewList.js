@@ -72,7 +72,7 @@ angular.module('myApp.ViewList', ['ngRoute'])
 
         .controller('MovieListControler', function ($scope, $uibModalInstance, items, $http)
         {
-
+            
             $scope.movie = items;
             $scope.close = function () {
                 $uibModalInstance.close();

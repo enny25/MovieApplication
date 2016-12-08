@@ -26,17 +26,6 @@ angular.module('myApp.factories', [])
         .factory('isAdmin', function () {
 
             return {
-                getUsername: function () {
-                    return this.updatedUsername;
-                },
-                setUsername: function (username) {
-                    this.updatedUsername = username;
-                }
-            };
-        })
-        .factory('isAdmin', function () {
-
-            return {
                 checkIsAdmin: function () {
                     return this.isAdmin;
                 },

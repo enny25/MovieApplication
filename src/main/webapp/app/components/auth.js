@@ -1,14 +1,13 @@
 angular.module('myApp.security', [])
 
-        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, usernameInfo) {
+        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, usernameInfo, isAdmin) {
+
 
             $rootScope.$on('logOutEvent', function () {
                 $scope.logout();
             });
-
             $scope.$on("NotAuthenticatedEvent", function (event, res) {
                 $scope.$emit("logOutEvent");
-
                 if (typeof res.data.error !== "undefined" && res.data.error.message) {
                     if (res.data.error.message.indexOf("No authorization header") === 0) {
                         //Provide a friendly message
@@ -22,7 +21,6 @@ angular.module('myApp.security', [])
                 }
 
             });
-
             $scope.$on("NotAuthorizedEvent", function (event, res) {
                 if (typeof res.data.error !== "undefined" && res.data.error.message) {
                     $scope.openErrorModal(res.data.error.message);
@@ -30,7 +28,6 @@ angular.module('myApp.security', [])
                     $scope.openErrorModal("You are not authorized to perform the requested operation");
                 }
             });
-
 //          $scope.$on("HttpErrorEvent", function (event, res) {
 //            if (typeof res.data.error !== "undefined" && res.data.error.message) {
 //              $scope.openErrorModal(res.data.error.message);
@@ -41,7 +38,6 @@ angular.module('myApp.security', [])
 //          }); Use only for debugging 
 
             clearUserDetails($scope);
-
             $scope.login = function () {
                 $http.post('api/login', $scope.user)
                         .success(function (data) {
@@ -49,22 +45,28 @@ angular.module('myApp.security', [])
                             initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper);
                             var tokenPayload = jwtHelper.decodeToken($window.sessionStorage.id_token);
                             usernameInfo.setUsername(tokenPayload.username);
+                            tokenPayload.roles.forEach(function (role) {
+                                if (role === "Admin") {
+                                    isAdmin.setToAdmin(true);
+                                }
+                            });
                             $location.path("#/view1");
+
                         })
                         .error(function (data) {
                             delete $window.sessionStorage.id_token;
                             clearUserDetails($scope);
                         });
             };
-
             $rootScope.logout = function () {
+                isAdmin.setToAdmin(false);
+                usernameInfo.setUsername(undefined);
                 $scope.isAuthenticated = false;
                 $scope.isAdmin = false;
                 $scope.isUser = false;
                 delete $window.sessionStorage.id_token;
-                $location.path("/view1");
+                $location.path("#/view1");
             };
-
             $rootScope.openErrorModal = function (text) {
                 var modalInstance = $uibModal.open({
                     animation: true,
@@ -91,7 +93,6 @@ angular.module('myApp.security', [])
                     size: 'sm'
                 });
             };
-
             //This sets the login data from session store if user pressed F5 (You are still logged in)
             var init = function () {
                 var token = $window.sessionStorage.id_token;
@@ -99,10 +100,9 @@ angular.module('myApp.security', [])
                     initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper);
                     var tokenPayload = jwtHelper.decodeToken($window.sessionStorage.id_token);
                     usernameInfo.setUsername(tokenPayload.username);
-
                 }
             };
-            init();// and fire it after definition
+            init(); // and fire it after definition
         })
         .factory('AuthInterceptor', function ($rootScope, $q) {
             return {
@@ -134,6 +134,7 @@ angular.module('myApp.security', [])
 
 
 function initializeFromToken($scope, token, jwtHelper) {
+
     $scope.isAuthenticated = true;
     var tokenPayload = jwtHelper.decodeToken(token);
     $scope.username = tokenPayload.username;
@@ -142,21 +143,20 @@ function initializeFromToken($scope, token, jwtHelper) {
     tokenPayload.roles.forEach(function (role) {
         if (role === "Admin") {
             $scope.isAdmin = true;
-            
         }
         if (role === "User") {
             $scope.isUser = true;
-            
         }
     });
 }
 
-function clearUserDetails($scope, isAdmin, isUser) {
+function clearUserDetails($scope) {
+
+
     $scope.username = "";
     $scope.isAuthenticated = false;
     $scope.isAdmin = false;
     $scope.isUser = false;
-   
 }
 
 

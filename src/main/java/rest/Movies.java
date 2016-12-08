@@ -107,6 +107,7 @@ public class Movies {
 
     @PUT
     @Path("updateMovie")
+    @RolesAllowed("Admin")
     @Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     @Produces(javax.ws.rs.core.MediaType.APPLICATION_JSON)
     public void updateMovie(String jsonString) {
