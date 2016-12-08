@@ -38,6 +38,12 @@ public class tester {
         Role admin = new Role("Admin");
         Role user = new Role("User");
         Role slave = new Role("Slave");
+        
+         uf.createUser(zygi);
+        uf.createUser(emil);
+        uf.createUser(daniel);
+        uf.createUser(plamen);
+        
         zygi.addRole(admin);
         emil.addRole(user);
         emil.addRole(slave);
@@ -53,11 +59,16 @@ public class tester {
         emil.addFriendList(zygi);
         plamen.addFriendList(zygi);
         daniel.addFriendList(zygi);
-        uf.createUser(zygi);
-        uf.createUser(emil);
-        uf.createUser(daniel);
-        uf.createUser(plamen);
-        
+       
+        User userOne;
+        User userTwo;
+        userOne = new User("Username","Password","Male","25-04-2890","Glorius Nation of Kazakhstan");
+       uf.createUser(userOne);
+      userTwo = new User ("Johhny","Password","Male","24-04-120","China");
+       Role userRole = new Role("user");
+       userOne.addRole(userRole);
+       userOne.addFriendList(userTwo);
+      uf.updateUser(userOne);
         
         mf.createMoviebyTitle("Frozen");
         mf.createMoviebyTitle("Grease");

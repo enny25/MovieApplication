@@ -123,23 +123,16 @@ public class MovieFacade {
 
     }
 
-    public List<Review> getReviewsByUser(User user) {
+    public List<Review> getReviewsByUser(String user) {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Review r WHERE r.user = :user");
+        Query query = em.createQuery("SELECT r FROM Review r WHERE r.username = :user");
         query.setParameter("user", user);
         List<Review> result = query.getResultList();
        return result;
         
     }
 
-    public List<Review> getReviewsByMovie(Movie movie) {
-        EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Review r WHERE r.movie = :movie");
-        query.setParameter("movie", movie);
-        List<Review> result = query.getResultList();
-       return result;
-        
-    }
+   
 
     public void upvoteReview(Review review) {
         EntityManager em = getEntityManager();

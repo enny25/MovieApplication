@@ -5,6 +5,7 @@
  */
 package facades;
 
+import entity.Movie;
 import entity.PersonalMovie;
 import entity.Role;
 import entity.User;
@@ -37,16 +38,25 @@ public class UserFacadeTest {
 
     @BeforeClass
     public static void setUp() throws PasswordStorage.CannotPerformOperationException {
+        Persistence.generateSchema("pu_test", null);
+        Movie frozen = new Movie("tt2294629","Frozen","2013","102 min","Animation, Adventure, Comedy","Chris Buck, Jennifer Lee,",
+        "Kristen Bell, Idina Menzel, Jonathan Groff, Josh Gad",
+        "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister, Anna, teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition."
+         ,"English, Icelandic","7.6","https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg");
+        PersonalMovie pm = new PersonalMovie(frozen,5,"nice");
+        
+        
         userOne = new User("Username", "Password", "Male", "25-04-2890", "Glorius Nation of Kazakhstan");
+        userTwo = new User ("Johhny","Password","Male","24-04-120","China");
+        uFacade.createUser(userOne);
+         uFacade.createUser(userTwo);
         Role user = new Role("user");
         userOne.addRole(user);
-        user.addUser(userOne);
-        uFacade.createUser(userOne);
-        userTwo = new User ("Johhny","Password","Male","24-04-120","China");
         userTwo.addRole(user);
-        user.addUser(userTwo);
-         userOne.addFriendList(userTwo);
-         uFacade.createUser(userTwo);
+        userOne.addFriendList(userTwo);
+        userTwo.addMovie(pm);
+        uFacade.updateUser(userOne);
+        uFacade.updateUser(userTwo);
 
     }
 
@@ -79,13 +89,16 @@ public class UserFacadeTest {
     @Test
     public void testGetPersonalMovieListById() {
         System.out.println("getPersonalMovieListById");
-        String id = "";
-        UserFacade instance = null;
-        List<PersonalMovie> expResult = null;
-        List<PersonalMovie> result = instance.getPersonalMovieListById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String id = userTwo.getUserName();
+        Movie frozen = new Movie("tt2294629","Frozen","2013","102 min","Animation, Adventure, Comedy","Chris Buck, Jennifer Lee,",
+        "Kristen Bell, Idina Menzel, Jonathan Groff, Josh Gad",
+        "When the newly crowned Queen Elsa accidentally uses her power to turn things into ice to curse her home in infinite winter, her sister, Anna, teams up with a mountain man, his playful reindeer, and a snowman to change the weather condition."
+         ,"English, Icelandic","7.6","https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg");
+        PersonalMovie pm = new PersonalMovie(frozen,5,"nice");
+        PersonalMovie expResult = pm;
+        List<PersonalMovie> result = uFacade.getPersonalMovieListById(id);
+        assertEquals(expResult.getMovie().getImdbId(), result.get(0).getMovie().getImdbId());
+       
     }
 
     /**
@@ -99,23 +112,6 @@ public class UserFacadeTest {
         User result = uFacade.updateUser(userTwo);
         assertEquals(expResult, result.getCountry());
     }
-
-    /**
-     * Test of beforeAddToPersonalMovieList method, of class UserFacade.
-     */
-    @Test
-    public void testBeforeAddToPersonalMovieList() {
-        System.out.println("beforeAddToPersonalMovieList");
-        String username = "";
-        String status = "";
-        String imdbid = "";
-        int rating = 0;
-        UserFacade instance = null;
-        instance.beforeAddToPersonalMovieList(username, status, imdbid, rating);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
 
 
 
