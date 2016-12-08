@@ -67,10 +67,16 @@ angular.module('myApp.MovieJS', ['ngRoute'])
             };
         })
         // Review area.
-        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance) {
+        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance,items,usernameinfo) {
             $scope.close = function () {
                 $uibModalInstance.close();
             };
+            $scope.movie=items;
+            console.log(items);
+            $scope.ok=function(){
+                console.log($scope.movieDetails);
+                var movieReview = {review : movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername()};
+                console.log(movieReview);
             
             $http({
                     url: 'api/movies/movie',
@@ -80,10 +86,21 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     headers: {
                         "Content-Type": "application/json"
                     }
-
-
-
+                    
                 })
+                
+                        .then(function sucessCallback(res){
+                            console.log(res.data)
+                            $scope.movieDetails = res.data;
+                        }
+                               , function errorCallback(res){
+                                   $scope.openErrorModal("This movie does not exist in our List!")
+                                    
+                               });
+
+
+            
+                };
             
         })
         .controller('datCtrl', function ($scope) {

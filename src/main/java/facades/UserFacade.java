@@ -110,6 +110,23 @@ public class UserFacade implements IUserFacade {
         return (getUserByUserId(user.getUserName()) != null);
 
     }
+    
+    
+    public void addBuddy(User user){
+        EntityManager em = getEntityManager();
+        List<User> buddyList = getFriendListById(user.getUserName());
+        buddyList.add(user);
+
+        try {
+            em.getTransaction().begin();
+            em.merge(buddyList);
+            em.getTransaction().commit();
+
+        } finally {
+            em.close();
+        }
+
+    }
 
     /*
   Return the Roles if users could be authenticated, otherwise null

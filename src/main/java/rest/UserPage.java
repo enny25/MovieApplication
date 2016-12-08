@@ -72,4 +72,16 @@ public class UserPage {
         int rating = json.get("rating").getAsInt();
         uFacade.beforeAddToPersonalMovieList(username, status, imdbid, rating);
     }
+    
+    @POST
+    @Path("addBuddy")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public void addBuddy(String jsonString){
+        JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
+        String username = json.get("username").getAsString();
+        User user = uFacade.getUserByUserId(username);
+        uFacade.addBuddy(user);
+        
+    }
 }
