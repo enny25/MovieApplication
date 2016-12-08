@@ -107,11 +107,11 @@ public class MovieFacade {
 
     }
     
-     public void postReview (Review review, String imdbID){
+     public void postReview (String movieString, String userString, String reviewText, int score){
         EntityManager em = getEntityManager();
-        Movie movie = getMoviebyID(imdbID);
-                movie.addReview(review);
-        
+        Movie movie = em.find(Movie.class, movieString);
+        Review review = new Review(userString, reviewText, score);
+        movie.addReview(review);
         try {
             em.getTransaction().begin();
             em.merge(movie);
@@ -123,23 +123,16 @@ public class MovieFacade {
 
     }
 
-    public List<Review> getReviewsByUser(User user) {
+    public List<Review> getReviewsByUser(String user) {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Review r WHERE r.user = :user");
+        Query query = em.createQuery("SELECT r FROM Review r WHERE r.username = :user");
         query.setParameter("user", user);
         List<Review> result = query.getResultList();
        return result;
         
     }
 
-    public List<Review> getReviewsByMovie(Movie movie) {
-        EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Review r WHERE r.movie = :movie");
-        query.setParameter("movie", movie);
-        List<Review> result = query.getResultList();
-       return result;
-        
-    }
+   
 
     public void upvoteReview(Review review) {
         EntityManager em = getEntityManager();
@@ -179,24 +172,11 @@ public class MovieFacade {
 
         EntityManager em = getEntityManager();
 
-        Movie updatedMovie = (Movie) em.find(Movie.class, movie.getImdbId());
 
         try {
             em.getTransaction().begin();
 
-            updatedMovie.setImdbId(movie.getImdbId());
-            updatedMovie.setTitle(movie.getTitle());
-            updatedMovie.setYear(movie.getYear());
-            updatedMovie.setRuntime(movie.getRuntime());
-            updatedMovie.setGenre(movie.getGenre());
-            updatedMovie.setDirectors(movie.getDirectors());
-            updatedMovie.setActors(movie.getActors());
-            updatedMovie.setPlot(movie.getPlot());
-            updatedMovie.setLanguage(movie.getLanguage());
-            updatedMovie.setImdbRating(movie.getImdbRating());
-            updatedMovie.setPoster(movie.getPoster());
-            updatedMovie.setRecommendations(movie.getRecommendations());
-            updatedMovie.setReviews(movie.getReviews());
+           em.merge(movie);
 
             em.getTransaction().commit();
 
@@ -204,24 +184,25 @@ public class MovieFacade {
             em.close();
         }
 
-        return updatedMovie;
+        return movie;
     }
 
     public List<Recommendation> getRecommendationsByUser(User user) {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.user = :user");
-        query.setParameter("user", user);
+        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.username = :user");
+        query.setParameter("user", user.getUserName());
         List<Recommendation> recresult = query.getResultList();
         return recresult;
 
     }
 
-    public void postRecommendation(Recommendation recommendation) {
+    public void postRecommendation(Recommendation recommendation,Movie movie) {
+        movie.addRecommendation(recommendation);
         EntityManager em = getEntityManager();
 
         try {
             em.getTransaction().begin();
-            em.persist(recommendation);
+            em.merge(movie);
             em.getTransaction().commit();
 
         } finally {
@@ -231,8 +212,8 @@ public class MovieFacade {
 
     public List<Recommendation> getRecommendationewsByMovie(Movie movie) {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.movie1 = :movie1");
-        query.setParameter("movie", movie);
+        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.suggestedMovie = :movie");
+        query.setParameter("movie", movie.getImdbId());
         List<Recommendation> result = query.getResultList();
         return result;
 

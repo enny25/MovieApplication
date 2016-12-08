@@ -20,18 +20,17 @@
   <persistence-unit name="pu_test" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>entity.Movie</class>
-    <class>entity.Review</class>
-    <class>entity.User</class>
-    <class>entity.Role</class>
-    <class>entity.Recommendation</class>
     <class>entity.PersonalMovie</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>entity.Recommendation</class>
+    <class>entity.Review</class>
+    <class>entity.Role</class>
+    <class>entity.User</class>
     <properties>
-      <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory/testDB;create=true"/>
-      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-      <property name="eclipselink.ddl-generation.output-mode" value="database"/>
-      <property name="eclipselink.canonicalmodel.subpackage" value="test"/>
+       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/seeddatabase?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="test"/>
+      <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
     </properties>
   </persistence-unit>
 </persistence>

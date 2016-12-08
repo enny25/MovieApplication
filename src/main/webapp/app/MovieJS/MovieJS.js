@@ -17,8 +17,8 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     }
                 });
             };
-            
-            
+
+
             $scope.showButton = true;
             $scope.searchMovie = function () {
                 console.log("Before" + $scope.showButton);
@@ -37,7 +37,7 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     var url = 'api/movies/movie';
                     console.log(postObject);
                 }
-                
+
                 $http({
                     url: 'api/movies/movie',
                     dataType: 'json',
@@ -64,18 +64,30 @@ angular.module('myApp.MovieJS', ['ngRoute'])
             };
         })
         // Review area.
-        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance,items,usernameInfo) {
+        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance, items, usernameInfo) {
+            $scope.ratings = [
+                {rate: "5", value: "5"},
+                {rate: "4", value: "4"},
+                {rate: "3", value: "3"},
+                {rate: "2", value: "2"},
+                {rate: "1", value: "1"}
+
+            ];
+            $scope.selectedRating = $scope.ratings[0];
+            $scope.setRate = function () {
+                console.log($scope.selectedRating.value);
+            };
             $scope.close = function () {
                 $uibModalInstance.close();
             };
-            $scope.movie=items;
+            $scope.movie = items;
             console.log(items);
-            $scope.ok=function(){
+            $scope.ok = function () {
                 console.log($scope.movieDetails);
-                var movieReview = {review : $scope.movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername()};
+                var movieReview = {review: $scope.movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername(), score:$scope.selectedRating.value};
                 console.log(movieReview);
-            
-            $http({
+
+                $http({
                     url: 'api/movies/createReview',
                     dataType: 'json',
                     method: 'POST',
@@ -83,22 +95,22 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     headers: {
                         "Content-Type": "application/json"
                     }
-                    
+
                 })
-                
-                        .then(function sucessCallback(res){
+
+                        .then(function sucessCallback(res) {
                             console.log(res.data)
                             $scope.movieDetails = res.data;
                         }
-                               , function errorCallback(res){
-                                   $scope.openErrorModal("This movie does not exist in our List!")
-                                    
-                               });
+                        , function errorCallback(res) {
+                            $scope.openErrorModal("This movie does not exist in our List!")
+
+                        });
 
 
-            
-                };
-            
+
+            };
+
         })
         .controller('datCtrl', function ($scope) {
             $scope.today = new Date();

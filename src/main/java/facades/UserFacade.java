@@ -112,14 +112,16 @@ public class UserFacade implements IUserFacade {
     }
     
     
-    public void addBuddy(User user){
+    public void addBuddy(User user,User user2){
         EntityManager em = getEntityManager();
-        List<User> buddyList = getFriendListById(user.getUserName());
-        buddyList.add(user);
+        user.addFriendList(user2);
+        user2.addFriendList(user);
+        
 
         try {
             em.getTransaction().begin();
-            em.merge(buddyList);
+            em.merge(user);
+            em.merge(user2);
             em.getTransaction().commit();
 
         } finally {
