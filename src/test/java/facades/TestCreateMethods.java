@@ -6,6 +6,7 @@
 package facades;
 
 import entity.Movie;
+import entity.Recommendation;
 import entity.Review;
 import entity.Role;
 import entity.User;
@@ -82,7 +83,19 @@ public class TestCreateMethods {
         
     }
     @Test
-    public void testPostRecommendation(){
+    public void testPostRecommendation() throws PasswordStorage.CannotPerformOperationException{
+        Movie Push = new Movie("tt0465580","Push","2001","102 min","Adventure, Comedy","The Director, Jennifer Lee,",
+        "The Actors","The Plot.","English, Somali","7.6","https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg");
+        Movie glad = new Movie("tt0172495","Gladiator","2001","102 min","Adventure, Comedy","The Director, Jennifer Lee,",
+        "The Actors","The Plot.","English, Somali","7.6","https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg");
+        instance.persistMovie(glad);
+        instance.persistMovie(Push);
+        userOne = new User("Jimmy","Password","Male","24-24-24","Zygiland");
+        uFacade.createUser(userOne);
+        Recommendation recommendation = new Recommendation("tt0172495","Jimmy","Both movies Very gut");
+        
+        instance.postRecommendation(recommendation, Push);
+        assertEquals(instance.getRecommendationsByUser(userOne).get(0).getSuggestedMovie(),glad.getImdbId());
         
     }
     

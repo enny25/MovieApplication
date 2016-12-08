@@ -189,19 +189,20 @@ public class MovieFacade {
 
     public List<Recommendation> getRecommendationsByUser(User user) {
         EntityManager em = getEntityManager();
-        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.user = :user");
-        query.setParameter("user", user);
+        Query query = em.createQuery("SELECT r FROM Recommendation r WHERE r.username = :user");
+        query.setParameter("user", user.getUserName());
         List<Recommendation> recresult = query.getResultList();
         return recresult;
 
     }
 
-    public void postRecommendation(Recommendation recommendation) {
+    public void postRecommendation(Recommendation recommendation,Movie movie) {
+        movie.addRecommendation(recommendation);
         EntityManager em = getEntityManager();
 
         try {
             em.getTransaction().begin();
-            em.persist(recommendation);
+            em.merge(movie);
             em.getTransaction().commit();
 
         } finally {
