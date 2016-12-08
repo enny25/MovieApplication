@@ -80,7 +80,7 @@ public class UserPage {
     public void addBuddy(String jsonString){
         JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
         String username = json.get("username").getAsString();
-        User user = uFacade.getUserByUsername(username);
+        User user = uFacade.getUserByUserId(username);
         uFacade.addBuddy(user);
         
     }

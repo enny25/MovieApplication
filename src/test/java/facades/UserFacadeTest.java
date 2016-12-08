@@ -116,18 +116,6 @@ public class UserFacadeTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of addToPersonalMovieList method, of class UserFacade.
-     */
-    @Test
-    public void testAddToPersonalMovieList() {
-        System.out.println("addToPersonalMovieList");
-        PersonalMovie pm = null;
-        UserFacade instance = null;
-        instance.addToPersonalMovieList(pm);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
 
 
