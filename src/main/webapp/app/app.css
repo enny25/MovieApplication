@@ -1,4 +1,4 @@
- ol.list {
+ol.list {
     list-style-type: none;
     margin: 0;
     margin-left: 3em;
@@ -18,13 +18,78 @@ ol.list > li:before {
     top: 0;
     left: -1em;
     width: 0.8em;
-     
+
     font-size: 1.5em;
     line-height: 1;
     font-weight: bold;
     text-align: right;
     color: #464646;
- 
+
     content: counter(li-counter);
     counter-increment: li-counter;
 }
+
+#logo { float: left; }
+
+#nav
+{
+    /*background: url(http://4.bp.blogspot.com/-dVtgikk-kOY/UprtswP0yGI/AAAAAAAADag/Og0DtZ8t_oQ/s1600/header+base.png) no-repeat scroll top left;*/    
+    /*background: url(https://www.2webdesign.com/public/images/inner-header.jpg) no-repeat scroll top left;*/    
+    background-color: none;
+    width: 84%;
+    height:10%;
+    /*box-shadow: 0px 1px 10px #5E5E5E;*/
+    position:fixed;
+    top:0px;
+    
+}
+
+#nav a
+{
+    display: block;
+font-size: 1.6em;
+text-transform: uppercase;
+text-shadow: 0 0 0.3em #464646;
+ font-weight: bold;
+ font-family:century gothic;
+  text-decoration:none;
+ color:#262626;
+ opacity:0.26;
+} 
+ #nav a:hover 
+{
+opacity:0.36;
+}
+
+#main{
+    padding: 16px;
+    margin-top: 100px;
+    height: 1500px;
+}
+/*.title
+ {
+display:none;
+ color:#EDEDED;
+ font-family:verdana;
+ font-size:25px;
+ width:350px;
+ margin-top:6px;
+ margin-left:150px;
+ font-weight:bold;
+ float:left;
+}*/
+
+
+/*.navigation
+{
+ list-style-type:none; 
+    float: left;
+}*/
+
+
+/*li 
+{ 
+
+display:inline;
+ padding:15px;
+ }*/

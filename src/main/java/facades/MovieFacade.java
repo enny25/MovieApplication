@@ -107,11 +107,11 @@ public class MovieFacade {
 
     }
     
-     public void postReview (Review review, String imdbID){
+     public void postReview (String movieString, String userString, String reviewText, int score){
         EntityManager em = getEntityManager();
-        Movie movie = getMoviebyID(imdbID);
-                movie.addReview(review);
-        
+        Movie movie = em.find(Movie.class, movieString);
+        Review review = new Review(userString, reviewText, score);
+        movie.addReview(review);
         try {
             em.getTransaction().begin();
             em.merge(movie);

@@ -4,31 +4,23 @@
 
                 <th></th>
                 <th>Name</th>
-                <th>Actors</th>
-                <th>Directors</th>
+                
                 <th>Genre</th>
-                <th>IMDB Rating</th>
-                <th>Language</th>
-                <th>Runtime</th>
-                <th>Year</th>
-                <th>Plot</th>
+                <th>Status</th>
+                <th>Score</th>
+               
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="movie in listDetails">
 
-                <td><img src="{{movie.Poster}}" style="width: 15em; height: auto"/>
+                <td><img src="{{movie.movie.Poster}}" style="width: 15em; height: auto"/>
                 </td>
-                <td style="font-size: 20px;"><b>{{movie.title}}</b><div style="font-size: 12px">{{movie.imdbid}}</div>
+                <td style="font-size: 20px;"><b>{{movie.movie.title}}</b><div style="font-size: 12px">{{movie.imdbid}}</div>
 
-                <td>{{movie.Actors}}</td>
-
-                <td>{{movie.Directors}}</td>
-                <td>{{movie.Genre}}</td>
-                <td>{{movie.ImdbRating}}</td>
-                <td>{{movie.Language}}</td>
-                <td>{{movie.Runtime}}</td>
-                <td>{{movie.Year}}</td>
-                <td>{{movie.plot}}</td></tr>
+                
+                <td>{{movie.movie.Genre}}</td>
+                <td>{{movie.status}}</td>
+                <td>{{movie.rating}}</td>
         </tbody>
     </table></div>

@@ -43,7 +43,12 @@
                        </div>
 
                        <div class="modal-body">
+                       Rating:
+                        <select ng-disabled="isDisabled" class="form-control" ng-model="selectedRating" ng-options="rt.rate for rt in ratings" ng-change="setRate()">
+
+                        </select>
                        <form  name="movieUpdate" ng-submit="ok()">
+                       Review:
                        <textarea style="width: 100%; height: 300px; resize: none" class="form-control" type="text" ng-model="movie.review" value="{{movie.review}}"/></textarea><br>
                        <button style="width: 100%"  class="btn btn-success" type="submit" autofocus>Submit</button>
                        </form>
