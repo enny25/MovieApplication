@@ -24,18 +24,18 @@ public class Recommendation implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-   
-    public Movie movie;
+    @OneToOne
+    public Movie movie1;
     
     @OneToOne
     public Movie movie2;
     
-    
+    @OneToOne
     public User user;
     private String description;
 
-    public Recommendation(Movie movie, Movie movie2, User user, String description) {
-        this.movie = movie;
+    public Recommendation(Movie movie1, Movie movie2, User user, String description) {
+        this.movie1 = movie1;
         this.movie2 = movie2;
         this.user = user;
         this.description = description;
@@ -45,12 +45,12 @@ public class Recommendation implements Serializable {
         
     }
 
-    public Movie getMovie() {
-        return movie;
+    public Movie getMovie1() {
+        return movie1;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovie1(Movie movie1) {
+        this.movie1 = movie1;
     }
 
     public Movie getMovie2() {
@@ -113,3 +113,4 @@ public class Recommendation implements Serializable {
     }
     
 }
+

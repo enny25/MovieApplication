@@ -38,9 +38,6 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     console.log(postObject);
                 }
                 
-                
-
-
                 $http({
                     url: 'api/movies/movie',
                     dataType: 'json',
@@ -67,7 +64,7 @@ angular.module('myApp.MovieJS', ['ngRoute'])
             };
         })
         // Review area.
-        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance,items,usernameinfo) {
+        .controller('movieReviewController', function ($http, $window, $scope, $uibModalInstance,items,usernameInfo) {
             $scope.close = function () {
                 $uibModalInstance.close();
             };
@@ -75,14 +72,14 @@ angular.module('myApp.MovieJS', ['ngRoute'])
             console.log(items);
             $scope.ok=function(){
                 console.log($scope.movieDetails);
-                var movieReview = {review : movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername()};
+                var movieReview = {review : $scope.movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername()};
                 console.log(movieReview);
             
             $http({
-                    url: 'api/movies/movie',
+                    url: 'api/movies/createReview',
                     dataType: 'json',
                     method: 'POST',
-                    data: postReview,
+                    data: movieReview,
                     headers: {
                         "Content-Type": "application/json"
                     }
