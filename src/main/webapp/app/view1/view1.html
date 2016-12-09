@@ -1,21 +1,22 @@
 
 
 
-<div id="slider" class="owl-carousel owl-theme">
+<!--<div id="slider" class="owl-carousel owl-theme" >
 
-    <!--Here you Implement the pictures for the carousel-->
+    Here you Implement the pictures for the carousel
 
     
-    <img src="view1/Trump.jpg" alt=""/>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
-    <div class="item"><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
+    <div class="item" ><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
+    <div class="item" ><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
+    <div class="item" ><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
+    <div class="item" ><img src="https://lh5.googleusercontent.com/-Sv0q6lkSAGM/AAAAAAAAAAI/AAAAAAAAAVA/9wS9aK9rScw/s0-c-k-no-ns/photo.jpg" alt="Owl Image"></div>
     
+    
+</div>-->
+<div>
+ <data-owl-carousel class="owl-carousel" data-options="{navigation: false, pagination: true, rewindNav : false}">
+      <div owl-carousel-item="" ng-repeat="item in listDetails" class="item">
+          <a ng-click="movie(item.imdbid)"><img style="height: 20em; width: 13em;" src="{{checkImage(item.Poster)}}" alt="{{item.title}}"/></a>
+      </div>
+    </data-owl-carousel>
 </div>
-

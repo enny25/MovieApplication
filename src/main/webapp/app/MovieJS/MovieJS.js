@@ -3,7 +3,10 @@
 angular.module('myApp.MovieJS', ['ngRoute'])
 
 
-        .controller('movieController', function ($http, $window, $scope, $uibModal, usernameInfo) {
+        .controller('movieController', function ($http, $window, $scope, $rootScope, $uibModal, usernameInfo) {
+
+           
+
             $scope.username = usernameInfo.getUsername();
             $scope.openeditModal = function (movie) {
                 var modalInstance = $uibModal.open({
@@ -84,7 +87,7 @@ angular.module('myApp.MovieJS', ['ngRoute'])
             console.log(items);
             $scope.ok = function () {
                 console.log($scope.movieDetails);
-                var movieReview = {review: $scope.movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername(), score:$scope.selectedRating.value};
+                var movieReview = {review: $scope.movie.review, movie: $scope.movie.imdbid, username: usernameInfo.getUsername(), score: $scope.selectedRating.value};
                 console.log(movieReview);
 
                 $http({
