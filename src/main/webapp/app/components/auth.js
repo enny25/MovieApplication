@@ -1,6 +1,6 @@
 angular.module('myApp.security', [])
 
-        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, usernameInfo, isAdmin) {
+        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, usernameInfo, isAdmin, isUser) {
 
 
             $rootScope.$on('logOutEvent', function () {
@@ -48,6 +48,8 @@ angular.module('myApp.security', [])
                             tokenPayload.roles.forEach(function (role) {
                                 if (role === "Admin") {
                                     isAdmin.setToAdmin(true);
+                                } else if(role === "User"){
+                                    isUser.setToUser(true);
                                 }
                             });
                             $location.path("#/view1");
@@ -60,6 +62,7 @@ angular.module('myApp.security', [])
             };
             $rootScope.logout = function () {
                 isAdmin.setToAdmin(false);
+                isUser.setToUser(false);
                 usernameInfo.setUsername(undefined);
                 $scope.isAuthenticated = false;
                 $scope.isAdmin = false;

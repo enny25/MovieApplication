@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="movie in listDetails">
+            <tr ng-repeat="movie in listDetails" ng-click="cout(movie)">
 
 
                 <td>
@@ -96,7 +96,7 @@
 
             <td style="font-size: 20px; width: 50%">{{movie.plot}}</td></div>
         <td><button ng-show="isAdmin"  class="btn btn-default" ng-click="openeditModal(movie)">Edit</button> <br />
-            <button  class="btn btn-default" ng-click="openaddModal(movie)">Add</button> <br /></td>
+            <button ng-show="Allow" class="btn btn-default" ng-click="openaddModal(movie)">Add</button> <br /></td>
         </tr>
         </tbody>
     </table>

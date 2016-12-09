@@ -39,11 +39,11 @@
     </head>
     <body ng-app="myApp">
         <div class="container-fullwidth" id="main" >
-            <nav class="navbar navbar-static-top  navbar-default " style="width: 100%;" role="navigation" ng-controller="AppLoginCtrl" id="nav">
+            <nav class="navbar navbar-static-top  navbar-default " style="width: 100%; height: 3%" role="navigation" ng-controller="AppLoginCtrl" id="nav">
                 <div class="container">
                     <!--<div class="navbar-header">-->
 
-                        <!--<a class="navbar-brand" href="#">{{title}}</a>-->
+                    <!--<a class="navbar-brand" href="#">{{title}}</a>-->
                     <!--</div>-->
                     <div id="navbar" class="collapse navbar-collapse">
 
@@ -56,7 +56,7 @@
 
 
                         </ul>
-                        <a href="#/docview" class="navbar-left"><img src="Good_qual.png" alt="" id="logo"> </a>
+                        <a  style="margin-left: 39%;  vertical-align: top;" href="#/docview" ><img src="Good_qual.png" alt="" id="logo"> </a>
                         <!--<a class="navbar-brand"><img src="STR3.png" alt="" id="logo"/></a>-->
                         <div >
                             <form class="navbar-form navbar-right" role="form" ng-show="!isAuthenticated" ng-submit="login()"  >
@@ -71,14 +71,16 @@
                                 <button style ="margin-right: 1.1em" type="submit" class="btn btn-success">Sign in</button>
 
                             </form>
-                            <div id="Profile" class="navbar-form navbar-right" ng-show="isAuthenticated">
-                                <ul>
-                                    <li><a id="profilePro" href="#/profile"  >Profile</a></li>
-                                </ul>
+                            <div class="nav navbar-nav" ng-show="isAuthenticated">
+
+
+
                             </div>
                             <div class="navbar-form navbar-right" ng-show="isAuthenticated">
-                                
-                                <button id="buttonProf" type="submit"   class="btn btn-danger navbar-btn"  ng-click="logout()">Logout</button>
+                                <ul class="nav navbar-nav">
+                                    <li><a id="profilePro" href="#/profile"  >Profile</a></li>
+                                <li><button id="buttonProf" type="submit"   class="btn btn-danger"  ng-click="logout()">Logout</button></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -87,13 +89,9 @@
             <div ng-controller="movieController">
                 <form name="movieSearch" ng-submit="searchMovie()">
                     <div class="form-group" style="float: right; width: 15em">
-                        <select class="form-control" id="sel1" ng-model="movie.type">
-                            <option value="1">Search By ID</option>
-                            <option value="2">Search By Title</option>
-
-                        </select>
+                        <select  class="form-control" ng-model="selectedOption" ng-options="rt.info for rt in options" ng-change="setOption()"></select>
                     </div>
-                    <button style="float:right; clear: right; margin-right: 0em" class="btn btn-info" type="submit">Search</button>
+                    <button style="float:right; clear: right; margin-top: 0em" class="btn btn-info" type="submit">Search</button>
                     <input ng-model="movie.info" style="float:right; width: 25em; margin-right: 0.5em; " class="form-control" type="text" placeholder="Title or ID" name="titlesearch"/>
                 </form>
                 <div ng-view></div>

@@ -8,9 +8,19 @@ angular.module('myApp.ViewList', ['ngRoute'])
                 });
             }])
 
-        .controller('listController', function ($http, $window, $scope, $uibModal, usernameInfo, isAdmin) {
+        .controller('listController', function ($http, $rootScope, $window, $scope, $uibModal, usernameInfo, isAdmin, isUser) {
+            $scope.cout = function (movie) {
+                
+                $rootScope.$broadcast('CallParentMethod', movie.imdbid);
+            };
             $scope.listDetails = {};
             $scope.isAdmin = isAdmin.checkIsAdmin();
+            $scope.isUser = isUser.checkIsUser();
+            if($scope.isAdmin || $scope.isUser){
+                $scope.Allow = true;
+            }else{
+                $scope.Allow = false;
+            }
             $http({
                 url: 'api/movies/getMovieList',
                 dataType: 'json',

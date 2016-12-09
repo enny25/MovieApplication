@@ -5,7 +5,16 @@ angular.module('myApp.MovieJS', ['ngRoute'])
 
         .controller('movieController', function ($http, $window, $scope, $rootScope, $uibModal, usernameInfo) {
 
-           
+            $scope.checkImage = function (image) {
+                if (image == "N/A") {
+                    return "images/no-image.png";
+                }
+                return image;
+            }
+            $rootScope.$on("CallParentMethod", function (event, string) {
+                $scope.movie = {type: "1", info: string};
+                $scope.searchMovie();
+            });
 
             $scope.username = usernameInfo.getUsername();
             $scope.openeditModal = function (movie) {
@@ -21,12 +30,20 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                 });
             };
 
-
+            $scope.options = [
+                {info: "Search By Title", type: "0"},
+                {info: "Search By ID", type: "1"}
+            ];
+            $scope.selectedOption = $scope.options[0];
+            $scope.setOption = function () {
+                $scope.movie.type = $scope.selectedOption; 
+            };
             $scope.showButton = true;
             $scope.searchMovie = function () {
-                console.log("Before" + $scope.showButton);
+
+
                 $scope.showButton = true;
-                console.log("After: " + $scope.showButton);
+
                 var movieGet = $scope.movie;
 
                 var postObject = {};
@@ -35,6 +52,8 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                     postObject.imdbid = movieGet.info;
                     var url = 'api/movies/movieById';
                     console.log(postObject);
+
+
                 } else {
                     postObject.title = movieGet.info;
                     var url = 'api/movies/movie';
@@ -42,7 +61,7 @@ angular.module('myApp.MovieJS', ['ngRoute'])
                 }
 
                 $http({
-                    url: 'api/movies/movie',
+                    url: url,
                     dataType: 'json',
                     method: 'POST',
                     data: postObject,
@@ -53,7 +72,7 @@ angular.module('myApp.MovieJS', ['ngRoute'])
 
 
                 }).then(function successCallback(res) {
-                    console.log(res.data)
+
 
                     $scope.movieDetails = res.data;
                     $window.location.href = '#/movie';

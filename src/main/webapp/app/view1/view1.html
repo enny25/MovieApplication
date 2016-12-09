@@ -13,10 +13,12 @@
     
     
 </div>-->
-<div>
+<div class="container" style="width: 100%;">
+<div style="margin-top: 15em;">
  <data-owl-carousel class="owl-carousel" data-options="{navigation: false, pagination: true, rewindNav : false}">
       <div owl-carousel-item="" ng-repeat="item in listDetails" class="item">
           <a ng-click="movie(item.imdbid)"><img style="height: 20em; width: 13em;" src="{{checkImage(item.Poster)}}" alt="{{item.title}}"/></a>
       </div>
     </data-owl-carousel>
+</div>
 </div>

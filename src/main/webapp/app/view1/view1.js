@@ -9,16 +9,8 @@ angular.module('myApp.view1', ['ngRoute'])
                     controllerAs: 'ctrl'
                 });
             }])
-        .controller('View1Ctrl', function ($http, $scope, $rootScope) {
 
-            $scope.childmethod = function () {
-                $rootScope.$emit("CallParentMethod", {});
-            };
-
-
-        })
-
-        .controller('View1Ctrl', function ($http, $scope, $rootScope) {
+        .controller('View1Ctrl',["$http", "$scope", "$rootScope", function ($http, $scope, $rootScope) {
 
 
 
@@ -27,18 +19,16 @@ angular.module('myApp.view1', ['ngRoute'])
                     return "images/no-image.png";
                 }
                 return image;
-            }
+            };
             $scope.listDetails = {};
 
             $scope.movie = function (movie) {
-                console.log(movie);
-                $rootScope.$on("CallParentMethod", function () {
-                    $scope.parentmethod();
-                });
+                
+                    $rootScope.$broadcast('CallParentMethod', movie);
+                    
 
-                $scope.parentmethod = function () {
-                    console.log("Hello");
-                };
+                console.log(movie);
+
             };
             $http({
                 url: 'api/movies/getMovieList',
@@ -67,7 +57,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
 
             });
-        }).directive("owlCarousel", function () {
+        }]).directive("owlCarousel", function () {
     return {
         restrict: 'E',
         transclude: false,

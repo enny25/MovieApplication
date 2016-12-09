@@ -1,5 +1,4 @@
 'use strict';
-
 angular.module('myApp.adminAdd', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
@@ -11,19 +10,27 @@ angular.module('myApp.adminAdd', ['ngRoute'])
             }])
 
         .controller('adminAddController', function ($scope, $http, $uibModal) {
+        $scope.options = [
+        {info: "Add By Title", type: "0"},
+        {info: "Add By ID", type: "1"}
+        ];
+                $scope.selectedOption = $scope.options[0];
+                $scope.setOption = function () {
+                console.log($scope.selectedOption.type);
+                };
             $scope.addMovie = function () {
 
-                
-                var movieGet = $scope.movieSearch;
+
+                var movieGet = $scope.selectedOption;
                 console.log(movieGet);
                 console.log(movieGet[0]);
                 var postObject = {};
                 if (movieGet.type == 1) {
-                    postObject.imdbid = movieGet.info;
+                    postObject.imdbid = $scope.movieSearch.info;
                     var url = 'api/movies/createById';
                     console.log(postObject);
                 } else {
-                    postObject.title = movieGet.info;
+                    postObject.title = $scope.movieSearch.info;
                     var url = 'api/movies/createByName';
                     console.log(postObject);
                 }
@@ -38,7 +45,6 @@ angular.module('myApp.adminAdd', ['ngRoute'])
                     }
 
 
-
                 }).then(function successCallback(res) {
                     $scope.openSuccessModal("Movie has been added to the list!");
                     $scope.isVisible = false;
@@ -46,6 +52,5 @@ angular.module('myApp.adminAdd', ['ngRoute'])
                     $scope.openErrorModal("Movie does not exist or is already Added!");
                     $scope.isVisible = false;
                 });
-
             };
         });

@@ -9,14 +9,18 @@ angular.module('myApp.PersonalProfile', ['ngRoute'])
                 });
             }])
 
-        .controller('profileCtrl', function (InfoFactory, $scope, usernameInfo, $http) {
+        .controller('profileCtrl', function (InfoFactory, $scope, usernameInfo, $http, $rootScope) {
+            $scope.cout = function (movie) {
+                $rootScope.$broadcast('CallParentMethod', movie.movie.imdbid);
+            };
             $http({
-                url: 'api/profile/'+usernameInfo.getUsername(),
+                url: 'api/profile/' + usernameInfo.getUsername(),
                 dataType: 'json',
                 method: 'GET',
                 headers: {
                     "Content-Type": "application/json"
                 }
+
 
 
 
@@ -26,5 +30,6 @@ angular.module('myApp.PersonalProfile', ['ngRoute'])
                 console.log($scope.listDetails);
             }, function errorCallback(res) {
                 console.log("Does not work");
-            });
+            }
+            );
         });
